@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkpa_openapi_docs=self.webpackChunkpa_openapi_docs||[]).push([[4399],{2109:a=>{a.exports=JSON.parse('{"label":"facebook","permalink":"/NAVER-ad-api/openapi-guide/blog/tags/facebook","allTagsPath":"/NAVER-ad-api/openapi-guide/blog/tags","count":1}')}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkpa_openapi_docs=self.webpackChunkpa_openapi_docs||[]).push([[2090],{4676:a=>{a.exports=JSON.parse('{"permalink":"/NAVER-ad-api/openapi-guide/blog/tags/docusaurus","page":1,"postsPerPage":10,"totalPages":1,"totalCount":4,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);
