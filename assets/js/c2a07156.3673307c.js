@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkpa_openapi_docs=self.webpackChunkpa_openapi_docs||[]).push([[4773],{5266:a=>{a.exports=JSON.parse('{"label":"docusaurus","permalink":"/openapi-guide/blog/tags/docusaurus","allTagsPath":"/openapi-guide/blog/tags","count":4}')}}]);
