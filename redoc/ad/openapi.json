@@ -1,0 +1,4465 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "v20230221",
+		"title": "광고 API"
+	},
+	"host": "openapi.naver.com",
+	"basePath": "/v1/ad-api",
+	"tags": [
+		{
+			"name": "캠페인"
+		},
+		{
+			"name": "광고 그룹"
+		},
+		{
+			"name": "광고 소재"
+		},
+		{
+			"name": "타겟팅 상세"
+		},
+		{
+			"name": "타입 정보"
+		}
+	],
+	"paths": {
+		"/api/open/{version}/adAccounts/{adAccountNo}/adSets": {
+			"get": {
+				"tags": [
+					"광고 그룹"
+				],
+				"summary": "광고 그룹 목록",
+				"operationId": "getListUsingGET",
+				"produces": [
+					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "activated",
+						"in": "query",
+						"description": "광고 그룹 ON/OFF 여부. 미입력 시 모든 광고 그룹을 검색합니다.",
+						"required": false,
+						"type": "boolean"
+					},
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "adAccountNo",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "bidTypes",
+						"in": "query",
+						"description": "광고 그룹의 청구 기준",
+						"required": false,
+						"type": "array",
+						"items": {
+							"type": "string"
+						},
+						"collectionFormat": "multi"
+					},
+					{
+						"name": "budgetTypes",
+						"in": "query",
+						"description": "광고 그룹의 예산 타입",
+						"required": false,
+						"type": "array",
+						"items": {
+							"type": "string",
+							"enum": [
+								"DAILY",
+								"TOTAL"
+							]
+						},
+						"collectionFormat": "multi",
+						"enum": [
+							"DAILY",
+							"TOTAL"
+						]
+					},
+					{
+						"name": "campaignNo",
+						"in": "query",
+						"description": "상위 캠페인 ID",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "deleteOnly",
+						"in": "query",
+						"description": "삭제된 광고 그룹만 검색. true 인 경우 삭제된 광고 그룹, false 인 경우 운영가능/광고집행전/광고집행종료 상태의 광고 그룹을 검색합니다.",
+						"required": false,
+						"type": "boolean"
+					},
+					{
+						"name": "offset",
+						"in": "query",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "page",
+						"in": "query",
+						"description": "페이지 번호 (기본값: 0)",
+						"required": false,
+						"type": "string"
+					},
+					{
+						"name": "pageNumber",
+						"in": "query",
+						"required": false,
+						"type": "integer",
+						"format": "int32"
+					},
+					{
+						"name": "pageSize",
+						"in": "query",
+						"required": false,
+						"type": "integer",
+						"format": "int32"
+					},
+					{
+						"name": "paged",
+						"in": "query",
+						"required": false,
+						"type": "boolean"
+					},
+					{
+						"name": "placementGroupCodes",
+						"in": "query",
+						"description": "광고 그룹의 게재 위치",
+						"required": false,
+						"type": "array",
+						"items": {
+							"type": "string"
+						},
+						"collectionFormat": "multi"
+					},
+					{
+						"name": "size",
+						"in": "query",
+						"description": "페이지 크기 (기본값: 10, 최대: 100)",
+						"required": false,
+						"type": "string"
+					},
+					{
+						"name": "sort.sorted",
+						"in": "query",
+						"required": false,
+						"type": "boolean"
+					},
+					{
+						"name": "sort.unsorted",
+						"in": "query",
+						"required": false,
+						"type": "boolean"
+					},
+					{
+						"name": "unpaged",
+						"in": "query",
+						"required": false,
+						"type": "boolean"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/Page«OpenAdSetListView»"
+						}
+					}
+				},
+				"deprecated": false
+			},
+			"post": {
+				"tags": [
+					"광고 그룹"
+				],
+				"summary": "광고 그룹 만들기",
+				"operationId": "createAdSetUsingPOST",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "adAccountNo",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"in": "body",
+						"name": "params",
+						"description": "params",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/OpenAdSetCreationParam"
+						}
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "version",
+						"required": false,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/OpenAdSetCreationParam"
+						}
+					}
+				},
+				"deprecated": false
+			},
+			"delete": {
+				"tags": [
+					"광고 그룹"
+				],
+				"summary": "광고 그룹 다중 삭제",
+				"operationId": "deleteAdSetsUsingDELETE",
+				"produces": [
+					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "adAccountNo",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "adSetNos",
+						"in": "query",
+						"description": "광고 그룹 ID 목록",
+						"required": false,
+						"type": "array",
+						"items": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"collectionFormat": "multi",
+						"maximum": 100,
+						"minimum": 1,
+						"allowEmptyValue": false
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/SuccessResponse"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/adAccounts/{adAccountNo}/adSets/activate": {
+			"post": {
+				"tags": [
+					"광고 그룹"
+				],
+				"summary": "광고 그룹 ON/OFF 다중 변경",
+				"operationId": "activateAdSetsUsingPOST",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "activated",
+						"in": "query",
+						"description": "ON/OFF 설정. (예, true : ON)",
+						"required": false,
+						"type": "boolean",
+						"allowEmptyValue": false
+					},
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "adAccountNo",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "adSetNos",
+						"in": "query",
+						"description": "광고 그룹 ID 목록",
+						"required": false,
+						"type": "array",
+						"items": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"collectionFormat": "multi",
+						"maximum": 100,
+						"minimum": 1,
+						"allowEmptyValue": false
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/SuccessResponse"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/adAccounts/{adAccountNo}/adSets/edit": {
+			"post": {
+				"tags": [
+					"광고 그룹"
+				],
+				"summary": "광고 그룹 예산/입찰가/비용관리 다중 변경",
+				"operationId": "editAdSetUsingPOST",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "adAccountNo",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"in": "body",
+						"name": "editParam",
+						"description": "editParam",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/AdSetEditParam"
+						}
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "version",
+						"required": false,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "변경 완료했습니다.",
+						"schema": {
+							"$ref": "#/definitions/SuccessResponse"
+						}
+					},
+					"400": {
+						"description": "잘못된 요청입니다.",
+						"schema": {
+							"$ref": "#/definitions/ErrorResult"
+						}
+					},
+					"422": {
+						"description": "처리할 수 없는 상태입니다.",
+						"schema": {
+							"$ref": "#/definitions/ErrorResult"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/adAccounts/{adAccountNo}/adSets/sampleByCampaignNo": {
+			"get": {
+				"tags": [
+					"광고 그룹"
+				],
+				"summary": "광고 그룹 만들기 - 샘플",
+				"description": "캠페인 하위 광고 그룹 만들기 위한 기본값으로 채워진 샘플",
+				"operationId": "sampleByCampaignNoUsingGET",
+				"produces": [
+					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "campaignNo",
+						"in": "query",
+						"description": "campaignNo",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/OpenAdSetCreationParam"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/adAccounts/{adAccountNo}/adSets/typeInfoByCampaignNo": {
+			"get": {
+				"tags": [
+					"광고 그룹"
+				],
+				"summary": "광고 그룹 만들기 - 타입 정보",
+				"description": "캠페인 하위 광고 그룹 만들기 위한, 사용가능한 타입 목록. 단, 다른 조건에 따라 불가능한 케이스가 발생할 수도 있습니다.",
+				"operationId": "typeInfoByCampaignNoUsingGET",
+				"produces": [
+					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "campaignNo",
+						"in": "query",
+						"description": "campaignNo",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/AvailableTypesOfAdSet"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/adAccounts/{adAccountNo}/adSets/{adSetNo}": {
+			"get": {
+				"tags": [
+					"광고 그룹"
+				],
+				"summary": "광고 그룹 조회",
+				"operationId": "getAdSetUsingGET",
+				"produces": [
+					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "adAccountNo",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "adSetNo",
+						"in": "path",
+						"description": "adSetNo",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/OpenAdSetView"
+						}
+					}
+				},
+				"deprecated": false
+			},
+			"delete": {
+				"tags": [
+					"광고 그룹"
+				],
+				"summary": "광고 그룹 삭제",
+				"operationId": "deleteAdSetUsingDELETE",
+				"produces": [
+					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "adAccountNo",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "adSetNo",
+						"in": "path",
+						"description": "adSetNo",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "version",
+						"required": false,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/SuccessResponse"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/adAccounts/{adAccountNo}/campaigns": {
+			"get": {
+				"tags": [
+					"캠페인"
+				],
+				"summary": "캠페인 목록",
+				"operationId": "getListUsingGET_1",
+				"produces": [
+					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "activated",
+						"in": "query",
+						"description": "true/false 인 경우 각각 ON/OFF 인 캠페인만 검색합니다. 값이 없을 시 모든 캠페인을 검색합니다.",
+						"required": false,
+						"type": "boolean"
+					},
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "adAccountNo",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "deleteOnly",
+						"in": "query",
+						"description": "삭제된 광고 그룹 검색. true 로 설정하지 않을 시 삭제된 캠페인은 검색 결과에서 누락됩니다.",
+						"required": false,
+						"type": "boolean"
+					},
+					{
+						"name": "objectives",
+						"in": "query",
+						"description": "주어진 목적에 해당하는 캠페인을 검색합니다. 값이 없을 시 모든 캠페인을 검색합니다.",
+						"required": false,
+						"type": "array",
+						"items": {
+							"type": "string",
+							"enum": [
+								"CONVERSION",
+								"WEB_SITE_TRAFFIC",
+								"INSTALL_APP",
+								"WATCH_VIDEO",
+								"CATALOG",
+								"SHOPPING"
+							]
+						},
+						"collectionFormat": "multi",
+						"enum": [
+							"CONVERSION",
+							"WEB_SITE_TRAFFIC",
+							"INSTALL_APP",
+							"WATCH_VIDEO",
+							"CATALOG",
+							"SHOPPING"
+						]
+					},
+					{
+						"name": "offset",
+						"in": "query",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "page",
+						"in": "query",
+						"description": "페이지 번호 (기본값: 0)",
+						"required": false,
+						"type": "string"
+					},
+					{
+						"name": "pageNumber",
+						"in": "query",
+						"required": false,
+						"type": "integer",
+						"format": "int32"
+					},
+					{
+						"name": "pageSize",
+						"in": "query",
+						"required": false,
+						"type": "integer",
+						"format": "int32"
+					},
+					{
+						"name": "paged",
+						"in": "query",
+						"required": false,
+						"type": "boolean"
+					},
+					{
+						"name": "size",
+						"in": "query",
+						"description": "페이지 크기 (기본값: 10, 최대: 100)",
+						"required": false,
+						"type": "string"
+					},
+					{
+						"name": "sort.sorted",
+						"in": "query",
+						"required": false,
+						"type": "boolean"
+					},
+					{
+						"name": "sort.unsorted",
+						"in": "query",
+						"required": false,
+						"type": "boolean"
+					},
+					{
+						"name": "unpaged",
+						"in": "query",
+						"required": false,
+						"type": "boolean"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/Page«Campaign»"
+						}
+					}
+				},
+				"deprecated": false
+			},
+			"post": {
+				"tags": [
+					"캠페인"
+				],
+				"summary": "캠페인 만들기",
+				"operationId": "createUsingPOST",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "adAccountNo",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"in": "body",
+						"name": "params",
+						"description": "params",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/OpenCampaignCreationParam"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/Campaign"
+						}
+					}
+				},
+				"deprecated": false
+			},
+			"delete": {
+				"tags": [
+					"캠페인"
+				],
+				"summary": "캠페인 다중 삭제",
+				"operationId": "deleteCampaignsUsingDELETE",
+				"produces": [
+					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "adAccountNo",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "campaignNos",
+						"in": "query",
+						"description": "캠페인 ID 목록",
+						"required": false,
+						"type": "array",
+						"items": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"collectionFormat": "multi",
+						"maximum": 100,
+						"minimum": 1,
+						"allowEmptyValue": false
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/SuccessResponse"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/adAccounts/{adAccountNo}/campaigns/activate": {
+			"post": {
+				"tags": [
+					"캠페인"
+				],
+				"summary": "캠페인 ON/OFF 다중 변경",
+				"operationId": "activateUsingPOST",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "activated",
+						"in": "query",
+						"description": "ON/OFF 설정. (예, true : ON)",
+						"required": false,
+						"type": "boolean",
+						"allowEmptyValue": false
+					},
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "adAccountNo",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "campaignNos",
+						"in": "query",
+						"description": "캠페인 ID 목록",
+						"required": false,
+						"type": "array",
+						"items": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"collectionFormat": "multi",
+						"maximum": 100,
+						"minimum": 1,
+						"allowEmptyValue": false
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "boolean"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/adAccounts/{adAccountNo}/campaigns/brands": {
+			"get": {
+				"tags": [
+					"캠페인"
+				],
+				"summary": "브랜드 목록",
+				"operationId": "getBrandsUsingGET",
+				"produces": [
+					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "adAccountNo",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "offset",
+						"in": "query",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "page",
+						"in": "query",
+						"description": "페이지 번호 (기본값: 0)",
+						"required": false,
+						"type": "string"
+					},
+					{
+						"name": "pageNumber",
+						"in": "query",
+						"required": false,
+						"type": "integer",
+						"format": "int32"
+					},
+					{
+						"name": "pageSize",
+						"in": "query",
+						"required": false,
+						"type": "integer",
+						"format": "int32"
+					},
+					{
+						"name": "paged",
+						"in": "query",
+						"required": false,
+						"type": "boolean"
+					},
+					{
+						"name": "size",
+						"in": "query",
+						"description": "페이지 크기 (기본값: 10, 최대: 100)",
+						"required": false,
+						"type": "string"
+					},
+					{
+						"name": "sort.sorted",
+						"in": "query",
+						"required": false,
+						"type": "boolean"
+					},
+					{
+						"name": "sort.unsorted",
+						"in": "query",
+						"required": false,
+						"type": "boolean"
+					},
+					{
+						"name": "unpaged",
+						"in": "query",
+						"required": false,
+						"type": "boolean"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/Page«BrandListResponse»"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/adAccounts/{adAccountNo}/campaigns/catalogs": {
+			"get": {
+				"tags": [
+					"캠페인"
+				],
+				"summary": "카탈로그 목록",
+				"operationId": "getCatalogsUsingGET",
+				"produces": [
+					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "adAccountNo",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "mallId",
+						"in": "query",
+						"description": "mallId",
+						"required": false,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/CatalogNode"
+							}
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/adAccounts/{adAccountNo}/campaigns/conversionUrls": {
+			"get": {
+				"tags": [
+					"캠페인"
+				],
+				"summary": "지정된 캠페인 목적에 따라 사용 가능한 전환 추적 대상 목록",
+				"operationId": "getConversionUrlsUsingGET",
+				"produces": [
+					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "adAccountNo",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "objective",
+						"in": "query",
+						"description": "objective",
+						"required": true,
+						"type": "string",
+						"enum": [
+							"CONVERSION",
+							"WEB_SITE_TRAFFIC",
+							"INSTALL_APP",
+							"WATCH_VIDEO",
+							"CATALOG",
+							"SHOPPING"
+						]
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/ConversionUrlResponse"
+							}
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/adAccounts/{adAccountNo}/campaigns/editBudget": {
+			"post": {
+				"tags": [
+					"캠페인"
+				],
+				"summary": "캠페인 예산 다중 변경",
+				"operationId": "editBudgetUsingPOST",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "adAccountNo",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "campaignBudget",
+						"in": "query",
+						"description": "캠페인 예산",
+						"required": false,
+						"type": "number",
+						"allowEmptyValue": false
+					},
+					{
+						"name": "campaignNos",
+						"in": "query",
+						"description": "캠페인 ID 목록",
+						"required": false,
+						"type": "array",
+						"items": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"collectionFormat": "multi",
+						"maximum": 100,
+						"minimum": 1,
+						"allowEmptyValue": false
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "boolean"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/adAccounts/{adAccountNo}/campaigns/urls": {
+			"get": {
+				"tags": [
+					"캠페인"
+				],
+				"summary": "대표url 목록",
+				"operationId": "getUrlsUsingGET",
+				"produces": [
+					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "adAccountNo",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "offset",
+						"in": "query",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "page",
+						"in": "query",
+						"description": "페이지 번호 (기본값: 0)",
+						"required": false,
+						"type": "string"
+					},
+					{
+						"name": "pageNumber",
+						"in": "query",
+						"required": false,
+						"type": "integer",
+						"format": "int32"
+					},
+					{
+						"name": "pageSize",
+						"in": "query",
+						"required": false,
+						"type": "integer",
+						"format": "int32"
+					},
+					{
+						"name": "paged",
+						"in": "query",
+						"required": false,
+						"type": "boolean"
+					},
+					{
+						"name": "size",
+						"in": "query",
+						"description": "페이지 크기 (기본값: 10, 최대: 100)",
+						"required": false,
+						"type": "string"
+					},
+					{
+						"name": "sort.sorted",
+						"in": "query",
+						"required": false,
+						"type": "boolean"
+					},
+					{
+						"name": "sort.unsorted",
+						"in": "query",
+						"required": false,
+						"type": "boolean"
+					},
+					{
+						"name": "unpaged",
+						"in": "query",
+						"required": false,
+						"type": "boolean"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/Page«Url»"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/adAccounts/{adAccountNo}/campaigns/{campaignNo}": {
+			"delete": {
+				"tags": [
+					"캠페인"
+				],
+				"summary": "캠페인 삭제",
+				"operationId": "deleteUsingDELETE",
+				"produces": [
+					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "adAccountNo",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "campaignNo",
+						"in": "path",
+						"description": "campaignNo",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "boolean"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/adAccounts/{adAccountNo}/creatives": {
+			"get": {
+				"tags": [
+					"광고 소재"
+				],
+				"summary": "광고 소재 목록",
+				"operationId": "searchUsingGET",
+				"produces": [
+					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "activated",
+						"in": "query",
+						"description": "true/false 인 경우 각각 ON/OFF 인 광고 소재만 검색합니다. 값이 없을 시 모든 광고 소재를 검색합니다.",
+						"required": false,
+						"type": "string",
+						"pattern": "^(true|false)$",
+						"allowEmptyValue": false
+					},
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "adAccountNo",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "adSetNo",
+						"in": "query",
+						"description": "adSetNo",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "campaignNo",
+						"in": "query",
+						"description": "campaignNo",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "deleteOnly",
+						"in": "query",
+						"description": "삭제된 광고 소재만 조회 여부",
+						"required": false,
+						"type": "string",
+						"default": "false",
+						"pattern": "^(true|false)$",
+						"allowEmptyValue": false
+					},
+					{
+						"name": "offset",
+						"in": "query",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "page",
+						"in": "query",
+						"description": "페이지 번호 (기본값: 0)",
+						"required": false,
+						"type": "string"
+					},
+					{
+						"name": "pageNumber",
+						"in": "query",
+						"required": false,
+						"type": "integer",
+						"format": "int32"
+					},
+					{
+						"name": "pageSize",
+						"in": "query",
+						"required": false,
+						"type": "integer",
+						"format": "int32"
+					},
+					{
+						"name": "paged",
+						"in": "query",
+						"required": false,
+						"type": "boolean"
+					},
+					{
+						"name": "size",
+						"in": "query",
+						"description": "페이지 크기 (기본값: 10, 최대: 100)",
+						"required": false,
+						"type": "string"
+					},
+					{
+						"name": "sort.sorted",
+						"in": "query",
+						"required": false,
+						"type": "boolean"
+					},
+					{
+						"name": "sort.unsorted",
+						"in": "query",
+						"required": false,
+						"type": "boolean"
+					},
+					{
+						"name": "unpaged",
+						"in": "query",
+						"required": false,
+						"type": "boolean"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/Page«OpenCreative»"
+						}
+					}
+				},
+				"deprecated": false
+			},
+			"delete": {
+				"tags": [
+					"광고 소재"
+				],
+				"summary": "광고 소재 다중 삭제",
+				"description": "http status code 에러코드별 설명<br> - 에러 400 광고 소재가 존재하지 않을 경우 or 광고계정 내 광고 소재가 아닐 경우 or 기삭제되었을 경우",
+				"operationId": "deleteUsingDELETE_2",
+				"produces": [
+					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "adAccountNo",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "creativeNos",
+						"in": "query",
+						"description": "creativeNos",
+						"required": true,
+						"type": "array",
+						"items": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"collectionFormat": "multi",
+						"maximum": 100,
+						"minimum": 1
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "version",
+						"required": true,
+						"type": "number",
+						"format": "float"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/SuccessResponse"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/adAccounts/{adAccountNo}/creatives/activate": {
+			"post": {
+				"tags": [
+					"광고 소재"
+				],
+				"summary": "광고 소재 ON/OFF 다중 변경",
+				"description": "http status code 에러코드별 설명<br> - 에러 400 광고 소재가 존재하지 않을 경우<br> - 에러 400 draftCreativeNos가 존재하지 않을 경우<br> - 에러 422 & error.code='CONDITION_DOES_NOT_MEET' : 광고 소재를 수정할 수 없는 경우",
+				"operationId": "activateUsingPOST_1",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "activated",
+						"in": "query",
+						"description": "ON/OFF 설정. (예, true : ON)",
+						"required": false,
+						"type": "string",
+						"pattern": "^(true|false)$",
+						"allowEmptyValue": false
+					},
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "adAccountNo",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "creativeNos",
+						"in": "query",
+						"description": "광고 소재no 목록",
+						"required": false,
+						"type": "array",
+						"items": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"collectionFormat": "multi",
+						"maximum": 100,
+						"minimum": 1,
+						"allowEmptyValue": false
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "version",
+						"required": true,
+						"type": "number",
+						"format": "float"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/SuccessResponse"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/adAccounts/{adAccountNo}/creatives/{creativeNo}": {
+			"delete": {
+				"tags": [
+					"광고 소재"
+				],
+				"summary": "광고 소재 삭제",
+				"description": "http status code 에러코드별 설명<br> - 에러 400 광고 소재가 존재하지 않을 경우 or 광고계정 내 광고 소재가 아닐 경우 or 기삭제되었을 경우",
+				"operationId": "deleteUsingDELETE_1",
+				"produces": [
+					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "adAccountNo",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "creativeNo",
+						"in": "path",
+						"description": "creativeNo",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "version",
+						"required": true,
+						"type": "number",
+						"format": "float"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/SuccessResponse"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/constants": {
+			"get": {
+				"tags": [
+					"타입 정보"
+				],
+				"summary": "multipleConstnants",
+				"operationId": "multipleConstnantsUsingGET",
+				"produces": [
+					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "types",
+						"in": "query",
+						"description": "types",
+						"required": true,
+						"type": "array",
+						"items": {
+							"type": "string"
+						},
+						"collectionFormat": "multi"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object",
+							"additionalProperties": {
+								"type": "array",
+								"items": {
+									"$ref": "#/definitions/ConstantResponse"
+								}
+							}
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/constants/bidGoals": {
+			"get": {
+				"tags": [
+					"타입 정보"
+				],
+				"summary": "bidGoals",
+				"operationId": "bidGoalsUsingGET",
+				"produces": [
+					"*/*"
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/ConstantResponse"
+							}
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/constants/bidStrategies": {
+			"get": {
+				"tags": [
+					"타입 정보"
+				],
+				"summary": "bidStrategies",
+				"operationId": "bidStrategiesUsingGET",
+				"produces": [
+					"*/*"
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/ConstantResponse"
+							}
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/constants/bidTypes": {
+			"get": {
+				"tags": [
+					"타입 정보"
+				],
+				"summary": "bidTypes",
+				"operationId": "bidTypesUsingGET",
+				"produces": [
+					"*/*"
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/ConstantResponse"
+							}
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/constants/budgetTypes": {
+			"get": {
+				"tags": [
+					"타입 정보"
+				],
+				"summary": "budgetTypes",
+				"operationId": "budgetTypesUsingGET",
+				"produces": [
+					"*/*"
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/ConstantResponse"
+							}
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/constants/campaignObjectives": {
+			"get": {
+				"tags": [
+					"타입 정보"
+				],
+				"summary": "campaignObjectives",
+				"operationId": "campaignObjectivesUsingGET",
+				"produces": [
+					"*/*"
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/ConstantResponse"
+							}
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/constants/creativeChooserTypes": {
+			"get": {
+				"tags": [
+					"타입 정보"
+				],
+				"summary": "creativeChooserTypes",
+				"operationId": "creativeChooserTypesUsingGET",
+				"produces": [
+					"*/*"
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/ConstantResponse"
+							}
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/constants/deviceTypes": {
+			"get": {
+				"tags": [
+					"타입 정보"
+				],
+				"summary": "deviceTypes",
+				"operationId": "deviceTypesUsingGET",
+				"produces": [
+					"*/*"
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/ConstantResponse"
+							}
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/constants/frequencyAdUnits": {
+			"get": {
+				"tags": [
+					"타입 정보"
+				],
+				"summary": "frequencyAdUnits",
+				"operationId": "frequencyAdUnitsUsingGET",
+				"produces": [
+					"*/*"
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/ConstantResponse"
+							}
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/constants/gender": {
+			"get": {
+				"tags": [
+					"타입 정보"
+				],
+				"summary": "genders",
+				"operationId": "gendersUsingGET",
+				"produces": [
+					"*/*"
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/ConstantResponse"
+							}
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/targetings/ageRanges": {
+			"get": {
+				"tags": [
+					"타겟팅 상세"
+				],
+				"summary": "ageRanges",
+				"operationId": "ageRangesUsingGET",
+				"produces": [
+					"*/*"
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/AgeRange"
+							}
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/targetings/extendedDemo": {
+			"get": {
+				"tags": [
+					"타겟팅 상세"
+				],
+				"summary": "extendedDemoCodes",
+				"operationId": "extendedDemoCodesUsingGET",
+				"produces": [
+					"*/*"
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object",
+							"additionalProperties": {
+								"type": "array",
+								"items": {
+									"$ref": "#/definitions/CodeKeywordResponse"
+								}
+							}
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/targetings/interests": {
+			"get": {
+				"tags": [
+					"타겟팅 상세"
+				],
+				"summary": "interests",
+				"operationId": "interestsUsingGET",
+				"produces": [
+					"*/*"
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/InterestKeywordResponse"
+							}
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/targetings/locations": {
+			"get": {
+				"tags": [
+					"타겟팅 상세"
+				],
+				"summary": "locations",
+				"operationId": "locationsUsingGET",
+				"produces": [
+					"*/*"
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/RegionCodeResponse"
+							}
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/targetings/placementGroupCodes": {
+			"get": {
+				"tags": [
+					"타겟팅 상세"
+				],
+				"summary": "placementGroupCodes",
+				"operationId": "placementGroupCodesUsingGET",
+				"produces": [
+					"*/*"
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/ConstantResponse"
+							}
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/api/open/{version}/targetings/purchaseIntent": {
+			"get": {
+				"tags": [
+					"타겟팅 상세"
+				],
+				"summary": "purchaseIntents",
+				"operationId": "purchaseIntentsUsingGET",
+				"produces": [
+					"*/*"
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/InterestKeywordResponse"
+							}
+						}
+					}
+				},
+				"deprecated": false
+			}
+		}
+	},
+	"definitions": {
+		"AdSetEditBidPriceParam": {
+			"title": "AdSetEditBidPriceParam",
+			"allOf": [
+				{
+					"$ref": "#/definitions/AdSetEditParam"
+				},
+				{
+					"type": "object",
+					"required": [
+						"adSetNos",
+						"bidPrice",
+						"editType"
+					],
+					"properties": {
+						"adSetNos": {
+							"type": "array",
+							"description": "광고그룹no 목록",
+							"items": {
+								"type": "integer",
+								"format": "int64",
+								"minimum": 1,
+								"maximum": 100
+							}
+						},
+						"bidPrice": {
+							"type": "number",
+							"example": 10000.0,
+							"description": "입찰가"
+						},
+						"editType": {
+							"type": "string",
+							"description": "변경 파라미터 구분"
+						}
+					},
+					"title": "AdSetEditBidPriceParam"
+				}
+			]
+		},
+		"AdSetEditBidStrategyValueParam": {
+			"title": "AdSetEditBidStrategyValueParam",
+			"allOf": [
+				{
+					"$ref": "#/definitions/AdSetEditParam"
+				},
+				{
+					"type": "object",
+					"required": [
+						"adSetNos",
+						"bidStrategyValue",
+						"editType"
+					],
+					"properties": {
+						"adSetNos": {
+							"type": "array",
+							"description": "광고그룹no 목록",
+							"items": {
+								"type": "integer",
+								"format": "int64",
+								"minimum": 1,
+								"maximum": 100
+							}
+						},
+						"bidStrategyValue": {
+							"type": "number",
+							"example": 100000.0,
+							"description": "입찰가/비용 한도"
+						},
+						"editType": {
+							"type": "string",
+							"description": "변경 파라미터 구분"
+						}
+					},
+					"title": "AdSetEditBidStrategyValueParam"
+				}
+			]
+		},
+		"AdSetEditBudgetParam": {
+			"title": "AdSetEditBudgetParam",
+			"allOf": [
+				{
+					"$ref": "#/definitions/AdSetEditParam"
+				},
+				{
+					"type": "object",
+					"required": [
+						"adSetNos",
+						"budgetAmount",
+						"editType"
+					],
+					"properties": {
+						"adSetNos": {
+							"type": "array",
+							"description": "광고그룹no 목록",
+							"items": {
+								"type": "integer",
+								"format": "int64",
+								"minimum": 1,
+								"maximum": 100
+							}
+						},
+						"budgetAmount": {
+							"type": "number",
+							"example": 100000.0,
+							"description": "예산"
+						},
+						"editType": {
+							"type": "string",
+							"description": "변경 파라미터 구분"
+						}
+					},
+					"title": "AdSetEditBudgetParam"
+				}
+			]
+		},
+		"AdSetEditParam": {
+			"type": "object",
+			"required": [
+				"adSetNos",
+				"editType"
+			],
+			"discriminator": "editType",
+			"properties": {
+				"adSetNos": {
+					"type": "array",
+					"description": "광고그룹no 목록",
+					"items": {
+						"type": "integer",
+						"format": "int64",
+						"minimum": 1,
+						"maximum": 100
+					}
+				},
+				"editType": {
+					"type": "string",
+					"description": "변경 파라미터 구분"
+				}
+			},
+			"title": "AdSetEditParam"
+		},
+		"AgeRange": {
+			"type": "object",
+			"properties": {
+				"from": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"to": {
+					"type": "integer",
+					"format": "int32"
+				}
+			},
+			"title": "AgeRange"
+		},
+		"AvailableTypesOfAdSet": {
+			"type": "object",
+			"properties": {
+				"bidGoals": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"enum": [
+							"MAX_CLICK",
+							"MAX_CONV",
+							"NONE"
+						]
+					}
+				},
+				"bidStrategies": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"enum": [
+							"FIXED_BID",
+							"BID_CAP",
+							"COST_CAP",
+							"NO_CAP",
+							"TARGET_COST"
+						]
+					}
+				},
+				"bidTypes": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"enum": [
+							"CPC",
+							"CPM",
+							"CPV"
+						]
+					}
+				},
+				"budgetTypes": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"enum": [
+							"DAILY",
+							"TOTAL"
+						]
+					}
+				},
+				"deviceTypes": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"enum": [
+							"DESKTOP",
+							"MOBILE",
+							"UNKNOWN"
+						]
+					}
+				},
+				"placementGroupCodes": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				}
+			},
+			"title": "AvailableTypesOfAdSet"
+		},
+		"Brand": {
+			"type": "object",
+			"properties": {
+				"adAccountNo": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"brandAdultOnly": {
+					"type": "boolean"
+				},
+				"brandFavorites": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/BrandFavorites"
+					}
+				},
+				"createdAt": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"disabled": {
+					"type": "boolean"
+				},
+				"explanation": {
+					"type": "string"
+				},
+				"industryRelations": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/BrandIndustryRelation"
+					}
+				},
+				"name": {
+					"type": "string"
+				},
+				"no": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"partnerName": {
+					"type": "string"
+				},
+				"registrationNumber": {
+					"type": "string"
+				},
+				"status": {
+					"type": "string",
+					"enum": [
+						"REQUEST",
+						"COMPLETE",
+						"MODIFY_REQUEST",
+						"POSTPONE"
+					]
+				},
+				"updatedAt": {
+					"type": "string",
+					"format": "date-time"
+				}
+			},
+			"title": "Brand"
+		},
+		"BrandFavorites": {
+			"type": "object",
+			"properties": {
+				"adAccountNo": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"brandNo": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"createdAt": {
+					"type": "string",
+					"format": "date-time"
+				}
+			},
+			"title": "BrandFavorites"
+		},
+		"BrandIndustryRelation": {
+			"type": "object",
+			"properties": {
+				"brandNo": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"categoryFirst": {
+					"$ref": "#/definitions/IndustryCategoryFirst"
+				},
+				"categorySecond": {
+					"$ref": "#/definitions/IndustryCategorySecond"
+				},
+				"createdAt": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"industryCategorySecondId": {
+					"type": "integer",
+					"format": "int64"
+				}
+			},
+			"title": "BrandIndustryRelation"
+		},
+		"BrandListResponse": {
+			"type": "object",
+			"properties": {
+				"adAccountNo": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"brandName": {
+					"type": "string"
+				},
+				"brandNo": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"categoryFirstId": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"categoryFirstName": {
+					"type": "string"
+				},
+				"categorySecondId": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"categorySecondName": {
+					"type": "string"
+				},
+				"explanation": {
+					"type": "string"
+				},
+				"favorites": {
+					"type": "boolean"
+				},
+				"updatedAt": {
+					"type": "string",
+					"format": "date-time"
+				}
+			},
+			"title": "BrandListResponse"
+		},
+		"CATALOG": {
+			"title": "CATALOG",
+			"allOf": [
+				{
+					"$ref": "#/definitions/OpenCampaignCreationParam"
+				},
+				{
+					"type": "object",
+					"required": [
+						"brandNo",
+						"catalogId",
+						"name",
+						"objective",
+						"urlNo"
+					],
+					"properties": {
+						"brandNo": {
+							"type": "integer",
+							"format": "int64",
+							"description": "브랜드 ID"
+						},
+						"budgetAmount": {
+							"type": "number",
+							"example": 100000.0,
+							"description": "예산"
+						},
+						"catalogId": {
+							"type": "string",
+							"description": "카탈로그 ID"
+						},
+						"conversionUrlNo": {
+							"type": "integer",
+							"format": "int64",
+							"description": "전환 추적 대상 ID"
+						},
+						"name": {
+							"type": "string",
+							"description": "캠페인 이름",
+							"minLength": 2,
+							"maxLength": 128
+						},
+						"objective": {
+							"type": "string",
+							"description": "캠페인 목적"
+						},
+						"urlNo": {
+							"type": "integer",
+							"format": "int64",
+							"description": "대표 url ID"
+						}
+					},
+					"title": "CATALOG"
+				}
+			]
+		},
+		"CONVERSION": {
+			"title": "CONVERSION",
+			"allOf": [
+				{
+					"$ref": "#/definitions/OpenCampaignCreationParam"
+				},
+				{
+					"type": "object",
+					"required": [
+						"brandNo",
+						"name",
+						"objective",
+						"urlNo"
+					],
+					"properties": {
+						"brandNo": {
+							"type": "integer",
+							"format": "int64",
+							"description": "브랜드 ID"
+						},
+						"budgetAmount": {
+							"type": "number",
+							"example": 100000.0,
+							"description": "예산"
+						},
+						"conversionType": {
+							"type": "string",
+							"description": "최적화 전환 유형\r\n- 사용 가능한 값: `PURCHASE`,`CART`"
+						},
+						"conversionUrlNo": {
+							"type": "integer",
+							"format": "int64",
+							"description": "전환 추적 대상 ID"
+						},
+						"name": {
+							"type": "string",
+							"description": "캠페인 이름",
+							"minLength": 2,
+							"maxLength": 128
+						},
+						"objective": {
+							"type": "string",
+							"description": "캠페인 목적"
+						},
+						"urlNo": {
+							"type": "integer",
+							"format": "int64",
+							"description": "대표 url ID"
+						}
+					},
+					"title": "CONVERSION"
+				}
+			]
+		},
+		"Campaign": {
+			"type": "object",
+			"properties": {
+				"activated": {
+					"type": "boolean"
+				},
+				"adAccountNo": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"appName": {
+					"type": "string"
+				},
+				"bidTypes": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"enum": [
+							"CPC",
+							"CPM",
+							"CPV"
+						]
+					}
+				},
+				"brand": {
+					"$ref": "#/definitions/Brand"
+				},
+				"brandAdultOnly": {
+					"type": "boolean"
+				},
+				"brandNo": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"budgetAmount": {
+					"type": "number"
+				},
+				"budgetExhausted": {
+					"type": "boolean"
+				},
+				"campaignApps": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/CampaignApp"
+					}
+				},
+				"campaignSearchKeywords": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/CampaignSearchKeyword"
+					}
+				},
+				"catalogAvailable": {
+					"type": "boolean"
+				},
+				"catalogId": {
+					"type": "string"
+				},
+				"conversionType": {
+					"type": "string",
+					"enum": [
+						"PURCHASE",
+						"MEMBERSHIP",
+						"CART",
+						"RESERVATION",
+						"ETC"
+					]
+				},
+				"conversionUrl": {
+					"$ref": "#/definitions/Url"
+				},
+				"conversionUrlName": {
+					"type": "string"
+				},
+				"conversionUrlNo": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"conversionUrlStorePlatform": {
+					"type": "string",
+					"enum": [
+						"ANDROID",
+						"IOS"
+					]
+				},
+				"createdAt": {
+					"$ref": "#/definitions/Timestamp"
+				},
+				"currency": {
+					"type": "string",
+					"enum": [
+						"KRW",
+						"USD"
+					]
+				},
+				"deleted": {
+					"type": "boolean"
+				},
+				"name": {
+					"type": "string"
+				},
+				"no": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"objective": {
+					"type": "string",
+					"enum": [
+						"CONVERSION",
+						"WEB_SITE_TRAFFIC",
+						"INSTALL_APP",
+						"WATCH_VIDEO",
+						"CATALOG",
+						"SHOPPING"
+					]
+				},
+				"pausedAt": {
+					"$ref": "#/definitions/Timestamp"
+				},
+				"spentBudgetRatio": {
+					"type": "number"
+				},
+				"stats": {
+					"$ref": "#/definitions/CampaignStats"
+				},
+				"status": {
+					"type": "string",
+					"enum": [
+						"RUNNABLE",
+						"DELETED",
+						"BUDGET_EXHAUSTED"
+					]
+				},
+				"timezone": {
+					"type": "string"
+				},
+				"timezoneId": {
+					"type": "string"
+				},
+				"updatedAt": {
+					"$ref": "#/definitions/Timestamp"
+				},
+				"updaterId": {
+					"type": "string"
+				},
+				"url": {
+					"$ref": "#/definitions/Url"
+				},
+				"urlNo": {
+					"type": "integer",
+					"format": "int64"
+				}
+			},
+			"title": "Campaign"
+		},
+		"CampaignApp": {
+			"type": "object",
+			"properties": {
+				"campaignNo": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"no": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"packageId": {
+					"type": "string"
+				},
+				"platform": {
+					"type": "string",
+					"enum": [
+						"UNKNOWN",
+						"ANDROID",
+						"IOS",
+						"WINDOWS",
+						"MACOS"
+					]
+				},
+				"url": {
+					"$ref": "#/definitions/Url"
+				},
+				"urlNo": {
+					"type": "integer",
+					"format": "int64"
+				}
+			},
+			"title": "CampaignApp"
+		},
+		"CampaignSearchKeyword": {
+			"type": "object",
+			"properties": {
+				"campaignNo": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"createdAt": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"searchKeywordNo": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"updaterId": {
+					"type": "string"
+				}
+			},
+			"title": "CampaignSearchKeyword"
+		},
+		"CampaignStats": {
+			"type": "object",
+			"properties": {
+				"active": {
+					"type": "boolean"
+				},
+				"autoPlayCount": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"bidType": {
+					"type": "string",
+					"enum": [
+						"CPC",
+						"CPM",
+						"CPV"
+					]
+				},
+				"campaignName": {
+					"type": "string"
+				},
+				"campaignNo": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"campaignObjective": {
+					"type": "string",
+					"enum": [
+						"CONVERSION",
+						"WEB_SITE_TRAFFIC",
+						"INSTALL_APP",
+						"WATCH_VIDEO",
+						"CATALOG",
+						"SHOPPING"
+					]
+				},
+				"clickCount": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"clickPlayCount": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"cpc": {
+					"type": "number"
+				},
+				"cpm": {
+					"type": "number"
+				},
+				"cpv": {
+					"type": "number"
+				},
+				"ctr": {
+					"type": "number"
+				},
+				"failedToLoad": {
+					"type": "boolean"
+				},
+				"impCount": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"multiBidType": {
+					"type": "boolean"
+				},
+				"prog25Count": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"prog50Count": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"prog75Count": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"prog95Count": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"reachImp": {
+					"type": "number"
+				},
+				"reachSales": {
+					"type": "number"
+				},
+				"resultCount": {
+					"type": "number"
+				},
+				"resultString": {
+					"type": "string"
+				},
+				"sales": {
+					"type": "number"
+				},
+				"salesPerResult": {
+					"type": "number"
+				},
+				"salesPerResultString": {
+					"type": "string"
+				},
+				"status": {
+					"type": "string"
+				},
+				"videoImpCount": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"vplayCount": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"vtr": {
+					"type": "number"
+				}
+			},
+			"title": "CampaignStats"
+		},
+		"CatalogNode": {
+			"type": "object",
+			"properties": {
+				"catalogTypeId": {
+					"type": "string"
+				},
+				"id": {
+					"type": "string"
+				},
+				"name": {
+					"type": "string"
+				}
+			},
+			"title": "CatalogNode"
+		},
+		"CodeKeywordResponse": {
+			"type": "object",
+			"properties": {
+				"code": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"keyword": {
+					"type": "string"
+				}
+			},
+			"title": "CodeKeywordResponse"
+		},
+		"ConstantResponse": {
+			"type": "object",
+			"properties": {
+				"extra": {
+					"type": "string"
+				},
+				"name": {
+					"type": "string"
+				},
+				"value": {
+					"type": "string"
+				}
+			},
+			"title": "ConstantResponse"
+		},
+		"ConversionUrlResponse": {
+			"type": "object",
+			"properties": {
+				"appId": {
+					"type": "string"
+				},
+				"bizChannelNo": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"naAccountId": {
+					"type": "string"
+				},
+				"name": {
+					"type": "string"
+				},
+				"storePlatform": {
+					"type": "string",
+					"enum": [
+						"ANDROID",
+						"IOS"
+					]
+				},
+				"trackingDays": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"url": {
+					"type": "string"
+				},
+				"urlNo": {
+					"type": "integer",
+					"format": "int64"
+				}
+			},
+			"title": "ConversionUrlResponse"
+		},
+		"Duration": {
+			"type": "object",
+			"properties": {
+				"nano": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"negative": {
+					"type": "boolean"
+				},
+				"seconds": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"units": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/TemporalUnit"
+					}
+				},
+				"zero": {
+					"type": "boolean"
+				}
+			},
+			"title": "Duration"
+		},
+		"Error": {
+			"type": "object",
+			"properties": {
+				"code": {
+					"type": "string",
+					"enum": [
+						"CASE_1",
+						"CASE_2",
+						"CASE_3",
+						"CASE_4",
+						"CASE_5",
+						"CONDITION_DOES_NOT_MEET",
+						"DATA_NOT_EXIST",
+						"DATA_CONCURRENCY_PROBLEM",
+						"DUPLICATED_VALUE",
+						"ALREADY_DONE",
+						"NOT_ALLOWED_FILE_TYPE",
+						"INVALID_PARAMETER",
+						"INVALID_URL",
+						"INVALID_SHOPPING",
+						"BAD_REQUEST",
+						"AUTH_ERROR",
+						"UNDER_CONSTRUCTION",
+						"UNKNOWN_ERROR"
+					]
+				},
+				"description": {
+					"type": "string"
+				},
+				"detailCode": {
+					"type": "string"
+				},
+				"extra": {
+					"type": "object"
+				},
+				"message": {
+					"type": "string"
+				}
+			},
+			"title": "Error"
+		},
+		"ErrorResult": {
+			"type": "object",
+			"properties": {
+				"error": {
+					"$ref": "#/definitions/Error"
+				}
+			},
+			"title": "ErrorResult"
+		},
+		"INSTALL_APP": {
+			"title": "INSTALL_APP",
+			"allOf": [
+				{
+					"$ref": "#/definitions/OpenCampaignCreationParam"
+				},
+				{
+					"type": "object",
+					"required": [
+						"brandNo",
+						"name",
+						"objective",
+						"urlNo"
+					],
+					"properties": {
+						"brandNo": {
+							"type": "integer",
+							"format": "int64",
+							"description": "브랜드 ID"
+						},
+						"budgetAmount": {
+							"type": "number",
+							"example": 100000.0,
+							"description": "예산"
+						},
+						"name": {
+							"type": "string",
+							"description": "캠페인 이름",
+							"minLength": 2,
+							"maxLength": 128
+						},
+						"objective": {
+							"type": "string",
+							"description": "캠페인 목적"
+						},
+						"urlNo": {
+							"type": "integer",
+							"format": "int64",
+							"description": "대표 url ID"
+						}
+					},
+					"title": "INSTALL_APP"
+				}
+			]
+		},
+		"Image": {
+			"type": "object",
+			"properties": {
+				"adAccountNo": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"createdAt": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"fileSize": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"filename": {
+					"type": "string"
+				},
+				"height": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"imageUrl": {
+					"type": "string"
+				},
+				"no": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"sizeGroupNo": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"width": {
+					"type": "integer",
+					"format": "int32"
+				}
+			},
+			"title": "Image"
+		},
+		"IndustryCategoryFirst": {
+			"type": "object",
+			"properties": {
+				"categorySecond": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/IndustryCategorySecond"
+					}
+				},
+				"id": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"name": {
+					"type": "string"
+				},
+				"visible": {
+					"type": "boolean"
+				}
+			},
+			"title": "IndustryCategoryFirst"
+		},
+		"IndustryCategorySecond": {
+			"type": "object",
+			"properties": {
+				"categoryFirstId": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"id": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"name": {
+					"type": "string"
+				},
+				"visible": {
+					"type": "boolean"
+				}
+			},
+			"title": "IndustryCategorySecond"
+		},
+		"InterestKeywordResponse": {
+			"type": "object",
+			"properties": {
+				"children": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/InterestKeywordResponse"
+					}
+				},
+				"code": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"depth": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"keyword": {
+					"type": "string"
+				}
+			},
+			"title": "InterestKeywordResponse"
+		},
+		"InterestTargetParam": {
+			"type": "object",
+			"properties": {
+				"code": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"depth": {
+					"type": "integer",
+					"format": "int32"
+				}
+			},
+			"title": "InterestTargetParam"
+		},
+		"LocalTime": {
+			"type": "object",
+			"properties": {
+				"hour": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"minute": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"nano": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"second": {
+					"type": "integer",
+					"format": "int32"
+				}
+			},
+			"title": "LocalTime"
+		},
+		"OpenAdSetCreationParam": {
+			"type": "object",
+			"required": [
+				"campaignNo",
+				"name"
+			],
+			"properties": {
+				"accelerated": {
+					"type": "boolean",
+					"description": "게재 방식. 빠른 게재 여부"
+				},
+				"ageRanges": {
+					"type": "array",
+					"description": "연령",
+					"items": {
+						"$ref": "#/definitions/AgeRange"
+					}
+				},
+				"allDevice": {
+					"type": "boolean",
+					"description": "노출 가능한 모든 디바이스 선택 여부"
+				},
+				"allPlacementGroup": {
+					"type": "boolean",
+					"description": "노출 가능한 모든 게재위치 선택 여부"
+				},
+				"bidGoal": {
+					"type": "string",
+					"description": "입찰 전략\r\n- 사용 가능한 값: `MAX_CONV`,`MAX_CLICK`,`NONE`"
+				},
+				"bidPrice": {
+					"type": "number",
+					"description": "입찰가"
+				},
+				"bidStrategy": {
+					"type": "string",
+					"description": "비용 관리\r\n- 사용 가능한 값: `FIXED_BID`,`BID_CAP`,`COST_CAP`,`NO_CAP`"
+				},
+				"bidStrategyValue": {
+					"type": "number",
+					"description": "한도 금액"
+				},
+				"bidType": {
+					"type": "string",
+					"description": "청구 기준\r\n- 사용 가능한 값: `CPC`,`CPM`,`CPV`"
+				},
+				"budgetAmount": {
+					"type": "number",
+					"description": "예산 금액"
+				},
+				"budgetType": {
+					"type": "string",
+					"description": "예산 타입",
+					"enum": [
+						"DAILY",
+						"TOTAL"
+					]
+				},
+				"campaignNo": {
+					"type": "integer",
+					"format": "int64",
+					"description": "캠페인 ID"
+				},
+				"creativeChooserType": {
+					"type": "string",
+					"description": "소재 선택 방식",
+					"enum": [
+						"VALUE_WEIGHTED_RANDOM",
+						"SIMPLE_RANDOM",
+						"OPTIMIZATION"
+					]
+				},
+				"devices": {
+					"type": "array",
+					"description": "디바이스 타입\r\n- 사용 가능한 값: `DESKTOP`,`MOBILE`",
+					"items": {
+						"type": "string"
+					}
+				},
+				"endTime": {
+					"type": "string",
+					"description": "종료일시"
+				},
+				"extensionDemos": {
+					"type": "array",
+					"description": "확장 데모",
+					"items": {
+						"type": "integer",
+						"format": "int32"
+					}
+				},
+				"frequencyAdUnit": {
+					"type": "string",
+					"description": "노출 빈도 단위",
+					"enum": [
+						"AD_SET",
+						"CREATIVE"
+					]
+				},
+				"genders": {
+					"type": "array",
+					"description": "성별\r\n- 사용 가능한 값: `M`,`F`,`U`",
+					"items": {
+						"type": "string"
+					}
+				},
+				"interestCodes": {
+					"type": "array",
+					"description": "관심사",
+					"items": {
+						"$ref": "#/definitions/InterestTargetParam"
+					}
+				},
+				"locations": {
+					"type": "array",
+					"description": "지역",
+					"items": {
+						"type": "string"
+					}
+				},
+				"name": {
+					"type": "string",
+					"description": "광고 그룹 이름",
+					"minLength": 2,
+					"maxLength": 128
+				},
+				"ongoing": {
+					"type": "boolean",
+					"description": "계속 게재 여부"
+				},
+				"placementGroupCodes": {
+					"type": "array",
+					"description": "게재 위치",
+					"items": {
+						"type": "string"
+					}
+				},
+				"platforms": {
+					"type": "array",
+					"description": "운영체제\r\n- 사용 가능한 값: `ANDROID`,`IOS`",
+					"items": {
+						"type": "string"
+					}
+				},
+				"purchaseIntentCodes": {
+					"type": "array",
+					"description": "구매 의도",
+					"items": {
+						"type": "integer",
+						"format": "int32"
+					}
+				},
+				"quota": {
+					"type": "integer",
+					"format": "int32",
+					"description": "노출 빈도 횟수",
+					"minimum": 1.0,
+					"maximum": 5.0,
+					"exclusiveMinimum": false,
+					"exclusiveMaximum": false
+				},
+				"scheduleTimeSlots": {
+					"type": "array",
+					"description": "상세 일정",
+					"items": {
+						"$ref": "#/definitions/ScheduleTimeSlotParam"
+					}
+				},
+				"startTime": {
+					"type": "string",
+					"description": "시작일시"
+				}
+			},
+			"title": "OpenAdSetCreationParam"
+		},
+		"OpenAdSetListView": {
+			"type": "object",
+			"properties": {
+				"activated": {
+					"type": "boolean"
+				},
+				"allPlacementGroup": {
+					"type": "boolean"
+				},
+				"autoBidStatus": {
+					"type": "string",
+					"enum": [
+						"LEARNING",
+						"RE_LEARNING",
+						"STABLE",
+						"LIMITED"
+					]
+				},
+				"bidGoal": {
+					"type": "string",
+					"enum": [
+						"MAX_CLICK",
+						"MAX_CONV",
+						"NONE"
+					]
+				},
+				"bidPrice": {
+					"type": "number"
+				},
+				"bidStrategy": {
+					"type": "string",
+					"description": "비용 관리\r\n- 사용 가능한 값: `FIXED_BID`,`BID_CAP`,`COST_CAP`,`NO_CAP`",
+					"enum": [
+						"FIXED_BID",
+						"BID_CAP",
+						"COST_CAP",
+						"NO_CAP",
+						"TARGET_COST"
+					]
+				},
+				"bidStrategyValue": {
+					"type": "number"
+				},
+				"bidType": {
+					"type": "string",
+					"enum": [
+						"CPC",
+						"CPM",
+						"CPV"
+					]
+				},
+				"budgetAmount": {
+					"type": "number"
+				},
+				"budgetType": {
+					"type": "string",
+					"enum": [
+						"DAILY",
+						"TOTAL"
+					]
+				},
+				"campaignName": {
+					"type": "string"
+				},
+				"campaignNo": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"deleted": {
+					"type": "boolean"
+				},
+				"endTime": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"interestIntersection": {
+					"type": "boolean"
+				},
+				"name": {
+					"type": "string"
+				},
+				"no": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"objective": {
+					"type": "string",
+					"enum": [
+						"CONVERSION",
+						"WEB_SITE_TRAFFIC",
+						"INSTALL_APP",
+						"WATCH_VIDEO",
+						"CATALOG",
+						"SHOPPING"
+					]
+				},
+				"placementGroups": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/PlacementGroup"
+					}
+				},
+				"startTime": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"timezoneOffset": {
+					"type": "string"
+				}
+			},
+			"title": "OpenAdSetListView"
+		},
+		"OpenAdSetView": {
+			"type": "object",
+			"required": [
+				"campaignNo",
+				"name"
+			],
+			"properties": {
+				"accelerated": {
+					"type": "boolean",
+					"description": "게재 방식. 빠른 게재 여부"
+				},
+				"adidLibraryParams": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/OpenCustomTargetView"
+					}
+				},
+				"ageRanges": {
+					"type": "array",
+					"description": "연령",
+					"items": {
+						"$ref": "#/definitions/AgeRange"
+					}
+				},
+				"aiplTargetParams": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/OpenCustomTargetView"
+					}
+				},
+				"allDevice": {
+					"type": "boolean",
+					"description": "노출 가능한 모든 디바이스 선택 여부"
+				},
+				"allPlacementGroup": {
+					"type": "boolean",
+					"description": "노출 가능한 모든 게재위치 선택 여부"
+				},
+				"bidGoal": {
+					"type": "string",
+					"description": "입찰 전략\r\n- 사용 가능한 값: `MAX_CONV`,`MAX_CLICK`,`NONE`"
+				},
+				"bidPrice": {
+					"type": "number",
+					"description": "입찰가"
+				},
+				"bidStrategy": {
+					"type": "string",
+					"description": "비용 관리\r\n- 사용 가능한 값: `FIXED_BID`,`BID_CAP`,`COST_CAP`,`NO_CAP`"
+				},
+				"bidStrategyValue": {
+					"type": "number",
+					"description": "한도 금액"
+				},
+				"bidType": {
+					"type": "string",
+					"description": "청구 기준\r\n- 사용 가능한 값: `CPC`,`CPM`,`CPV`"
+				},
+				"budgetAmount": {
+					"type": "number",
+					"description": "예산 금액"
+				},
+				"budgetType": {
+					"type": "string",
+					"description": "예산 타입",
+					"enum": [
+						"DAILY",
+						"TOTAL"
+					]
+				},
+				"campaignNo": {
+					"type": "integer",
+					"format": "int64",
+					"description": "캠페인 ID"
+				},
+				"creativeChooserType": {
+					"type": "string",
+					"description": "소재 선택 방식",
+					"enum": [
+						"VALUE_WEIGHTED_RANDOM",
+						"SIMPLE_RANDOM",
+						"OPTIMIZATION"
+					]
+				},
+				"devices": {
+					"type": "array",
+					"description": "디바이스 타입\r\n- 사용 가능한 값: `DESKTOP`,`MOBILE`",
+					"items": {
+						"type": "string"
+					}
+				},
+				"endTime": {
+					"type": "string",
+					"description": "종료일시"
+				},
+				"extensionDemos": {
+					"type": "array",
+					"description": "확장 데모",
+					"items": {
+						"type": "integer",
+						"format": "int32"
+					}
+				},
+				"frequencyAdUnit": {
+					"type": "string",
+					"description": "노출 빈도 단위",
+					"enum": [
+						"AD_SET",
+						"CREATIVE"
+					]
+				},
+				"genders": {
+					"type": "array",
+					"description": "성별\r\n- 사용 가능한 값: `M`,`F`,`U`",
+					"items": {
+						"type": "string"
+					}
+				},
+				"interestCodes": {
+					"type": "array",
+					"description": "관심사",
+					"items": {
+						"$ref": "#/definitions/InterestTargetParam"
+					}
+				},
+				"locations": {
+					"type": "array",
+					"description": "지역",
+					"items": {
+						"type": "string"
+					}
+				},
+				"lookalikeAudienceParams": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/OpenCustomTargetView"
+					}
+				},
+				"matTargetParams": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/OpenCustomTargetView"
+					}
+				},
+				"name": {
+					"type": "string",
+					"description": "광고 그룹 이름",
+					"minLength": 2,
+					"maxLength": 128
+				},
+				"ongoing": {
+					"type": "boolean",
+					"description": "계속 게재 여부"
+				},
+				"placementGroupCodes": {
+					"type": "array",
+					"description": "게재 위치",
+					"items": {
+						"type": "string"
+					}
+				},
+				"platforms": {
+					"type": "array",
+					"description": "운영체제\r\n- 사용 가능한 값: `ANDROID`,`IOS`",
+					"items": {
+						"type": "string"
+					}
+				},
+				"purchaseIntentCodes": {
+					"type": "array",
+					"description": "구매 의도",
+					"items": {
+						"type": "integer",
+						"format": "int32"
+					}
+				},
+				"quota": {
+					"type": "integer",
+					"format": "int32",
+					"description": "노출 빈도 횟수",
+					"minimum": 1.0,
+					"maximum": 5.0,
+					"exclusiveMinimum": false,
+					"exclusiveMaximum": false
+				},
+				"scheduleTimeSlots": {
+					"type": "array",
+					"description": "상세 일정",
+					"items": {
+						"$ref": "#/definitions/ScheduleTimeSlotParam"
+					}
+				},
+				"shoppingNewsTargetParams": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/OpenCustomTargetView"
+					}
+				},
+				"spentBudgetRatio": {
+					"type": "number"
+				},
+				"startTime": {
+					"type": "string",
+					"description": "시작일시"
+				},
+				"status": {
+					"type": "string",
+					"enum": [
+						"RUNNABLE",
+						"BEFORE_STARTING",
+						"TERMINATED",
+						"DELETED",
+						"BUDGET_EXHAUSTED",
+						"LOW_TARGETED",
+						"TARGET_DISABLED",
+						"LEARNING",
+						"LEARNING_LIMITED"
+					]
+				}
+			},
+			"title": "OpenAdSetView"
+		},
+		"OpenCampaignCreationParam": {
+			"type": "object",
+			"required": [
+				"brandNo",
+				"name",
+				"objective",
+				"urlNo"
+			],
+			"discriminator": "objective",
+			"properties": {
+				"brandNo": {
+					"type": "integer",
+					"format": "int64",
+					"description": "브랜드 ID"
+				},
+				"budgetAmount": {
+					"type": "number",
+					"example": 100000.0,
+					"description": "예산"
+				},
+				"name": {
+					"type": "string",
+					"description": "캠페인 이름",
+					"minLength": 2,
+					"maxLength": 128
+				},
+				"objective": {
+					"type": "string",
+					"description": "캠페인 목적"
+				},
+				"urlNo": {
+					"type": "integer",
+					"format": "int64",
+					"description": "대표 url ID"
+				}
+			},
+			"title": "OpenCampaignCreationParam"
+		},
+		"OpenCreative": {
+			"type": "object",
+			"properties": {
+				"activated": {
+					"type": "boolean"
+				},
+				"adSetName": {
+					"type": "string"
+				},
+				"adSetNo": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"campaignName": {
+					"type": "string"
+				},
+				"campaignNo": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"creativeType": {
+					"type": "string",
+					"description": "소재 타입:\r\n `SINGLE_IMAGE`,`MULTIPLE_IMAGE`,`SINGLE_VIDEO`,`IMAGE_BANNER`,`CATALOG`",
+					"enum": [
+						"SINGLE_IMAGE",
+						"MULTIPLE_IMAGE",
+						"SINGLE_VIDEO",
+						"IMAGE_BANNER",
+						"CATALOG"
+					]
+				},
+				"image": {
+					"description": "대표 이미지",
+					"$ref": "#/definitions/Image"
+				},
+				"name": {
+					"type": "string"
+				},
+				"no": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"status": {
+					"type": "string",
+					"description": "소재 상태:\r\n `PENDING','REJECT','ACCEPT','PENDING_IN_OPERATION','REJECT_IN_OPERATION','DELETED`"
+				}
+			},
+			"title": "OpenCreative"
+		},
+		"OpenCustomTargetView": {
+			"type": "object",
+			"properties": {
+				"included": {
+					"type": "boolean"
+				},
+				"name": {
+					"type": "string"
+				},
+				"no": {
+					"type": "integer",
+					"format": "int64"
+				}
+			},
+			"title": "OpenCustomTargetView"
+		},
+		"Pageable": {
+			"type": "object",
+			"properties": {
+				"offset": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"pageNumber": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"pageSize": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"paged": {
+					"type": "boolean"
+				},
+				"sort": {
+					"$ref": "#/definitions/Sort"
+				},
+				"unpaged": {
+					"type": "boolean"
+				}
+			},
+			"title": "Pageable"
+		},
+		"Page«BrandListResponse»": {
+			"type": "object",
+			"properties": {
+				"content": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/BrandListResponse"
+					}
+				},
+				"empty": {
+					"type": "boolean"
+				},
+				"first": {
+					"type": "boolean"
+				},
+				"last": {
+					"type": "boolean"
+				},
+				"number": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"numberOfElements": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"pageable": {
+					"$ref": "#/definitions/Pageable"
+				},
+				"size": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"sort": {
+					"$ref": "#/definitions/Sort"
+				},
+				"totalElements": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"totalPages": {
+					"type": "integer",
+					"format": "int32"
+				}
+			},
+			"title": "Page«BrandListResponse»"
+		},
+		"Page«Campaign»": {
+			"type": "object",
+			"properties": {
+				"content": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Campaign"
+					}
+				},
+				"empty": {
+					"type": "boolean"
+				},
+				"first": {
+					"type": "boolean"
+				},
+				"last": {
+					"type": "boolean"
+				},
+				"number": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"numberOfElements": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"pageable": {
+					"$ref": "#/definitions/Pageable"
+				},
+				"size": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"sort": {
+					"$ref": "#/definitions/Sort"
+				},
+				"totalElements": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"totalPages": {
+					"type": "integer",
+					"format": "int32"
+				}
+			},
+			"title": "Page«Campaign»"
+		},
+		"Page«OpenAdSetListView»": {
+			"type": "object",
+			"properties": {
+				"content": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/OpenAdSetListView"
+					}
+				},
+				"empty": {
+					"type": "boolean"
+				},
+				"first": {
+					"type": "boolean"
+				},
+				"last": {
+					"type": "boolean"
+				},
+				"number": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"numberOfElements": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"pageable": {
+					"$ref": "#/definitions/Pageable"
+				},
+				"size": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"sort": {
+					"$ref": "#/definitions/Sort"
+				},
+				"totalElements": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"totalPages": {
+					"type": "integer",
+					"format": "int32"
+				}
+			},
+			"title": "Page«OpenAdSetListView»"
+		},
+		"Page«OpenCreative»": {
+			"type": "object",
+			"properties": {
+				"content": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/OpenCreative"
+					}
+				},
+				"empty": {
+					"type": "boolean"
+				},
+				"first": {
+					"type": "boolean"
+				},
+				"last": {
+					"type": "boolean"
+				},
+				"number": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"numberOfElements": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"pageable": {
+					"$ref": "#/definitions/Pageable"
+				},
+				"size": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"sort": {
+					"$ref": "#/definitions/Sort"
+				},
+				"totalElements": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"totalPages": {
+					"type": "integer",
+					"format": "int32"
+				}
+			},
+			"title": "Page«OpenCreative»"
+		},
+		"Page«Url»": {
+			"type": "object",
+			"properties": {
+				"content": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Url"
+					}
+				},
+				"empty": {
+					"type": "boolean"
+				},
+				"first": {
+					"type": "boolean"
+				},
+				"last": {
+					"type": "boolean"
+				},
+				"number": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"numberOfElements": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"pageable": {
+					"$ref": "#/definitions/Pageable"
+				},
+				"size": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"sort": {
+					"$ref": "#/definitions/Sort"
+				},
+				"totalElements": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"totalPages": {
+					"type": "integer",
+					"format": "int32"
+				}
+			},
+			"title": "Page«Url»"
+		},
+		"PlacementGroup": {
+			"type": "object",
+			"properties": {
+				"basisGrade": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"betaExposable": {
+					"type": "boolean"
+				},
+				"code": {
+					"type": "string"
+				},
+				"displayOrder": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"exposablePhases": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"hidden": {
+					"type": "boolean"
+				},
+				"managerId": {
+					"type": "string"
+				},
+				"name": {
+					"type": "string"
+				},
+				"productType": {
+					"type": "string",
+					"enum": [
+						"SMARTCHANNEL",
+						"BANNER",
+						"FEED",
+						"INSTREAM",
+						"SHOPPING"
+					]
+				},
+				"publisherGroupCode": {
+					"type": "string"
+				},
+				"updatedAt": {
+					"type": "string",
+					"format": "date-time"
+				}
+			},
+			"title": "PlacementGroup"
+		},
+		"RegionCodeResponse": {
+			"type": "object",
+			"properties": {
+				"childLocations": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/RegionCodeResponse"
+					}
+				},
+				"country": {
+					"type": "string",
+					"enum": [
+						"KR",
+						"US"
+					]
+				},
+				"level": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"location": {
+					"type": "string"
+				},
+				"rcode": {
+					"type": "string"
+				}
+			},
+			"title": "RegionCodeResponse"
+		},
+		"SHOPPING": {
+			"title": "SHOPPING",
+			"allOf": [
+				{
+					"$ref": "#/definitions/OpenCampaignCreationParam"
+				},
+				{
+					"type": "object",
+					"required": [
+						"brandNo",
+						"name",
+						"objective",
+						"urlNo"
+					],
+					"properties": {
+						"brandNo": {
+							"type": "integer",
+							"format": "int64",
+							"description": "브랜드 ID"
+						},
+						"budgetAmount": {
+							"type": "number",
+							"example": 100000.0,
+							"description": "예산"
+						},
+						"conversionType": {
+							"type": "string",
+							"description": "최적화 전환 유형\r\n- 사용 가능한 값: `PURCHASE`,`CART`"
+						},
+						"conversionUrlNo": {
+							"type": "integer",
+							"format": "int64",
+							"description": "전환 추적 대상 ID"
+						},
+						"name": {
+							"type": "string",
+							"description": "캠페인 이름",
+							"minLength": 2,
+							"maxLength": 128
+						},
+						"objective": {
+							"type": "string",
+							"description": "캠페인 목적"
+						},
+						"urlNo": {
+							"type": "integer",
+							"format": "int64",
+							"description": "대표 url ID"
+						}
+					},
+					"title": "SHOPPING"
+				}
+			]
+		},
+		"ScheduleTimeSlotParam": {
+			"type": "object",
+			"properties": {
+				"dayOfWeek": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"endHour": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"startHour": {
+					"type": "integer",
+					"format": "int32"
+				}
+			},
+			"title": "ScheduleTimeSlotParam"
+		},
+		"Sort": {
+			"type": "object",
+			"properties": {
+				"empty": {
+					"type": "boolean"
+				},
+				"sorted": {
+					"type": "boolean"
+				},
+				"unsorted": {
+					"type": "boolean"
+				}
+			},
+			"title": "Sort"
+		},
+		"SuccessResponse": {
+			"type": "object",
+			"properties": {
+				"description": {
+					"type": "string"
+				},
+				"message": {
+					"type": "string"
+				},
+				"success": {
+					"type": "boolean"
+				}
+			},
+			"title": "SuccessResponse"
+		},
+		"TemporalUnit": {
+			"type": "object",
+			"properties": {
+				"dateBased": {
+					"type": "boolean"
+				},
+				"duration": {
+					"$ref": "#/definitions/Duration"
+				},
+				"durationEstimated": {
+					"type": "boolean"
+				},
+				"timeBased": {
+					"type": "boolean"
+				}
+			},
+			"title": "TemporalUnit"
+		},
+		"Timestamp": {
+			"type": "object",
+			"properties": {
+				"date": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"day": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"hours": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"minutes": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"month": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"nanos": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"seconds": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"time": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"timezoneOffset": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"year": {
+					"type": "integer",
+					"format": "int32"
+				}
+			},
+			"title": "Timestamp"
+		},
+		"Url": {
+			"type": "object",
+			"properties": {
+				"adAccountNo": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"bizChannelType": {
+					"type": "string",
+					"enum": [
+						"NAVER_SHOPPING",
+						"WEBSITE",
+						"MOBILE_APP"
+					]
+				},
+				"createdAt": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"deleted": {
+					"type": "boolean"
+				},
+				"inspectionStatus": {
+					"type": "string",
+					"enum": [
+						"PENDING",
+						"APPROVED",
+						"REJECTED"
+					]
+				},
+				"localUpdatedAt": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"mallId": {
+					"type": "string"
+				},
+				"managerId": {
+					"type": "string"
+				},
+				"managerName": {
+					"type": "string"
+				},
+				"mobileApp": {
+					"type": "boolean"
+				},
+				"no": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"storePlatform": {
+					"type": "string",
+					"enum": [
+						"ANDROID",
+						"IOS"
+					]
+				},
+				"updatedAt": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"updaterId": {
+					"type": "string"
+				},
+				"url": {
+					"type": "string"
+				},
+				"zoneId": {
+					"$ref": "#/definitions/ZoneId"
+				}
+			},
+			"title": "Url"
+		},
+		"WATCH_VIDEO": {
+			"title": "WATCH_VIDEO",
+			"allOf": [
+				{
+					"$ref": "#/definitions/OpenCampaignCreationParam"
+				},
+				{
+					"type": "object",
+					"required": [
+						"brandNo",
+						"name",
+						"objective",
+						"urlNo"
+					],
+					"properties": {
+						"brandNo": {
+							"type": "integer",
+							"format": "int64",
+							"description": "브랜드 ID"
+						},
+						"budgetAmount": {
+							"type": "number",
+							"example": 100000.0,
+							"description": "예산"
+						},
+						"conversionUrlNo": {
+							"type": "integer",
+							"format": "int64",
+							"description": "전환 추적 대상 ID"
+						},
+						"name": {
+							"type": "string",
+							"description": "캠페인 이름",
+							"minLength": 2,
+							"maxLength": 128
+						},
+						"objective": {
+							"type": "string",
+							"description": "캠페인 목적"
+						},
+						"urlNo": {
+							"type": "integer",
+							"format": "int64",
+							"description": "대표 url ID"
+						}
+					},
+					"title": "WATCH_VIDEO"
+				}
+			]
+		},
+		"WEB_SITE_TRAFFIC": {
+			"title": "WEB_SITE_TRAFFIC",
+			"allOf": [
+				{
+					"$ref": "#/definitions/OpenCampaignCreationParam"
+				},
+				{
+					"type": "object",
+					"required": [
+						"brandNo",
+						"name",
+						"objective",
+						"urlNo"
+					],
+					"properties": {
+						"brandNo": {
+							"type": "integer",
+							"format": "int64",
+							"description": "브랜드 ID"
+						},
+						"budgetAmount": {
+							"type": "number",
+							"example": 100000.0,
+							"description": "예산"
+						},
+						"conversionUrlNo": {
+							"type": "integer",
+							"format": "int64",
+							"description": "전환 추적 대상 ID"
+						},
+						"name": {
+							"type": "string",
+							"description": "캠페인 이름",
+							"minLength": 2,
+							"maxLength": 128
+						},
+						"objective": {
+							"type": "string",
+							"description": "캠페인 목적"
+						},
+						"urlNo": {
+							"type": "integer",
+							"format": "int64",
+							"description": "대표 url ID"
+						}
+					},
+					"title": "WEB_SITE_TRAFFIC"
+				}
+			]
+		},
+		"ZoneId": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "string"
+				},
+				"rules": {
+					"$ref": "#/definitions/ZoneRules"
+				}
+			},
+			"title": "ZoneId"
+		},
+		"ZoneOffset": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "string"
+				},
+				"rules": {
+					"$ref": "#/definitions/ZoneRules"
+				},
+				"totalSeconds": {
+					"type": "integer",
+					"format": "int32"
+				}
+			},
+			"title": "ZoneOffset"
+		},
+		"ZoneOffsetTransition": {
+			"type": "object",
+			"properties": {
+				"dateTimeAfter": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"dateTimeBefore": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"duration": {
+					"$ref": "#/definitions/Duration"
+				},
+				"gap": {
+					"type": "boolean"
+				},
+				"instant": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"offsetAfter": {
+					"$ref": "#/definitions/ZoneOffset"
+				},
+				"offsetBefore": {
+					"$ref": "#/definitions/ZoneOffset"
+				},
+				"overlap": {
+					"type": "boolean"
+				}
+			},
+			"title": "ZoneOffsetTransition"
+		},
+		"ZoneOffsetTransitionRule": {
+			"type": "object",
+			"properties": {
+				"dayOfMonthIndicator": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"dayOfWeek": {
+					"type": "string",
+					"enum": [
+						"MONDAY",
+						"TUESDAY",
+						"WEDNESDAY",
+						"THURSDAY",
+						"FRIDAY",
+						"SATURDAY",
+						"SUNDAY"
+					]
+				},
+				"localTime": {
+					"$ref": "#/definitions/LocalTime"
+				},
+				"midnightEndOfDay": {
+					"type": "boolean"
+				},
+				"month": {
+					"type": "string",
+					"enum": [
+						"JANUARY",
+						"FEBRUARY",
+						"MARCH",
+						"APRIL",
+						"MAY",
+						"JUNE",
+						"JULY",
+						"AUGUST",
+						"SEPTEMBER",
+						"OCTOBER",
+						"NOVEMBER",
+						"DECEMBER"
+					]
+				},
+				"offsetAfter": {
+					"$ref": "#/definitions/ZoneOffset"
+				},
+				"offsetBefore": {
+					"$ref": "#/definitions/ZoneOffset"
+				},
+				"standardOffset": {
+					"$ref": "#/definitions/ZoneOffset"
+				},
+				"timeDefinition": {
+					"type": "string",
+					"enum": [
+						"UTC",
+						"WALL",
+						"STANDARD"
+					]
+				}
+			},
+			"title": "ZoneOffsetTransitionRule"
+		},
+		"ZoneRules": {
+			"type": "object",
+			"properties": {
+				"fixedOffset": {
+					"type": "boolean"
+				},
+				"transitionRules": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/ZoneOffsetTransitionRule"
+					}
+				},
+				"transitions": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/ZoneOffsetTransition"
+					}
+				}
+			},
+			"title": "ZoneRules"
+		}
+	}
+}

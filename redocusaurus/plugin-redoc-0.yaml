@@ -1,9 +1,120 @@
 swagger: '2.0'
 info:
-  description: description of your API
-  version: v1
-  title: GFA 계정 API
+  version: v20230217
+  title: 광고 API
 host: openapi.naver.com
 basePath: /v1/ad-api
-schemes:
-  - https
+tags:
+  - name: 광고 계정
+paths:
+  /{version}/adAccounts:
+    get:
+      tags:
+        - 광고 계정
+      summary: 내 광고 계정 목록
+      operationId: listUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: page
+          in: query
+          description: '페이지 번호 (기본값: 0)'
+          required: false
+          type: string
+        - name: size
+          in: query
+          description: '페이지 크기 (기본값: 10, 최대: 100)'
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Page«OpenAdAccount»'
+definitions:
+  OpenAdAccount:
+    type: object
+    properties:
+      createdAt:
+        type: string
+        format: date-time
+      disabled:
+        type: boolean
+      name:
+        type: string
+      'no':
+        type: integer
+        format: int64
+      role:
+        type: string
+        enum:
+          - MASTER
+          - STANDARD
+          - READ_ONLY
+          - PERFORMANCE_MANAGEMENT
+      updatedAt:
+        type: string
+        format: date-time
+    title: OpenAdAccount
+  Pageable:
+    type: object
+    properties:
+      offset:
+        type: integer
+        format: int64
+      pageNumber:
+        type: integer
+        format: int32
+      pageSize:
+        type: integer
+        format: int32
+      paged:
+        type: boolean
+      sort:
+        $ref: '#/definitions/Sort'
+      unpaged:
+        type: boolean
+    title: Pageable
+  Page«OpenAdAccount»:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/OpenAdAccount'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      pageable:
+        $ref: '#/definitions/Pageable'
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: Page«OpenAdAccount»
+  Sort:
+    type: object
+    properties:
+      empty:
+        type: boolean
+      sorted:
+        type: boolean
+      unsorted:
+        type: boolean
+    title: Sort

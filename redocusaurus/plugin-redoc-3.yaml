@@ -1,9 +1,675 @@
-swagger: '2.0'
+openapi: 3.0.1
 info:
-  description: description of your API
-  version: v1
-  title: GFA 통계 API
-host: openapi.naver.com
-basePath: /v1/ad-api
-schemes:
-  - https
+  title: 성과 조회 API 명세서
+  description: |
+    GFA 캠페인, 광고 그룹, 소재별 과거/실시간 성과를 조회할 수 있습니다.
+  version: v20230220
+servers:
+  - url: http://openapi.naver.com
+paths:
+  /v1/ad-api/{version}/adAccounts/{adAccountNo}/performance/realtime/creatives:
+    get:
+      tags:
+        - 실시간 성과 조회
+      summary: 광고 계정 실시간 성과 조회
+      description: |
+        특정 광고 계정의 실시간 성과를 조회합니다.
+        오늘 또는 어제 데이터를 조회할 수 있으며, 조회 결과는 업데이트 시점을 기준으로 오름차순 정렬되어 제공됩니다.
+
+        응답의 until 필드 값은 마지막으로 조회된 타임스탬프를 나타냅니다.
+        해당 값을 다음 요청의 since 파라미터로 포함시키면 이전 요청 이후에 업데이트된 소재만을 조회할 수 있습니다.
+      operationId: adAccountRealtimePerformance
+      parameters:
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          schema:
+            type: float
+            default: '1.0'
+        - name: adAccountNo
+          in: path
+          description: 광고 계정 번호
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 1234
+        - name: targetDate
+          in: query
+          description: '조회 대상 일자 ( 오늘 : today, 어제 : yesterday ), 주어지지 않으면 today'
+          required: false
+          schema:
+            type: string
+            enum:
+              - today
+              - yesterday
+        - name: since
+          in: query
+          description: 특정 시점 이후 성과가 업데이트된 소재만을 조회하기 위한 타임스탬프
+          required: false
+          schema:
+            type: integer
+            format: int64
+          example: 1675907423
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RealtimePerformanceResponse'
+  /v1/ad-api/{version}/adAccounts/{adAccountNo}/performance/realtime/creatives/{creativeNo}/creatives:
+    get:
+      tags:
+        - 실시간 성과 조회
+      summary: 소재 실시간 성과 조회
+      description: |
+        특정 소재의 실시간 성과를 조회합니다.
+        오늘 또는 어제 데이터를 조회할 수 있으며, 조회 결과는 업데이트 시점을 기준으로 오름차순 정렬되어 제공됩니다.
+
+        응답의 until 필드 값은 마지막으로 조회된 타임스탬프를 나타냅니다.
+        해당 값을 다음 요청의 since 파라미터로 포함시키면 이전 요청 이후에 업데이트된 소재만을 조회할 수 있습니다.
+      operationId: creativeRealtimePerformance
+      parameters:
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          schema:
+            type: float
+            default: '1.0'
+        - name: adAccountNo
+          in: path
+          description: 광고 계정 번호
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 1234
+        - name: creativeNo
+          in: path
+          description: 소재 번호
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 5678
+        - name: targetDate
+          in: query
+          description: '조회 대상 일자 ( 오늘 : today, 어제 : yesterday ), 주어지지 않으면 today'
+          required: false
+          schema:
+            type: string
+            enum:
+              - today
+              - yesterday
+        - name: since
+          in: query
+          description: 특정 시점 이후 성과가 업데이트된 소재만을 조회하기 위한 타임스탬프
+          required: false
+          schema:
+            type: integer
+            format: int64
+          example: 1675907423
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RealtimePerformanceResponse'
+  /v1/ad-api/{version}/adAccounts/{adAccountNo}/performance/realtime/campaigns/{campaignNo}/creatives:
+    get:
+      tags:
+        - 실시간 성과 조회
+      summary: 캠페인 실시간 성과 조회
+      description: |
+        특정 캠페인의 실시간 성과를 조회합니다.
+        오늘 또는 어제 데이터를 조회할 수 있으며, 조회 결과는 업데이트 시점을 기준으로 오름차순 정렬되어 제공됩니다.
+
+        응답의 until 필드 값은 마지막으로 조회된 타임스탬프를 나타냅니다.
+        해당 값을 다음 요청의 since 파라미터로 포함시키면 이전 요청 이후에 업데이트된 소재만을 조회할 수 있습니다.
+      operationId: campaignRealtimePerformance
+      parameters:
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          schema:
+            type: float
+            default: '1.0'
+        - name: adAccountNo
+          in: path
+          description: 광고 계정 번호
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 1234
+        - name: campaignNo
+          in: path
+          description: 캠페인 번호
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 5678
+        - name: targetDate
+          in: query
+          description: '조회 대상 일자 ( 오늘 : today, 어제 : yesterday ), 주어지지 않으면 today'
+          required: false
+          schema:
+            type: string
+            enum:
+              - today
+              - yesterday
+        - name: since
+          in: query
+          description: 특정 시점 이후 성과가 업데이트된 소재만을 조회하기 위한 타임스탬프
+          required: false
+          schema:
+            type: integer
+            format: int64
+          example: 1675907423
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RealtimePerformanceResponse'
+  /v1/ad-api/{version}/adAccounts/{adAccountNo}/performance/realtime/adSets/{adSetNo}/creatives:
+    get:
+      tags:
+        - 실시간 성과 조회
+      summary: 광고 그룹 실시간 성과 조회
+      description: |
+        특정 광고 그룹의 실시간 성과를 조회합니다.
+        오늘 또는 어제 데이터를 조회할 수 있으며, 조회 결과는 업데이트 시점을 기준으로 오름차순 정렬되어 제공됩니다.
+
+        응답의 until 필드 값은 마지막으로 조회된 타임스탬프를 나타냅니다.
+        해당 값을 다음 요청의 since 파라미터로 포함시키면 이전 요청 이후에 업데이트된 소재만을 조회할 수 있습니다.
+      operationId: adSetRealtimePerformance
+      parameters:
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          schema:
+            type: float
+            default: '1.0'
+        - name: adAccountNo
+          in: path
+          description: 광고 계정 번호
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 1234
+        - name: adSetNo
+          in: path
+          description: 광고 그룹 번호
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 5678
+        - name: targetDate
+          in: query
+          description: '조회 대상 일자 ( 오늘 : today, 어제 : yesterday ), 주어지지 않으면 today'
+          required: false
+          schema:
+            type: string
+            enum:
+              - today
+              - yesterday
+        - name: since
+          in: query
+          description: 특정 시점 이후 성과가 업데이트된 소재만을 조회하기 위한 타임스탬프
+          required: false
+          schema:
+            type: integer
+            format: int64
+          example: 1675907423
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RealtimePerformanceResponse'
+  /v1/ad-api/{version}/adAccounts/{adAccountNo}/performance/past/{aggregationType}:
+    get:
+      tags:
+        - 과거 성과 조회
+      summary: 광고 계정 과거 성과 조회
+      description: >
+        특정 광고 계정의 과거 성과를 조회합니다.
+
+        캠페인, 광고 그룹, 소재 단위로 집계할 수 있으며, 조회 결과는 날짜, 광고주, 캠페인, 광고 그룹, 소재 번호 순으로 오름차순
+        정렬되어 제공됩니다.
+
+
+        조회 기간은 최대 31일이며, 2년 전부터 전일 데이터까지 조회가 가능합니다.
+
+        전일 데이터는 금일 02시부터 조회가 가능합니다.
+
+
+        한 번에 최대 1000개 까지 조회가 가능하며, 이를 초과하는 개수가 존재하는 경우 페이징이 적용됩니다.
+
+
+        응답의 next 필드 값을 다음 요청의 next 파라미터로 포함시키면 다음 페이지를 조회할 수 있으며, 해당 토큰은 10분간
+        유효합니다.
+      operationId: adAccountPastPerformance
+      parameters:
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          schema:
+            type: float
+            default: '1.0'
+        - name: adAccountNo
+          in: path
+          description: 광고 계정 번호
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 1234
+        - name: aggregationType
+          in: path
+          description: '성과 제공 단위 ( 캠페인 : campaigns, 광고 그룹 : adSets, 소재 : creatives )'
+          required: true
+          schema:
+            type: string
+            enum:
+              - campaigns
+              - adSets
+              - creatives
+        - name: startDate
+          in: query
+          description: 조회 시작일 (yyyy-MM-dd 형식)
+          required: true
+          schema:
+            type: string
+          example: '2023-01-01'
+        - name: endDate
+          in: query
+          description: 조회 종료일 (yyyy-MM-dd 형식)
+          required: true
+          schema:
+            type: string
+          example: '2023-01-30'
+        - name: next
+          in: query
+          description: 다음 페이지 조회를 위한 토큰
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: 조회할 레코드 수, 주어지지 않으면 1000
+          required: false
+          schema:
+            type: integer
+            format: int32
+          example: 1000
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PastPerformanceResponse'
+  /v1/ad-api/{version}/adAccounts/{adAccountNo}/performance/past/creatives/{creativeNo}/{aggregationType}:
+    get:
+      tags:
+        - 과거 성과 조회
+      summary: 소재 과거 성과 조회
+      description: >
+        특정 소재의 과거 성과를 조회합니다.
+
+        조회 결과는 날짜, 광고주, 캠페인, 광고 그룹, 소재 번호 순으로 오름차순 정렬되어 제공됩니다.
+
+
+        조회 기간은 최대 31일이며, 2년 전부터 전일 데이터까지 조회가 가능합니다.
+
+        전일 데이터는 금일 02시부터 조회가 가능합니다.
+
+
+        한 번에 최대 1000개 까지 조회가 가능하며, 이를 초과하는 개수가 존재하는 경우 페이징이 적용됩니다.
+
+
+        응답의 next 필드 값을 다음 요청의 next 파라미터로 포함시키면 다음 페이지를 조회할 수 있으며, 해당 토큰은 10분간
+        유효합니다.
+      operationId: creativePastPerformance
+      parameters:
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          schema:
+            type: float
+            default: '1.0'
+        - name: adAccountNo
+          in: path
+          description: 광고 계정 번호
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 1234
+        - name: creativeNo
+          in: path
+          description: 소재 번호
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 5678
+        - name: aggregationType
+          in: path
+          description: '성과 제공 단위 ( 소재 : creatives )'
+          required: true
+          schema:
+            type: string
+            enum:
+              - creatives
+        - name: startDate
+          in: query
+          description: 조회 시작일 (yyyy-MM-dd 포맷)
+          required: true
+          schema:
+            type: string
+          example: '2023-01-01'
+        - name: endDate
+          in: query
+          description: 조회 종료일 (yyyy-MM-dd 포맷)
+          required: true
+          schema:
+            type: string
+          example: '2023-01-30'
+        - name: next
+          in: query
+          description: 다음 페이지 조회를 위한 토큰
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: 조회할 레코드 수, 주어지지 않으면 1000
+          required: false
+          schema:
+            type: integer
+            format: int32
+          example: 1000
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PastPerformanceResponse'
+  /v1/ad-api/{version}/adAccounts/{adAccountNo}/performance/past/campaigns/{campaignNo}/{aggregationType}:
+    get:
+      tags:
+        - 과거 성과 조회
+      summary: 캠페인 과거 성과 조회
+      description: >
+        특정 캠페인의 과거 성과를 조회합니다.
+
+        광고 그룹 또는 소재 단위로 집계할 수 있으며, 조회 결과는 날짜, 광고주, 캠페인, 광고 그룹, 소재 번호 순으로 오름차순
+        정렬되어 제공됩니다.
+
+
+        조회 기간은 최대 31일이며, 2년 전부터 전일 데이터까지 조회가 가능합니다.
+
+        전일 데이터는 금일 02시부터 조회가 가능합니다.
+
+
+        한 번에 최대 1000개 까지 조회가 가능하며, 이를 초과하는 개수가 존재하는 경우 페이징이 적용됩니다.
+
+
+        응답의 next 필드 값을 다음 요청의 next 파라미터로 포함시키면 다음 페이지를 조회할 수 있으며, 해당 토큰은 10분간
+        유효합니다.
+      operationId: campaignPastPerformance
+      parameters:
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          schema:
+            type: float
+            default: '1.0'
+        - name: adAccountNo
+          in: path
+          description: 광고 계정 번호
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 1234
+        - name: campaignNo
+          in: path
+          description: 캠페인 번호
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 5678
+        - name: aggregationType
+          in: path
+          description: '성과 제공 단위 ( 광고 그룹 : adSets, 소재 : creatives )'
+          required: true
+          schema:
+            type: string
+            enum:
+              - adSets
+              - creatives
+        - name: startDate
+          in: query
+          description: 조회 시작일 (yyyy-MM-dd 포맷)
+          required: true
+          schema:
+            type: string
+          example: '2023-01-01'
+        - name: endDate
+          in: query
+          description: 조회 종료일 (yyyy-MM-dd 포맷)
+          required: true
+          schema:
+            type: string
+          example: '2023-01-30'
+        - name: next
+          in: query
+          description: 다음 페이지 조회를 위한 토큰
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: 조회할 레코드 수, 주어지지 않으면 1000
+          required: false
+          schema:
+            type: integer
+            format: int32
+          example: 1000
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PastPerformanceResponse'
+  /v1/ad-api/{version}/adAccounts/{adAccountNo}/performance/past/adSets/{adSetNo}/{aggregationType}:
+    get:
+      tags:
+        - 과거 성과 조회
+      summary: 광고 그룹 과거 성과 조회
+      description: >
+        특정 광고 그룹의 과거 성과를 조회합니다.
+
+        조회 결과는 날짜, 광고주, 캠페인, 광고 그룹, 소재 번호 순으로 오름차순 정렬되어 제공됩니다.
+
+
+        조회 기간은 최대 31일이며, 2년 전부터 전일 데이터까지 조회가 가능합니다.
+
+        전일 데이터는 금일 02시부터 조회가 가능합니다.
+
+
+        한 번에 최대 1000개 까지 조회가 가능하며, 이를 초과하는 개수가 존재하는 경우 페이징이 적용됩니다.
+
+
+        응답의 next 필드 값을 다음 요청의 next 파라미터로 포함시키면 다음 페이지를 조회할 수 있으며, 해당 토큰은 10분간
+        유효합니다.
+      operationId: adSetPastPerformance
+      parameters:
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          schema:
+            type: float
+            default: '1.0'
+        - name: adAccountNo
+          in: path
+          description: 광고 계정 번호
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 1234
+        - name: adSetNo
+          in: path
+          description: 광고 그룹 번호
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 5678
+        - name: aggregationType
+          in: path
+          description: '성과 제공 단위 ( 소재 : creatives )'
+          required: true
+          schema:
+            type: string
+            enum:
+              - creatives
+        - name: startDate
+          in: query
+          description: 조회 시작일 (yyyy-MM-dd 포맷)
+          required: true
+          schema:
+            type: string
+          example: '2023-01-01'
+        - name: endDate
+          in: query
+          description: 조회 종료일 (yyyy-MM-dd 포맷)
+          required: true
+          schema:
+            type: string
+          example: '2023-01-30'
+        - name: next
+          in: query
+          description: 다음 페이지 조회를 위한 토큰
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: 조회할 레코드 수, 주어지지 않으면 1000
+          required: false
+          schema:
+            type: integer
+            format: int32
+          example: 1000
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PastPerformanceResponse'
+components:
+  schemas:
+    AggregatedPerformance:
+      type: object
+      properties:
+        campaignNo:
+          type: integer
+          format: int64
+        adSetNo:
+          type: integer
+          format: int64
+        creativeNo:
+          type: integer
+          format: int64
+        targetDate:
+          type: string
+          format: date
+        impCount:
+          type: integer
+          format: int64
+        clickCount:
+          type: integer
+          format: int64
+        vplayCount:
+          type: integer
+          format: int64
+        sales:
+          type: number
+          format: double
+        convCount:
+          type: integer
+          format: int64
+        convSales:
+          type: number
+          format: double
+        updatedAt:
+          type: string
+          format: date-time
+    RealtimePerformanceResponse:
+      type: object
+      properties:
+        rows:
+          type: array
+          items:
+            $ref: '#/components/schemas/AggregatedPerformance'
+        until:
+          type: integer
+          format: int64
+    PastPerformanceResponse:
+      type: object
+      properties:
+        rows:
+          type: array
+          items:
+            $ref: '#/components/schemas/AggregatedPerformance'
+        next:
+          type: string
