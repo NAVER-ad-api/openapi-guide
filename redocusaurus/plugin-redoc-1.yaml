@@ -11,7 +11,7 @@ tags:
   - name: 타겟팅 상세
   - name: 타입 정보
 paths:
-  /api/open/{version}/adAccounts/{adAccountNo}/adSets:
+  /{version}/adAccounts/{adAccountNo}/adSets:
     get:
       tags:
         - 광고 그룹
@@ -31,14 +31,6 @@ paths:
           required: true
           type: integer
           format: int64
-        - name: bidTypes
-          in: query
-          description: 광고 그룹의 청구 기준
-          required: false
-          type: array
-          items:
-            type: string
-          collectionFormat: multi
         - name: budgetTypes
           in: query
           description: 광고 그룹의 예산 타입
@@ -66,30 +58,11 @@ paths:
             광고 그룹을 검색합니다.
           required: false
           type: boolean
-        - name: offset
-          in: query
-          required: false
-          type: integer
-          format: int64
         - name: page
           in: query
           description: '페이지 번호 (기본값: 0)'
           required: false
           type: string
-        - name: pageNumber
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: pageSize
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: paged
-          in: query
-          required: false
-          type: boolean
         - name: placementGroupCodes
           in: query
           description: 광고 그룹의 게재 위치
@@ -103,18 +76,6 @@ paths:
           description: '페이지 크기 (기본값: 10, 최대: 100)'
           required: false
           type: string
-        - name: sort.sorted
-          in: query
-          required: false
-          type: boolean
-        - name: sort.unsorted
-          in: query
-          required: false
-          type: boolean
-        - name: unpaged
-          in: query
-          required: false
-          type: boolean
       responses:
         '200':
           description: OK
@@ -188,7 +149,7 @@ paths:
           schema:
             $ref: '#/definitions/SuccessResponse'
       deprecated: false
-  /api/open/{version}/adAccounts/{adAccountNo}/adSets/activate:
+  /{version}/adAccounts/{adAccountNo}/adSets/activate:
     post:
       tags:
         - 광고 그룹
@@ -229,7 +190,7 @@ paths:
           schema:
             $ref: '#/definitions/SuccessResponse'
       deprecated: false
-  /api/open/{version}/adAccounts/{adAccountNo}/adSets/edit:
+  /{version}/adAccounts/{adAccountNo}/adSets/edit:
     post:
       tags:
         - 광고 그룹
@@ -273,7 +234,7 @@ paths:
           schema:
             $ref: '#/definitions/ErrorResult'
       deprecated: false
-  /api/open/{version}/adAccounts/{adAccountNo}/adSets/sampleByCampaignNo:
+  /{version}/adAccounts/{adAccountNo}/adSets/sampleByCampaignNo:
     get:
       tags:
         - 광고 그룹
@@ -295,7 +256,7 @@ paths:
           schema:
             $ref: '#/definitions/OpenAdSetCreationParam'
       deprecated: false
-  /api/open/{version}/adAccounts/{adAccountNo}/adSets/typeInfoByCampaignNo:
+  /{version}/adAccounts/{adAccountNo}/adSets/typeInfoByCampaignNo:
     get:
       tags:
         - 광고 그룹
@@ -317,7 +278,7 @@ paths:
           schema:
             $ref: '#/definitions/AvailableTypesOfAdSet'
       deprecated: false
-  /api/open/{version}/adAccounts/{adAccountNo}/adSets/{adSetNo}:
+  /{version}/adAccounts/{adAccountNo}/adSets/{adSetNo}:
     get:
       tags:
         - 광고 그룹
@@ -377,7 +338,7 @@ paths:
           schema:
             $ref: '#/definitions/SuccessResponse'
       deprecated: false
-  /api/open/{version}/adAccounts/{adAccountNo}/campaigns:
+  /{version}/adAccounts/{adAccountNo}/campaigns:
     get:
       tags:
         - 캠페인
@@ -424,47 +385,16 @@ paths:
             - WATCH_VIDEO
             - CATALOG
             - SHOPPING
-        - name: offset
-          in: query
-          required: false
-          type: integer
-          format: int64
         - name: page
           in: query
           description: '페이지 번호 (기본값: 0)'
           required: false
           type: string
-        - name: pageNumber
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: pageSize
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: paged
-          in: query
-          required: false
-          type: boolean
         - name: size
           in: query
           description: '페이지 크기 (기본값: 10, 최대: 100)'
           required: false
           type: string
-        - name: sort.sorted
-          in: query
-          required: false
-          type: boolean
-        - name: sort.unsorted
-          in: query
-          required: false
-          type: boolean
-        - name: unpaged
-          in: query
-          required: false
-          type: boolean
       responses:
         '200':
           description: OK
@@ -531,7 +461,7 @@ paths:
           schema:
             $ref: '#/definitions/SuccessResponse'
       deprecated: false
-  /api/open/{version}/adAccounts/{adAccountNo}/campaigns/activate:
+  /{version}/adAccounts/{adAccountNo}/campaigns/activate:
     post:
       tags:
         - 캠페인
@@ -572,7 +502,7 @@ paths:
           schema:
             type: boolean
       deprecated: false
-  /api/open/{version}/adAccounts/{adAccountNo}/campaigns/brands:
+  /{version}/adAccounts/{adAccountNo}/campaigns/brands:
     get:
       tags:
         - 캠페인
@@ -587,54 +517,23 @@ paths:
           required: true
           type: integer
           format: int64
-        - name: offset
-          in: query
-          required: false
-          type: integer
-          format: int64
         - name: page
           in: query
           description: '페이지 번호 (기본값: 0)'
           required: false
           type: string
-        - name: pageNumber
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: pageSize
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: paged
-          in: query
-          required: false
-          type: boolean
         - name: size
           in: query
           description: '페이지 크기 (기본값: 10, 최대: 100)'
           required: false
           type: string
-        - name: sort.sorted
-          in: query
-          required: false
-          type: boolean
-        - name: sort.unsorted
-          in: query
-          required: false
-          type: boolean
-        - name: unpaged
-          in: query
-          required: false
-          type: boolean
       responses:
         '200':
           description: OK
           schema:
             $ref: '#/definitions/Page«BrandListResponse»'
       deprecated: false
-  /api/open/{version}/adAccounts/{adAccountNo}/campaigns/catalogs:
+  /{version}/adAccounts/{adAccountNo}/campaigns/catalogs:
     get:
       tags:
         - 캠페인
@@ -662,7 +561,7 @@ paths:
             items:
               $ref: '#/definitions/CatalogNode'
       deprecated: false
-  /api/open/{version}/adAccounts/{adAccountNo}/campaigns/conversionUrls:
+  /{version}/adAccounts/{adAccountNo}/campaigns/conversionUrls:
     get:
       tags:
         - 캠페인
@@ -697,7 +596,7 @@ paths:
             items:
               $ref: '#/definitions/ConversionUrlResponse'
       deprecated: false
-  /api/open/{version}/adAccounts/{adAccountNo}/campaigns/editBudget:
+  /{version}/adAccounts/{adAccountNo}/campaigns/editBudget:
     post:
       tags:
         - 캠페인
@@ -738,7 +637,7 @@ paths:
           schema:
             type: boolean
       deprecated: false
-  /api/open/{version}/adAccounts/{adAccountNo}/campaigns/urls:
+  /{version}/adAccounts/{adAccountNo}/campaigns/urls:
     get:
       tags:
         - 캠페인
@@ -753,54 +652,23 @@ paths:
           required: true
           type: integer
           format: int64
-        - name: offset
-          in: query
-          required: false
-          type: integer
-          format: int64
         - name: page
           in: query
           description: '페이지 번호 (기본값: 0)'
           required: false
           type: string
-        - name: pageNumber
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: pageSize
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: paged
-          in: query
-          required: false
-          type: boolean
         - name: size
           in: query
           description: '페이지 크기 (기본값: 10, 최대: 100)'
           required: false
           type: string
-        - name: sort.sorted
-          in: query
-          required: false
-          type: boolean
-        - name: sort.unsorted
-          in: query
-          required: false
-          type: boolean
-        - name: unpaged
-          in: query
-          required: false
-          type: boolean
       responses:
         '200':
           description: OK
           schema:
             $ref: '#/definitions/Page«Url»'
       deprecated: false
-  /api/open/{version}/adAccounts/{adAccountNo}/campaigns/{campaignNo}:
+  /{version}/adAccounts/{adAccountNo}/campaigns/{campaignNo}:
     delete:
       tags:
         - 캠페인
@@ -827,7 +695,7 @@ paths:
           schema:
             type: boolean
       deprecated: false
-  /api/open/{version}/adAccounts/{adAccountNo}/creatives:
+  /{version}/adAccounts/{adAccountNo}/creatives:
     get:
       tags:
         - 광고 소재
@@ -840,8 +708,7 @@ paths:
           in: query
           description: true/false 인 경우 각각 ON/OFF 인 광고 소재만 검색합니다. 값이 없을 시 모든 광고 소재를 검색합니다.
           required: false
-          type: string
-          pattern: ^(true|false)$
+          type: boolean
           allowEmptyValue: false
         - name: adAccountNo
           in: path
@@ -865,51 +732,20 @@ paths:
           in: query
           description: 삭제된 광고 소재만 조회 여부
           required: false
-          type: string
-          default: 'false'
-          pattern: ^(true|false)$
+          type: boolean
+          default: false
           allowEmptyValue: false
-        - name: offset
-          in: query
-          required: false
-          type: integer
-          format: int64
+          x-example: false
         - name: page
           in: query
           description: '페이지 번호 (기본값: 0)'
           required: false
           type: string
-        - name: pageNumber
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: pageSize
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: paged
-          in: query
-          required: false
-          type: boolean
         - name: size
           in: query
           description: '페이지 크기 (기본값: 10, 최대: 100)'
           required: false
           type: string
-        - name: sort.sorted
-          in: query
-          required: false
-          type: boolean
-        - name: sort.unsorted
-          in: query
-          required: false
-          type: boolean
-        - name: unpaged
-          in: query
-          required: false
-          type: boolean
       responses:
         '200':
           description: OK
@@ -956,7 +792,7 @@ paths:
           schema:
             $ref: '#/definitions/SuccessResponse'
       deprecated: false
-  /api/open/{version}/adAccounts/{adAccountNo}/creatives/activate:
+  /{version}/adAccounts/{adAccountNo}/creatives/activate:
     post:
       tags:
         - 광고 소재
@@ -975,8 +811,7 @@ paths:
           in: query
           description: 'ON/OFF 설정. (예, true : ON)'
           required: false
-          type: string
-          pattern: ^(true|false)$
+          type: boolean
           allowEmptyValue: false
         - name: adAccountNo
           in: path
@@ -1008,7 +843,7 @@ paths:
           schema:
             $ref: '#/definitions/SuccessResponse'
       deprecated: false
-  /api/open/{version}/adAccounts/{adAccountNo}/creatives/{creativeNo}:
+  /{version}/adAccounts/{adAccountNo}/creatives/{creativeNo}:
     delete:
       tags:
         - 광고 소재
@@ -1044,7 +879,7 @@ paths:
           schema:
             $ref: '#/definitions/SuccessResponse'
       deprecated: false
-  /api/open/{version}/constants:
+  /{version}/constants:
     get:
       tags:
         - 타입 정보
@@ -1071,7 +906,7 @@ paths:
               items:
                 $ref: '#/definitions/ConstantResponse'
       deprecated: false
-  /api/open/{version}/constants/bidGoals:
+  /{version}/constants/bidGoals:
     get:
       tags:
         - 타입 정보
@@ -1087,7 +922,7 @@ paths:
             items:
               $ref: '#/definitions/ConstantResponse'
       deprecated: false
-  /api/open/{version}/constants/bidStrategies:
+  /{version}/constants/bidStrategies:
     get:
       tags:
         - 타입 정보
@@ -1103,7 +938,7 @@ paths:
             items:
               $ref: '#/definitions/ConstantResponse'
       deprecated: false
-  /api/open/{version}/constants/bidTypes:
+  /{version}/constants/bidTypes:
     get:
       tags:
         - 타입 정보
@@ -1119,7 +954,7 @@ paths:
             items:
               $ref: '#/definitions/ConstantResponse'
       deprecated: false
-  /api/open/{version}/constants/budgetTypes:
+  /{version}/constants/budgetTypes:
     get:
       tags:
         - 타입 정보
@@ -1135,7 +970,7 @@ paths:
             items:
               $ref: '#/definitions/ConstantResponse'
       deprecated: false
-  /api/open/{version}/constants/campaignObjectives:
+  /{version}/constants/campaignObjectives:
     get:
       tags:
         - 타입 정보
@@ -1151,7 +986,7 @@ paths:
             items:
               $ref: '#/definitions/ConstantResponse'
       deprecated: false
-  /api/open/{version}/constants/creativeChooserTypes:
+  /{version}/constants/creativeChooserTypes:
     get:
       tags:
         - 타입 정보
@@ -1167,7 +1002,7 @@ paths:
             items:
               $ref: '#/definitions/ConstantResponse'
       deprecated: false
-  /api/open/{version}/constants/deviceTypes:
+  /{version}/constants/deviceTypes:
     get:
       tags:
         - 타입 정보
@@ -1183,7 +1018,7 @@ paths:
             items:
               $ref: '#/definitions/ConstantResponse'
       deprecated: false
-  /api/open/{version}/constants/frequencyAdUnits:
+  /{version}/constants/frequencyAdUnits:
     get:
       tags:
         - 타입 정보
@@ -1199,7 +1034,7 @@ paths:
             items:
               $ref: '#/definitions/ConstantResponse'
       deprecated: false
-  /api/open/{version}/constants/gender:
+  /{version}/constants/gender:
     get:
       tags:
         - 타입 정보
@@ -1215,7 +1050,7 @@ paths:
             items:
               $ref: '#/definitions/ConstantResponse'
       deprecated: false
-  /api/open/{version}/targetings/ageRanges:
+  /{version}/targetings/ageRanges:
     get:
       tags:
         - 타겟팅 상세
@@ -1231,7 +1066,7 @@ paths:
             items:
               $ref: '#/definitions/AgeRange'
       deprecated: false
-  /api/open/{version}/targetings/extendedDemo:
+  /{version}/targetings/extendedDemo:
     get:
       tags:
         - 타겟팅 상세
@@ -1249,7 +1084,7 @@ paths:
               items:
                 $ref: '#/definitions/CodeKeywordResponse'
       deprecated: false
-  /api/open/{version}/targetings/interests:
+  /{version}/targetings/interests:
     get:
       tags:
         - 타겟팅 상세
@@ -1265,7 +1100,7 @@ paths:
             items:
               $ref: '#/definitions/InterestKeywordResponse'
       deprecated: false
-  /api/open/{version}/targetings/locations:
+  /{version}/targetings/locations:
     get:
       tags:
         - 타겟팅 상세
@@ -1281,7 +1116,7 @@ paths:
             items:
               $ref: '#/definitions/RegionCodeResponse'
       deprecated: false
-  /api/open/{version}/targetings/placementGroupCodes:
+  /{version}/targetings/placementGroupCodes:
     get:
       tags:
         - 타겟팅 상세
@@ -1297,7 +1132,7 @@ paths:
             items:
               $ref: '#/definitions/ConstantResponse'
       deprecated: false
-  /api/open/{version}/targetings/purchaseIntent:
+  /{version}/targetings/purchaseIntent:
     get:
       tags:
         - 타겟팅 상세
