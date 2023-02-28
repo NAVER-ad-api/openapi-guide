@@ -2,6 +2,9 @@ swagger: '2.0'
 info:
   version: v20230221
   title: 광고 API
+  description: >-
+    <b>공통 HEADER PARAMETERS</b><br/> - `AccessManagerAccountNo`: 해당 광고 계정에 대한 접근
+    권한이 있는 관리 계정 ID. 관리계정으로만 멤버인 경우, 이 값을 포함해서 호출해야 광고계정에 대한 호출이 가능합니다.
 host: openapi.naver.com
 basePath: /v1/ad-api
 tags:
@@ -20,6 +23,12 @@ paths:
       produces:
         - '*/*'
       parameters:
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID
+          required: false
+          type: integer
+          format: int64
         - name: activated
           in: query
           description: 광고 그룹 ON/OFF 여부. 미입력 시 모든 광고 그룹을 검색합니다.
@@ -62,7 +71,8 @@ paths:
           in: query
           description: '페이지 번호 (기본값: 0)'
           required: false
-          type: string
+          type: integer
+          format: int32
         - name: placementGroupCodes
           in: query
           description: 광고 그룹의 게재 위치
@@ -75,7 +85,8 @@ paths:
           in: query
           description: '페이지 크기 (기본값: 10, 최대: 100)'
           required: false
-          type: string
+          type: integer
+          format: int32
       responses:
         '200':
           description: OK
@@ -92,6 +103,12 @@ paths:
       produces:
         - '*/*'
       parameters:
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID
+          required: false
+          type: integer
+          format: int64
         - name: adAccountNo
           in: path
           description: adAccountNo
@@ -125,6 +142,12 @@ paths:
       produces:
         - '*/*'
       parameters:
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID
+          required: false
+          type: integer
+          format: int64
         - name: adAccountNo
           in: path
           description: adAccountNo
@@ -160,6 +183,12 @@ paths:
       produces:
         - '*/*'
       parameters:
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID
+          required: false
+          type: integer
+          format: int64
         - name: activated
           in: query
           description: 'ON/OFF 설정. (예, true : ON)'
@@ -201,6 +230,12 @@ paths:
       produces:
         - '*/*'
       parameters:
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID
+          required: false
+          type: integer
+          format: int64
         - name: adAccountNo
           in: path
           description: adAccountNo
@@ -244,6 +279,12 @@ paths:
       produces:
         - '*/*'
       parameters:
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID
+          required: false
+          type: integer
+          format: int64
         - name: campaignNo
           in: query
           description: campaignNo
@@ -266,6 +307,12 @@ paths:
       produces:
         - '*/*'
       parameters:
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID
+          required: false
+          type: integer
+          format: int64
         - name: campaignNo
           in: query
           description: campaignNo
@@ -287,6 +334,12 @@ paths:
       produces:
         - '*/*'
       parameters:
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID
+          required: false
+          type: integer
+          format: int64
         - name: adAccountNo
           in: path
           description: adAccountNo
@@ -313,6 +366,12 @@ paths:
       produces:
         - '*/*'
       parameters:
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID
+          required: false
+          type: integer
+          format: int64
         - name: adAccountNo
           in: path
           description: adAccountNo
@@ -347,6 +406,12 @@ paths:
       produces:
         - '*/*'
       parameters:
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID
+          required: false
+          type: integer
+          format: int64
         - name: activated
           in: query
           description: true/false 인 경우 각각 ON/OFF 인 캠페인만 검색합니다. 값이 없을 시 모든 캠페인을 검색합니다.
@@ -389,12 +454,14 @@ paths:
           in: query
           description: '페이지 번호 (기본값: 0)'
           required: false
-          type: string
+          type: integer
+          format: int32
         - name: size
           in: query
           description: '페이지 크기 (기본값: 10, 최대: 100)'
           required: false
-          type: string
+          type: integer
+          format: int32
       responses:
         '200':
           description: OK
@@ -411,6 +478,12 @@ paths:
       produces:
         - '*/*'
       parameters:
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID
+          required: false
+          type: integer
+          format: int64
         - name: adAccountNo
           in: path
           description: adAccountNo
@@ -437,6 +510,12 @@ paths:
       produces:
         - '*/*'
       parameters:
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID
+          required: false
+          type: integer
+          format: int64
         - name: adAccountNo
           in: path
           description: adAccountNo
@@ -472,6 +551,12 @@ paths:
       produces:
         - '*/*'
       parameters:
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID
+          required: false
+          type: integer
+          format: int64
         - name: activated
           in: query
           description: 'ON/OFF 설정. (예, true : ON)'
@@ -511,6 +596,12 @@ paths:
       produces:
         - '*/*'
       parameters:
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID
+          required: false
+          type: integer
+          format: int64
         - name: adAccountNo
           in: path
           description: adAccountNo
@@ -521,12 +612,14 @@ paths:
           in: query
           description: '페이지 번호 (기본값: 0)'
           required: false
-          type: string
+          type: integer
+          format: int32
         - name: size
           in: query
           description: '페이지 크기 (기본값: 10, 최대: 100)'
           required: false
-          type: string
+          type: integer
+          format: int32
       responses:
         '200':
           description: OK
@@ -542,6 +635,12 @@ paths:
       produces:
         - '*/*'
       parameters:
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID
+          required: false
+          type: integer
+          format: int64
         - name: adAccountNo
           in: path
           description: adAccountNo
@@ -570,6 +669,12 @@ paths:
       produces:
         - '*/*'
       parameters:
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID
+          required: false
+          type: integer
+          format: int64
         - name: adAccountNo
           in: path
           description: adAccountNo
@@ -607,6 +712,12 @@ paths:
       produces:
         - '*/*'
       parameters:
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID
+          required: false
+          type: integer
+          format: int64
         - name: adAccountNo
           in: path
           description: adAccountNo
@@ -646,6 +757,12 @@ paths:
       produces:
         - '*/*'
       parameters:
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID
+          required: false
+          type: integer
+          format: int64
         - name: adAccountNo
           in: path
           description: adAccountNo
@@ -656,12 +773,14 @@ paths:
           in: query
           description: '페이지 번호 (기본값: 0)'
           required: false
-          type: string
+          type: integer
+          format: int32
         - name: size
           in: query
           description: '페이지 크기 (기본값: 10, 최대: 100)'
           required: false
-          type: string
+          type: integer
+          format: int32
       responses:
         '200':
           description: OK
@@ -677,6 +796,12 @@ paths:
       produces:
         - '*/*'
       parameters:
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID
+          required: false
+          type: integer
+          format: int64
         - name: adAccountNo
           in: path
           description: adAccountNo
@@ -704,6 +829,12 @@ paths:
       produces:
         - '*/*'
       parameters:
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID
+          required: false
+          type: integer
+          format: int64
         - name: activated
           in: query
           description: true/false 인 경우 각각 ON/OFF 인 광고 소재만 검색합니다. 값이 없을 시 모든 광고 소재를 검색합니다.
@@ -740,12 +871,14 @@ paths:
           in: query
           description: '페이지 번호 (기본값: 0)'
           required: false
-          type: string
+          type: integer
+          format: int32
         - name: size
           in: query
           description: '페이지 크기 (기본값: 10, 최대: 100)'
           required: false
-          type: string
+          type: integer
+          format: int32
       responses:
         '200':
           description: OK
@@ -763,6 +896,12 @@ paths:
       produces:
         - '*/*'
       parameters:
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID
+          required: false
+          type: integer
+          format: int64
         - name: adAccountNo
           in: path
           description: adAccountNo
@@ -807,6 +946,12 @@ paths:
       produces:
         - '*/*'
       parameters:
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID
+          required: false
+          type: integer
+          format: int64
         - name: activated
           in: query
           description: 'ON/OFF 설정. (예, true : ON)'
@@ -855,6 +1000,12 @@ paths:
       produces:
         - '*/*'
       parameters:
+        - name: AccessManagerAccountNo
+          in: header
+          description: 해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID
+          required: false
+          type: integer
+          format: int64
         - name: adAccountNo
           in: path
           description: adAccountNo
@@ -2344,6 +2495,18 @@ definitions:
           - LEARNING
           - LEARNING_LIMITED
     title: OpenAdSetView
+  OpenApiPageable:
+    type: object
+    properties:
+      page:
+        type: integer
+        format: int32
+        description: '페이지 번호 (기본값: 0)'
+      size:
+        type: integer
+        format: int32
+        description: '페이지 크기 (기본값: 10, 최대: 100)'
+    title: OpenApiPageable
   OpenCampaignCreationParam:
     type: object
     required:
@@ -2421,25 +2584,6 @@ definitions:
         type: integer
         format: int64
     title: OpenCustomTargetView
-  Pageable:
-    type: object
-    properties:
-      offset:
-        type: integer
-        format: int64
-      pageNumber:
-        type: integer
-        format: int32
-      pageSize:
-        type: integer
-        format: int32
-      paged:
-        type: boolean
-      sort:
-        $ref: '#/definitions/Sort'
-      unpaged:
-        type: boolean
-    title: Pageable
   Page«BrandListResponse»:
     type: object
     properties:
@@ -2460,7 +2604,7 @@ definitions:
         type: integer
         format: int32
       pageable:
-        $ref: '#/definitions/Pageable'
+        $ref: '#/definitions/OpenApiPageable'
       size:
         type: integer
         format: int32
@@ -2493,7 +2637,7 @@ definitions:
         type: integer
         format: int32
       pageable:
-        $ref: '#/definitions/Pageable'
+        $ref: '#/definitions/OpenApiPageable'
       size:
         type: integer
         format: int32
@@ -2526,7 +2670,7 @@ definitions:
         type: integer
         format: int32
       pageable:
-        $ref: '#/definitions/Pageable'
+        $ref: '#/definitions/OpenApiPageable'
       size:
         type: integer
         format: int32
@@ -2559,7 +2703,7 @@ definitions:
         type: integer
         format: int32
       pageable:
-        $ref: '#/definitions/Pageable'
+        $ref: '#/definitions/OpenApiPageable'
       size:
         type: integer
         format: int32
@@ -2592,7 +2736,7 @@ definitions:
         type: integer
         format: int32
       pageable:
-        $ref: '#/definitions/Pageable'
+        $ref: '#/definitions/OpenApiPageable'
       size:
         type: integer
         format: int32

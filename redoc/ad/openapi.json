@@ -2,7 +2,8 @@
 	"swagger": "2.0",
 	"info": {
 		"version": "v20230221",
-		"title": "광고 API"
+		"title": "광고 API",
+		"description": "<b>공통 HEADER PARAMETERS</b><br/> - `AccessManagerAccountNo`: 해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID. 관리계정으로만 멤버인 경우, 이 값을 포함해서 호출해야 광고계정에 대한 호출이 가능합니다."
 	},
 	"host": "openapi.naver.com",
 	"basePath": "/v1/ad-api",
@@ -35,6 +36,14 @@
 					"*/*"
 				],
 				"parameters": [
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
 					{
 						"name": "activated",
 						"in": "query",
@@ -89,7 +98,8 @@
 						"in": "query",
 						"description": "페이지 번호 (기본값: 0)",
 						"required": false,
-						"type": "string"
+						"type": "integer",
+						"format": "int32"
 					},
 					{
 						"name": "placementGroupCodes",
@@ -107,7 +117,8 @@
 						"in": "query",
 						"description": "페이지 크기 (기본값: 10, 최대: 100)",
 						"required": false,
-						"type": "string"
+						"type": "integer",
+						"format": "int32"
 					}
 				],
 				"responses": {
@@ -133,6 +144,14 @@
 					"*/*"
 				],
 				"parameters": [
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
 					{
 						"name": "adAccountNo",
 						"in": "path",
@@ -180,6 +199,14 @@
 					"*/*"
 				],
 				"parameters": [
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
 					{
 						"name": "adAccountNo",
 						"in": "path",
@@ -229,6 +256,14 @@
 					"*/*"
 				],
 				"parameters": [
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
 					{
 						"name": "activated",
 						"in": "query",
@@ -286,6 +321,14 @@
 					"*/*"
 				],
 				"parameters": [
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
 					{
 						"name": "adAccountNo",
 						"in": "path",
@@ -349,6 +392,14 @@
 				],
 				"parameters": [
 					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
 						"name": "campaignNo",
 						"in": "query",
 						"description": "campaignNo",
@@ -381,6 +432,14 @@
 				],
 				"parameters": [
 					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
 						"name": "campaignNo",
 						"in": "query",
 						"description": "campaignNo",
@@ -411,6 +470,14 @@
 					"*/*"
 				],
 				"parameters": [
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
 					{
 						"name": "adAccountNo",
 						"in": "path",
@@ -448,6 +515,14 @@
 					"*/*"
 				],
 				"parameters": [
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
 					{
 						"name": "adAccountNo",
 						"in": "path",
@@ -496,6 +571,14 @@
 					"*/*"
 				],
 				"parameters": [
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
 					{
 						"name": "activated",
 						"in": "query",
@@ -550,14 +633,16 @@
 						"in": "query",
 						"description": "페이지 번호 (기본값: 0)",
 						"required": false,
-						"type": "string"
+						"type": "integer",
+						"format": "int32"
 					},
 					{
 						"name": "size",
 						"in": "query",
 						"description": "페이지 크기 (기본값: 10, 최대: 100)",
 						"required": false,
-						"type": "string"
+						"type": "integer",
+						"format": "int32"
 					}
 				],
 				"responses": {
@@ -583,6 +668,14 @@
 					"*/*"
 				],
 				"parameters": [
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
 					{
 						"name": "adAccountNo",
 						"in": "path",
@@ -621,6 +714,14 @@
 					"*/*"
 				],
 				"parameters": [
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
 					{
 						"name": "adAccountNo",
 						"in": "path",
@@ -670,6 +771,14 @@
 					"*/*"
 				],
 				"parameters": [
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
 					{
 						"name": "activated",
 						"in": "query",
@@ -725,6 +834,14 @@
 				],
 				"parameters": [
 					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
 						"name": "adAccountNo",
 						"in": "path",
 						"description": "adAccountNo",
@@ -737,14 +854,16 @@
 						"in": "query",
 						"description": "페이지 번호 (기본값: 0)",
 						"required": false,
-						"type": "string"
+						"type": "integer",
+						"format": "int32"
 					},
 					{
 						"name": "size",
 						"in": "query",
 						"description": "페이지 크기 (기본값: 10, 최대: 100)",
 						"required": false,
-						"type": "string"
+						"type": "integer",
+						"format": "int32"
 					}
 				],
 				"responses": {
@@ -769,6 +888,14 @@
 					"*/*"
 				],
 				"parameters": [
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
 					{
 						"name": "adAccountNo",
 						"in": "path",
@@ -810,6 +937,14 @@
 					"*/*"
 				],
 				"parameters": [
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
 					{
 						"name": "adAccountNo",
 						"in": "path",
@@ -862,6 +997,14 @@
 					"*/*"
 				],
 				"parameters": [
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
 					{
 						"name": "adAccountNo",
 						"in": "path",
@@ -917,6 +1060,14 @@
 				],
 				"parameters": [
 					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
 						"name": "adAccountNo",
 						"in": "path",
 						"description": "adAccountNo",
@@ -929,14 +1080,16 @@
 						"in": "query",
 						"description": "페이지 번호 (기본값: 0)",
 						"required": false,
-						"type": "string"
+						"type": "integer",
+						"format": "int32"
 					},
 					{
 						"name": "size",
 						"in": "query",
 						"description": "페이지 크기 (기본값: 10, 최대: 100)",
 						"required": false,
-						"type": "string"
+						"type": "integer",
+						"format": "int32"
 					}
 				],
 				"responses": {
@@ -961,6 +1114,14 @@
 					"*/*"
 				],
 				"parameters": [
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
 					{
 						"name": "adAccountNo",
 						"in": "path",
@@ -1000,6 +1161,14 @@
 					"*/*"
 				],
 				"parameters": [
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
 					{
 						"name": "activated",
 						"in": "query",
@@ -1047,14 +1216,16 @@
 						"in": "query",
 						"description": "페이지 번호 (기본값: 0)",
 						"required": false,
-						"type": "string"
+						"type": "integer",
+						"format": "int32"
 					},
 					{
 						"name": "size",
 						"in": "query",
 						"description": "페이지 크기 (기본값: 10, 최대: 100)",
 						"required": false,
-						"type": "string"
+						"type": "integer",
+						"format": "int32"
 					}
 				],
 				"responses": {
@@ -1078,6 +1249,14 @@
 					"*/*"
 				],
 				"parameters": [
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
 					{
 						"name": "adAccountNo",
 						"in": "path",
@@ -1135,6 +1314,14 @@
 					"*/*"
 				],
 				"parameters": [
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
 					{
 						"name": "activated",
 						"in": "query",
@@ -1198,6 +1385,14 @@
 					"*/*"
 				],
 				"parameters": [
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID",
+						"required": false,
+						"type": "integer",
+						"format": "int64"
+					},
 					{
 						"name": "adAccountNo",
 						"in": "path",
@@ -3294,6 +3489,22 @@
 			},
 			"title": "OpenAdSetView"
 		},
+		"OpenApiPageable": {
+			"type": "object",
+			"properties": {
+				"page": {
+					"type": "integer",
+					"format": "int32",
+					"description": "페이지 번호 (기본값: 0)"
+				},
+				"size": {
+					"type": "integer",
+					"format": "int32",
+					"description": "페이지 크기 (기본값: 10, 최대: 100)"
+				}
+			},
+			"title": "OpenApiPageable"
+		},
 		"OpenCampaignCreationParam": {
 			"type": "object",
 			"required": [
@@ -3397,33 +3608,6 @@
 			},
 			"title": "OpenCustomTargetView"
 		},
-		"Pageable": {
-			"type": "object",
-			"properties": {
-				"offset": {
-					"type": "integer",
-					"format": "int64"
-				},
-				"pageNumber": {
-					"type": "integer",
-					"format": "int32"
-				},
-				"pageSize": {
-					"type": "integer",
-					"format": "int32"
-				},
-				"paged": {
-					"type": "boolean"
-				},
-				"sort": {
-					"$ref": "#/definitions/Sort"
-				},
-				"unpaged": {
-					"type": "boolean"
-				}
-			},
-			"title": "Pageable"
-		},
 		"Page«BrandListResponse»": {
 			"type": "object",
 			"properties": {
@@ -3451,7 +3635,7 @@
 					"format": "int32"
 				},
 				"pageable": {
-					"$ref": "#/definitions/Pageable"
+					"$ref": "#/definitions/OpenApiPageable"
 				},
 				"size": {
 					"type": "integer",
@@ -3498,7 +3682,7 @@
 					"format": "int32"
 				},
 				"pageable": {
-					"$ref": "#/definitions/Pageable"
+					"$ref": "#/definitions/OpenApiPageable"
 				},
 				"size": {
 					"type": "integer",
@@ -3545,7 +3729,7 @@
 					"format": "int32"
 				},
 				"pageable": {
-					"$ref": "#/definitions/Pageable"
+					"$ref": "#/definitions/OpenApiPageable"
 				},
 				"size": {
 					"type": "integer",
@@ -3592,7 +3776,7 @@
 					"format": "int32"
 				},
 				"pageable": {
-					"$ref": "#/definitions/Pageable"
+					"$ref": "#/definitions/OpenApiPageable"
 				},
 				"size": {
 					"type": "integer",
@@ -3639,7 +3823,7 @@
 					"format": "int32"
 				},
 				"pageable": {
-					"$ref": "#/definitions/Pageable"
+					"$ref": "#/definitions/OpenApiPageable"
 				},
 				"size": {
 					"type": "integer",
