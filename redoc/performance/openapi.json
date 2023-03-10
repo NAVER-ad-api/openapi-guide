@@ -2,8 +2,7 @@
 	"openapi": "3.0.1",
 	"info": {
 		"title": "성과 조회 API 명세서",
-		"description": "GFA 캠페인, 광고 그룹, 소재별 과거/실시간 성과를 조회할 수 있습니다.\n",
-		"version": "v20230220"
+		"description": "GFA 캠페인, 광고 그룹, 소재별 과거/실시간 성과를 조회할 수 있습니다.\n"
 	},
 	"servers": [
 		{

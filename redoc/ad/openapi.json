@@ -1,7 +1,6 @@
 {
 	"swagger": "2.0",
 	"info": {
-		"version": "v20230221",
 		"title": "광고 API",
 		"description": "<b>공통 HEADER PARAMETERS</b><br/> - `AccessManagerAccountNo`: 해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID. 관리계정으로만 멤버인 경우, 이 값을 포함해서 호출해야 광고계정에 대한 호출이 가능합니다."
 	},
@@ -119,6 +118,15 @@
 						"required": false,
 						"type": "integer",
 						"format": "int32"
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
 					}
 				],
 				"responses": {
@@ -229,6 +237,15 @@
 						"maximum": 100,
 						"minimum": 1,
 						"allowEmptyValue": false
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
 					}
 				],
 				"responses": {
@@ -294,6 +311,15 @@
 						"maximum": 100,
 						"minimum": 1,
 						"allowEmptyValue": false
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
 					}
 				],
 				"responses": {
@@ -406,6 +432,15 @@
 						"required": true,
 						"type": "integer",
 						"format": "int64"
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
 					}
 				],
 				"responses": {
@@ -446,6 +481,15 @@
 						"required": true,
 						"type": "integer",
 						"format": "int64"
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
 					}
 				],
 				"responses": {
@@ -493,6 +537,15 @@
 						"required": true,
 						"type": "integer",
 						"format": "int64"
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
 					}
 				],
 				"responses": {
@@ -643,6 +696,15 @@
 						"required": false,
 						"type": "integer",
 						"format": "int32"
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
 					}
 				],
 				"responses": {
@@ -692,6 +754,15 @@
 						"schema": {
 							"$ref": "#/definitions/OpenCampaignCreationParam"
 						}
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
 					}
 				],
 				"responses": {
@@ -744,6 +815,15 @@
 						"maximum": 100,
 						"minimum": 1,
 						"allowEmptyValue": false
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
 					}
 				],
 				"responses": {
@@ -809,6 +889,15 @@
 						"maximum": 100,
 						"minimum": 1,
 						"allowEmptyValue": false
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
 					}
 				],
 				"responses": {
@@ -864,6 +953,15 @@
 						"required": false,
 						"type": "integer",
 						"format": "int32"
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
 					}
 				],
 				"responses": {
@@ -910,6 +1008,15 @@
 						"description": "mallId",
 						"required": false,
 						"type": "string"
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
 					}
 				],
 				"responses": {
@@ -967,6 +1074,15 @@
 							"CATALOG",
 							"SHOPPING"
 						]
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
 					}
 				],
 				"responses": {
@@ -1035,6 +1151,15 @@
 						"maximum": 100,
 						"minimum": 1,
 						"allowEmptyValue": false
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
 					}
 				],
 				"responses": {
@@ -1090,6 +1215,15 @@
 						"required": false,
 						"type": "integer",
 						"format": "int32"
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
 					}
 				],
 				"responses": {
@@ -1137,6 +1271,15 @@
 						"required": true,
 						"type": "integer",
 						"format": "int64"
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
 					}
 				],
 				"responses": {
@@ -1226,6 +1369,15 @@
 						"required": false,
 						"type": "integer",
 						"format": "int32"
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
 					}
 				],
 				"responses": {
@@ -1285,6 +1437,7 @@
 						"description": "version",
 						"required": true,
 						"type": "number",
+						"default": 1.0,
 						"format": "float"
 					}
 				],
@@ -1359,6 +1512,7 @@
 						"description": "version",
 						"required": true,
 						"type": "number",
+						"default": 1.0,
 						"format": "float"
 					}
 				],
@@ -1415,6 +1569,7 @@
 						"description": "version",
 						"required": true,
 						"type": "number",
+						"default": 1.0,
 						"format": "float"
 					}
 				],
@@ -1450,6 +1605,15 @@
 							"type": "string"
 						},
 						"collectionFormat": "multi"
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
 					}
 				],
 				"responses": {
@@ -1479,6 +1643,17 @@
 				"produces": [
 					"*/*"
 				],
+				"parameters": [
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "OK",
@@ -1502,6 +1677,17 @@
 				"operationId": "bidStrategiesUsingGET",
 				"produces": [
 					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
+					}
 				],
 				"responses": {
 					"200": {
@@ -1527,6 +1713,17 @@
 				"produces": [
 					"*/*"
 				],
+				"parameters": [
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "OK",
@@ -1550,6 +1747,17 @@
 				"operationId": "budgetTypesUsingGET",
 				"produces": [
 					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
+					}
 				],
 				"responses": {
 					"200": {
@@ -1575,6 +1783,17 @@
 				"produces": [
 					"*/*"
 				],
+				"parameters": [
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "OK",
@@ -1598,6 +1817,17 @@
 				"operationId": "creativeChooserTypesUsingGET",
 				"produces": [
 					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
+					}
 				],
 				"responses": {
 					"200": {
@@ -1623,6 +1853,17 @@
 				"produces": [
 					"*/*"
 				],
+				"parameters": [
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "OK",
@@ -1646,6 +1887,17 @@
 				"operationId": "frequencyAdUnitsUsingGET",
 				"produces": [
 					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
+					}
 				],
 				"responses": {
 					"200": {
@@ -1671,6 +1923,17 @@
 				"produces": [
 					"*/*"
 				],
+				"parameters": [
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "OK",
@@ -1695,6 +1958,17 @@
 				"produces": [
 					"*/*"
 				],
+				"parameters": [
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "OK",
@@ -1718,6 +1992,17 @@
 				"operationId": "extendedDemoCodesUsingGET",
 				"produces": [
 					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
+					}
 				],
 				"responses": {
 					"200": {
@@ -1746,6 +2031,17 @@
 				"produces": [
 					"*/*"
 				],
+				"parameters": [
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "OK",
@@ -1769,6 +2065,17 @@
 				"operationId": "locationsUsingGET",
 				"produces": [
 					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
+					}
 				],
 				"responses": {
 					"200": {
@@ -1794,6 +2101,17 @@
 				"produces": [
 					"*/*"
 				],
+				"parameters": [
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "OK",
@@ -1817,6 +2135,17 @@
 				"operationId": "purchaseIntentsUsingGET",
 				"produces": [
 					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
+					}
 				],
 				"responses": {
 					"200": {

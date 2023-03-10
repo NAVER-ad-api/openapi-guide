@@ -1,6 +1,5 @@
 swagger: '2.0'
 info:
-  version: v20230221
   title: 광고 API
   description: >-
     <b>공통 HEADER PARAMETERS</b><br/> - `AccessManagerAccountNo`: 해당 광고 계정에 대한 접근
@@ -87,6 +86,13 @@ paths:
           required: false
           type: integer
           format: int32
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -166,6 +172,13 @@ paths:
           maximum: 100
           minimum: 1
           allowEmptyValue: false
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -213,6 +226,13 @@ paths:
           maximum: 100
           minimum: 1
           allowEmptyValue: false
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -291,6 +311,13 @@ paths:
           required: true
           type: integer
           format: int64
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -319,6 +346,13 @@ paths:
           required: true
           type: integer
           format: int64
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -352,6 +386,13 @@ paths:
           required: true
           type: integer
           format: int64
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -462,6 +503,13 @@ paths:
           required: false
           type: integer
           format: int32
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -496,6 +544,13 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/OpenCampaignCreationParam'
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -534,6 +589,13 @@ paths:
           maximum: 100
           minimum: 1
           allowEmptyValue: false
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -581,6 +643,13 @@ paths:
           maximum: 100
           minimum: 1
           allowEmptyValue: false
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -620,6 +689,13 @@ paths:
           required: false
           type: integer
           format: int32
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -652,6 +728,13 @@ paths:
           description: mallId
           required: false
           type: string
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -693,6 +776,13 @@ paths:
             - WATCH_VIDEO
             - CATALOG
             - SHOPPING
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -742,6 +832,13 @@ paths:
           maximum: 100
           minimum: 1
           allowEmptyValue: false
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -781,6 +878,13 @@ paths:
           required: false
           type: integer
           format: int32
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -814,6 +918,13 @@ paths:
           required: true
           type: integer
           format: int64
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -879,6 +990,13 @@ paths:
           required: false
           type: integer
           format: int32
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -924,6 +1042,7 @@ paths:
           description: version
           required: true
           type: number
+          default: 1
           format: float
       responses:
         '200':
@@ -981,6 +1100,7 @@ paths:
           description: version
           required: true
           type: number
+          default: 1
           format: float
       responses:
         '200':
@@ -1023,6 +1143,7 @@ paths:
           description: version
           required: true
           type: number
+          default: 1
           format: float
       responses:
         '200':
@@ -1047,6 +1168,13 @@ paths:
           items:
             type: string
           collectionFormat: multi
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -1065,6 +1193,14 @@ paths:
       operationId: bidGoalsUsingGET
       produces:
         - '*/*'
+      parameters:
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -1081,6 +1217,14 @@ paths:
       operationId: bidStrategiesUsingGET
       produces:
         - '*/*'
+      parameters:
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -1097,6 +1241,14 @@ paths:
       operationId: bidTypesUsingGET
       produces:
         - '*/*'
+      parameters:
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -1113,6 +1265,14 @@ paths:
       operationId: budgetTypesUsingGET
       produces:
         - '*/*'
+      parameters:
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -1129,6 +1289,14 @@ paths:
       operationId: campaignObjectivesUsingGET
       produces:
         - '*/*'
+      parameters:
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -1145,6 +1313,14 @@ paths:
       operationId: creativeChooserTypesUsingGET
       produces:
         - '*/*'
+      parameters:
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -1161,6 +1337,14 @@ paths:
       operationId: deviceTypesUsingGET
       produces:
         - '*/*'
+      parameters:
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -1177,6 +1361,14 @@ paths:
       operationId: frequencyAdUnitsUsingGET
       produces:
         - '*/*'
+      parameters:
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -1193,6 +1385,14 @@ paths:
       operationId: gendersUsingGET
       produces:
         - '*/*'
+      parameters:
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -1209,6 +1409,14 @@ paths:
       operationId: ageRangesUsingGET
       produces:
         - '*/*'
+      parameters:
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -1225,6 +1433,14 @@ paths:
       operationId: extendedDemoCodesUsingGET
       produces:
         - '*/*'
+      parameters:
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -1243,6 +1459,14 @@ paths:
       operationId: interestsUsingGET
       produces:
         - '*/*'
+      parameters:
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -1259,6 +1483,14 @@ paths:
       operationId: locationsUsingGET
       produces:
         - '*/*'
+      parameters:
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -1275,6 +1507,14 @@ paths:
       operationId: placementGroupCodesUsingGET
       produces:
         - '*/*'
+      parameters:
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK
@@ -1291,6 +1531,14 @@ paths:
       operationId: purchaseIntentsUsingGET
       produces:
         - '*/*'
+      parameters:
+        - name: version
+          in: path
+          description: API 버전
+          required: true
+          type: number
+          default: 1
+          format: float
       responses:
         '200':
           description: OK

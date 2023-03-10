@@ -1,8 +1,7 @@
 {
 	"swagger": "2.0",
 	"info": {
-		"version": "v20230217",
-		"title": "광고 API"
+		"title": "계정 API"
 	},
 	"host": "openapi.naver.com",
 	"basePath": "/v1/ad-api",
@@ -36,6 +35,15 @@
 						"description": "페이지 크기 (기본값: 10, 최대: 100)",
 						"required": false,
 						"type": "string"
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": false,
+						"type": "number",
+						"default": 1.0,
+						"format": "float"
 					}
 				],
 				"responses": {
