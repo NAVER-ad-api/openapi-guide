@@ -443,7 +443,7 @@ paths:
       tags:
         - 캠페인
       summary: 캠페인 목록
-      operationId: getListUsingGET_1
+      operationId: getListOldUsingGET
       produces:
         - '*/*'
       parameters:
@@ -514,7 +514,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Page«Campaign»'
+            $ref: '#/definitions/Page«OpenCampaignView»'
       deprecated: false
     post:
       tags:
@@ -555,7 +555,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Campaign'
+            $ref: '#/definitions/OpenCampaignView'
       deprecated: false
     delete:
       tags:
@@ -948,7 +948,9 @@ paths:
           format: int64
         - name: activated
           in: query
-          description: true/false 인 경우 각각 ON/OFF 인 광고 소재만 검색합니다. 값이 없을 시 모든 광고 소재를 검색합니다.
+          description: >-
+            소재 활성화 여부, true/false 인 경우 각각 ON/OFF 인 광고 소재만 검색합니다. 이 값이 없을 시 모든 광고
+            소재를 검색합니다.
           required: false
           type: boolean
           allowEmptyValue: false
@@ -960,19 +962,21 @@ paths:
           format: int64
         - name: adSetNo
           in: query
-          description: adSetNo
+          description: 광고 그룹 ID
           required: false
           type: integer
           format: int64
+          allowEmptyValue: false
         - name: campaignNo
           in: query
-          description: campaignNo
+          description: 캠페인 ID
           required: false
           type: integer
           format: int64
+          allowEmptyValue: false
         - name: deleteOnly
           in: query
-          description: 삭제된 광고 소재만 조회 여부
+          description: 삭제된 소재 조회 여부, 이 값이 true인 경우, 삭제된 소재만 조회합니다.
           required: false
           type: boolean
           default: false
@@ -982,14 +986,12 @@ paths:
           in: query
           description: '페이지 번호 (기본값: 0)'
           required: false
-          type: integer
-          format: int32
+          type: string
         - name: size
           in: query
           description: '페이지 크기 (기본값: 10, 최대: 100)'
           required: false
-          type: integer
-          format: int32
+          type: string
         - name: version
           in: path
           description: API 버전
@@ -1028,7 +1030,7 @@ paths:
           format: int64
         - name: creativeNos
           in: query
-          description: creativeNos
+          description: 소재 ID 목록
           required: true
           type: array
           items:
@@ -1037,6 +1039,7 @@ paths:
           collectionFormat: multi
           maximum: 100
           minimum: 1
+          allowEmptyValue: false
         - name: version
           in: path
           description: version
@@ -1073,8 +1076,8 @@ paths:
           format: int64
         - name: activated
           in: query
-          description: 'ON/OFF 설정. (예, true : ON)'
-          required: false
+          description: '소재 활성화 여부, (예> true : ON)'
+          required: true
           type: boolean
           allowEmptyValue: false
         - name: adAccountNo
@@ -1085,8 +1088,8 @@ paths:
           format: int64
         - name: creativeNos
           in: query
-          description: 광고 소재no 목록
-          required: false
+          description: 소재 ID 목록
+          required: true
           type: array
           items:
             type: integer
@@ -1155,8 +1158,8 @@ paths:
     get:
       tags:
         - 타입 정보
-      summary: multipleConstnants
-      operationId: multipleConstnantsUsingGET
+      summary: multipleConstants
+      operationId: multipleConstantsUsingGET
       produces:
         - '*/*'
       parameters:
@@ -1783,28 +1786,38 @@ definitions:
       adAccountNo:
         type: integer
         format: int64
+        description: 브랜드를 등록한 광고 계정 ID
       brandName:
         type: string
+        description: 브랜드명
       brandNo:
         type: integer
         format: int64
+        description: 브랜드 ID
       categoryFirstId:
         type: integer
         format: int64
+        description: 대업종 ID
       categoryFirstName:
         type: string
+        description: 대업종 이름
       categorySecondId:
         type: integer
         format: int64
+        description: 세부업종 ID
       categorySecondName:
         type: string
+        description: 세부업종 이름
       explanation:
         type: string
+        description: 설명
       favorites:
         type: boolean
+        description: 즐겨찾기 여부
       updatedAt:
         type: string
         format: date-time
+        description: 수정 일시
     title: BrandListResponse
   CATALOG:
     title: CATALOG
@@ -1885,141 +1898,6 @@ definitions:
             format: int64
             description: 대표 url ID
         title: CONVERSION
-  Campaign:
-    type: object
-    properties:
-      activated:
-        type: boolean
-      adAccountNo:
-        type: integer
-        format: int64
-      appName:
-        type: string
-      bidTypes:
-        type: array
-        items:
-          type: string
-          enum:
-            - CPC
-            - CPM
-            - CPV
-      brand:
-        $ref: '#/definitions/Brand'
-      brandAdultOnly:
-        type: boolean
-      brandNo:
-        type: integer
-        format: int64
-      budgetAmount:
-        type: number
-      budgetExhausted:
-        type: boolean
-      campaignApps:
-        type: array
-        items:
-          $ref: '#/definitions/CampaignApp'
-      campaignSearchKeywords:
-        type: array
-        items:
-          $ref: '#/definitions/CampaignSearchKeyword'
-      catalogAvailable:
-        type: boolean
-      catalogId:
-        type: string
-      conversionType:
-        type: string
-        enum:
-          - PURCHASE
-          - MEMBERSHIP
-          - CART
-          - RESERVATION
-          - ETC
-      conversionUrl:
-        $ref: '#/definitions/Url'
-      conversionUrlName:
-        type: string
-      conversionUrlNo:
-        type: integer
-        format: int64
-      conversionUrlStorePlatform:
-        type: string
-        enum:
-          - ANDROID
-          - IOS
-      createdAt:
-        $ref: '#/definitions/Timestamp'
-      currency:
-        type: string
-        enum:
-          - KRW
-          - USD
-      deleted:
-        type: boolean
-      name:
-        type: string
-      'no':
-        type: integer
-        format: int64
-      objective:
-        type: string
-        enum:
-          - CONVERSION
-          - WEB_SITE_TRAFFIC
-          - INSTALL_APP
-          - WATCH_VIDEO
-          - CATALOG
-          - SHOPPING
-      pausedAt:
-        $ref: '#/definitions/Timestamp'
-      spentBudgetRatio:
-        type: number
-      stats:
-        $ref: '#/definitions/CampaignStats'
-      status:
-        type: string
-        enum:
-          - RUNNABLE
-          - DELETED
-          - BUDGET_EXHAUSTED
-      timezone:
-        type: string
-      timezoneId:
-        type: string
-      updatedAt:
-        $ref: '#/definitions/Timestamp'
-      updaterId:
-        type: string
-      url:
-        $ref: '#/definitions/Url'
-      urlNo:
-        type: integer
-        format: int64
-    title: Campaign
-  CampaignApp:
-    type: object
-    properties:
-      campaignNo:
-        type: integer
-        format: int64
-      'no':
-        type: integer
-        format: int64
-      packageId:
-        type: string
-      platform:
-        type: string
-        enum:
-          - UNKNOWN
-          - ANDROID
-          - IOS
-          - WINDOWS
-          - MACOS
-      url:
-        $ref: '#/definitions/Url'
-      urlNo:
-        type: integer
-        format: int64
-    title: CampaignApp
   CampaignSearchKeyword:
     type: object
     properties:
@@ -2158,10 +2036,13 @@ definitions:
       bizChannelNo:
         type: integer
         format: int64
+        description: 비즈채널 ID
       naAccountId:
         type: string
+        description: 네이버 공통키
       name:
         type: string
+        description: 비즈채널 이름
       storePlatform:
         type: string
         enum:
@@ -2170,11 +2051,14 @@ definitions:
       trackingDays:
         type: integer
         format: int32
+        description: 전환 추적 기간
       url:
         type: string
+        description: 비즈채널 URL
       urlNo:
         type: integer
         format: int64
+        description: URL ID
     title: ConversionUrlResponse
   Duration:
     type: object
@@ -2501,8 +2385,10 @@ definitions:
     properties:
       activated:
         type: boolean
+        description: 광고 그룹 ON/OFF 여부
       allPlacementGroup:
         type: boolean
+        description: 노출 가능한 모든 게재위치 선택 여부
       autoBidStatus:
         type: string
         enum:
@@ -2512,12 +2398,14 @@ definitions:
           - LIMITED
       bidGoal:
         type: string
+        description: "입찰 전략\r\n- 사용 가능한 값: `MAX_CONV`,`MAX_CLICK`,`NONE`"
         enum:
           - MAX_CLICK
           - MAX_CONV
           - NONE
       bidPrice:
         type: number
+        description: 입찰가
       bidStrategy:
         type: string
         description: "비용 관리\r\n- 사용 가능한 값: `FIXED_BID`,`BID_CAP`,`COST_CAP`,`NO_CAP`"
@@ -2529,38 +2417,49 @@ definitions:
           - TARGET_COST
       bidStrategyValue:
         type: number
+        description: 한도 금액
       bidType:
         type: string
+        description: "청구 기준\r\n- 사용 가능한 값: `CPC`,`CPM`,`CPV`"
         enum:
           - CPC
           - CPM
           - CPV
       budgetAmount:
         type: number
+        description: 예산 금액
       budgetType:
         type: string
+        description: 예산 타입
         enum:
           - DAILY
           - TOTAL
       campaignName:
         type: string
+        description: 캠페인 이름
       campaignNo:
         type: integer
         format: int64
+        description: 캠페인 ID
       deleted:
         type: boolean
+        description: 삭제 여부
       endTime:
         type: string
         format: date-time
+        description: 종료일시
       interestIntersection:
         type: boolean
       name:
         type: string
+        description: 광고 그룹 이름
       'no':
         type: integer
         format: int64
+        description: 광고 그룹 ID
       objective:
         type: string
+        description: 캠페인 목적
         enum:
           - CONVERSION
           - WEB_SITE_TRAFFIC
@@ -2570,11 +2469,13 @@ definitions:
           - SHOPPING
       placementGroups:
         type: array
+        description: 게재 위치
         items:
           $ref: '#/definitions/PlacementGroup'
       startTime:
         type: string
         format: date-time
+        description: 시작일시
       timezoneOffset:
         type: string
     title: OpenAdSetListView
@@ -2689,6 +2590,10 @@ definitions:
         description: 광고 그룹 이름
         minLength: 2
         maxLength: 128
+      'no':
+        type: integer
+        format: int64
+        description: 광고 그룹 ID
       ongoing:
         type: boolean
         description: 계속 게재 여부
@@ -2785,21 +2690,145 @@ definitions:
         format: int64
         description: 대표 url ID
     title: OpenCampaignCreationParam
-  OpenCreative:
+  OpenCampaignView:
     type: object
     properties:
       activated:
         type: boolean
+        description: ON/OFF 여부
+      adAccountNo:
+        type: integer
+        format: int64
+        description: 광고 계정 ID
+      appName:
+        type: string
+        description: 앱 이름. 구 데이터 때문에 컬럼은 남아 있음. 더이상 입력 받지 않는 값
+      bidTypes:
+        type: array
+        items:
+          type: string
+          enum:
+            - CPC
+            - CPM
+            - CPV
+      brand:
+        description: 브랜드 객체
+        $ref: '#/definitions/Brand'
+      brandNo:
+        type: integer
+        format: int64
+        description: 브랜드 ID
+      budgetAmount:
+        type: number
+        description: 캠페인 예산 한도
+      budgetExhausted:
+        type: boolean
+        description: 예산 도달 여부
+      campaignSearchKeywords:
+        type: array
+        description: 키워드 객체
+        items:
+          $ref: '#/definitions/CampaignSearchKeyword'
+      catalogAvailable:
+        type: boolean
+        description: 카탈로그 사용가능 여부
+      catalogId:
+        type: string
+        description: 카탈로그 ID
+      conversionType:
+        type: string
+        description: "최적화 전환 유형\r\n- 사용 가능한 값: `PURCHASE`,`CART`"
+        enum:
+          - PURCHASE
+          - MEMBERSHIP
+          - CART
+          - RESERVATION
+          - ETC
+      conversionUrl:
+        description: 전환추적대상 객체
+        $ref: '#/definitions/Url'
+      conversionUrlName:
+        type: string
+        description: 전환추적대상 비즈채널 이름
+      conversionUrlNo:
+        type: integer
+        format: int64
+        description: 전환 추적 대상 ID
+      conversionUrlStorePlatform:
+        type: string
+        enum:
+          - ANDROID
+          - IOS
+      createdAt:
+        description: 생성 일시
+        $ref: '#/definitions/Timestamp'
+      deleted:
+        type: boolean
+        description: 삭제 여부
+      name:
+        type: string
+        description: 캠페인 이름
+      'no':
+        type: integer
+        format: int64
+        description: 캠페인 ID
+      objective:
+        type: string
+        description: 캠페인 목적
+        enum:
+          - CONVERSION
+          - WEB_SITE_TRAFFIC
+          - INSTALL_APP
+          - WATCH_VIDEO
+          - CATALOG
+          - SHOPPING
+      pausedAt:
+        description: 중지 일시
+        $ref: '#/definitions/Timestamp'
+      spentBudgetRatio:
+        type: number
+      stats:
+        description: 캠페인 통계 객체
+        $ref: '#/definitions/CampaignStats'
+      updatedAt:
+        description: 수정 일시
+        $ref: '#/definitions/Timestamp'
+      url:
+        description: 대표 URL 객체
+        $ref: '#/definitions/Url'
+      urlNo:
+        type: integer
+        format: int64
+        description: URL ID
+    title: OpenCampaignView
+  OpenCreative:
+    type: object
+    required:
+      - activated
+      - adSetName
+      - adSetNo
+      - campaignName
+      - campaignNo
+      - name
+      - 'no'
+    properties:
+      activated:
+        type: boolean
+        description: 소재 활성화 여부
       adSetName:
         type: string
+        description: 광고 그룹 이름
       adSetNo:
         type: integer
         format: int64
+        description: 광고 그룹 ID
       campaignName:
         type: string
+        description: 캠페인 이름
       campaignNo:
         type: integer
         format: int64
+        description: 캠페인 ID
       creativeType:
         type: string
         description: "소재 타입:\r\n `SINGLE_IMAGE`,`MULTIPLE_IMAGE`,`SINGLE_VIDEO`,`IMAGE_BANNER`,`CATALOG`"
@@ -2814,9 +2843,11 @@ definitions:
         $ref: '#/definitions/Image'
       name:
         type: string
+        description: 소재 이름
       'no':
         type: integer
         format: int64
+        description: 소재 ID
       status:
         type: string
         description: "소재 상태:\r\n `PENDING','REJECT','ACCEPT','PENDING_IN_OPERATION','REJECT_IN_OPERATION','DELETED`"
@@ -2865,39 +2896,6 @@ definitions:
         type: integer
         format: int32
     title: Page«BrandListResponse»
-  Page«Campaign»:
-    type: object
-    properties:
-      content:
-        type: array
-        items:
-          $ref: '#/definitions/Campaign'
-      empty:
-        type: boolean
-      first:
-        type: boolean
-      last:
-        type: boolean
-      number:
-        type: integer
-        format: int32
-      numberOfElements:
-        type: integer
-        format: int32
-      pageable:
-        $ref: '#/definitions/OpenApiPageable'
-      size:
-        type: integer
-        format: int32
-      sort:
-        $ref: '#/definitions/Sort'
-      totalElements:
-        type: integer
-        format: int64
-      totalPages:
-        type: integer
-        format: int32
-    title: Page«Campaign»
   Page«OpenAdSetListView»:
     type: object
     properties:
@@ -2931,6 +2929,39 @@ definitions:
         type: integer
         format: int32
     title: Page«OpenAdSetListView»
+  Page«OpenCampaignView»:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/OpenCampaignView'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      pageable:
+        $ref: '#/definitions/OpenApiPageable'
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: Page«OpenCampaignView»
   Page«OpenCreative»:
     type: object
     properties:

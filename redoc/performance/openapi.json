@@ -1,12 +1,22 @@
 {
 	"openapi": "3.0.1",
 	"info": {
-		"title": "성과 조회 API 명세서",
-		"description": "GFA 캠페인, 광고 그룹, 소재별 과거/실시간 성과를 조회할 수 있습니다.\n"
+		"title": "성과 API",
+		"description": "GFA 광고 계정 / 캠페인 / 광고 그룹 / 소재 단위로 과거 및 실시간 성과를 조회할 수 있습니다.\n"
 	},
 	"servers": [
 		{
 			"url": "http://openapi.naver.com",
+		}
+	],
+	"tags": [
+		{
+			"name": "과거 성과 조회",
+			"description": "특정 광고 계정 / 캠페인 / 광고 그룹 / 소재의 과거 성과를 조회합니다.\n\n조회 단위보다 하위 요소로 집계한 결과가 제공되며,\n성과는 날짜, 광고주, 캠페인, 광고 그룹, 소재 번호 순으로 오름차순 정렬되어 제공됩니다.\n\n조회 기간은 최대 31일이며, 2년 전부터 전일 데이터까지 조회가 가능합니다.\n(전일 데이터는 금일 02시부터 조회가 가능합니다.)\n\n한 번에 최대 1000개 까지 조회가 가능하며, 이를 초과하는 개수가 존재하는 경우 페이징이 적용됩니다.\n응답의 next 필드 값을 다음 요청의 next 파라미터로 포함시키면 다음 페이지를 조회할 수 있으며, 해당 토큰은 10분간 유효합니다.\n"
+		},
+		{
+			"name": "실시간 성과 조회",
+			"description": "특정 광고 계정 / 캠페인 / 광고 그룹 / 소재의 실시간 성과를 소재 단위로 조회합니다.\n\n오늘 또는 어제 데이터를 조회할 수 있으며, 성과는 업데이트 시점을 기준으로 오름차순 정렬되어 제공됩니다.\n\n응답의 until 필드 값을 다음 요청의 since 파라미터로 포함시키면 이전 요청 시점 이후에 업데이트된 소재만을 조회할 수 있습니다.\n\n실시간 성과는 조회 시점 이후라도 정합성 검증 및 보정 작업에 따라 변동이 발생할 수 있습니다.\n"
 		}
 	],
 	"paths": {
@@ -16,7 +26,7 @@
 					"실시간 성과 조회"
 				],
 				"summary": "광고 계정 실시간 성과 조회",
-				"description": "특정 광고 계정의 실시간 성과를 조회합니다.\n오늘 또는 어제 데이터를 조회할 수 있으며, 조회 결과는 업데이트 시점을 기준으로 오름차순 정렬되어 제공됩니다.\n\n응답의 until 필드 값은 마지막으로 조회된 타임스탬프를 나타냅니다.\n해당 값을 다음 요청의 since 파라미터로 포함시키면 이전 요청 이후에 업데이트된 소재만을 조회할 수 있습니다.\n",
+				"description": "특정 광고 계정의 실시간 성과를 조회합니다.\n",
 				"operationId": "adAccountRealtimePerformance",
 				"parameters": [
 					{
@@ -90,7 +100,7 @@
 					"실시간 성과 조회"
 				],
 				"summary": "소재 실시간 성과 조회",
-				"description": "특정 소재의 실시간 성과를 조회합니다.\n오늘 또는 어제 데이터를 조회할 수 있으며, 조회 결과는 업데이트 시점을 기준으로 오름차순 정렬되어 제공됩니다.\n\n응답의 until 필드 값은 마지막으로 조회된 타임스탬프를 나타냅니다.\n해당 값을 다음 요청의 since 파라미터로 포함시키면 이전 요청 이후에 업데이트된 소재만을 조회할 수 있습니다.\n",
+				"description": "특정 소재의 실시간 성과를 조회합니다.\n",
 				"operationId": "creativeRealtimePerformance",
 				"parameters": [
 					{
@@ -175,7 +185,7 @@
 					"실시간 성과 조회"
 				],
 				"summary": "캠페인 실시간 성과 조회",
-				"description": "특정 캠페인의 실시간 성과를 조회합니다.\n오늘 또는 어제 데이터를 조회할 수 있으며, 조회 결과는 업데이트 시점을 기준으로 오름차순 정렬되어 제공됩니다.\n\n응답의 until 필드 값은 마지막으로 조회된 타임스탬프를 나타냅니다.\n해당 값을 다음 요청의 since 파라미터로 포함시키면 이전 요청 이후에 업데이트된 소재만을 조회할 수 있습니다.\n",
+				"description": "특정 캠페인의 실시간 성과를 조회합니다.\n",
 				"operationId": "campaignRealtimePerformance",
 				"parameters": [
 					{
@@ -260,7 +270,7 @@
 					"실시간 성과 조회"
 				],
 				"summary": "광고 그룹 실시간 성과 조회",
-				"description": "특정 광고 그룹의 실시간 성과를 조회합니다.\n오늘 또는 어제 데이터를 조회할 수 있으며, 조회 결과는 업데이트 시점을 기준으로 오름차순 정렬되어 제공됩니다.\n\n응답의 until 필드 값은 마지막으로 조회된 타임스탬프를 나타냅니다.\n해당 값을 다음 요청의 since 파라미터로 포함시키면 이전 요청 이후에 업데이트된 소재만을 조회할 수 있습니다.\n",
+				"description": "특정 광고 그룹의 실시간 성과를 조회합니다.\n",
 				"operationId": "adSetRealtimePerformance",
 				"parameters": [
 					{
@@ -345,7 +355,7 @@
 					"과거 성과 조회"
 				],
 				"summary": "광고 계정 과거 성과 조회",
-				"description": "특정 광고 계정의 과거 성과를 조회합니다.\n캠페인, 광고 그룹, 소재 단위로 집계할 수 있으며, 조회 결과는 날짜, 광고주, 캠페인, 광고 그룹, 소재 번호 순으로 오름차순 정렬되어 제공됩니다.\n\n조회 기간은 최대 31일이며, 2년 전부터 전일 데이터까지 조회가 가능합니다.\n전일 데이터는 금일 02시부터 조회가 가능합니다.\n\n한 번에 최대 1000개 까지 조회가 가능하며, 이를 초과하는 개수가 존재하는 경우 페이징이 적용됩니다.\n\n응답의 next 필드 값을 다음 요청의 next 파라미터로 포함시키면 다음 페이지를 조회할 수 있으며, 해당 토큰은 10분간 유효합니다.\n",
+				"description": "특정 광고 계정의 과거 성과를 캠페인 / 광고 그룹 / 소재 단위로 집계하여 조회합니다.\n",
 				"operationId": "adAccountPastPerformance",
 				"parameters": [
 					{
@@ -372,7 +382,7 @@
 					{
 						"name": "aggregationType",
 						"in": "path",
-						"description": "성과 제공 단위 ( 캠페인 : campaigns, 광고 그룹 : adSets, 소재 : creatives )",
+						"description": "성과 집계 단위 ( 캠페인 : campaigns, 광고 그룹 : adSets, 소재 : creatives )",
 						"required": true,
 						"schema": {
 							"type": "string",
@@ -449,7 +459,7 @@
 					"과거 성과 조회"
 				],
 				"summary": "소재 과거 성과 조회",
-				"description": "특정 소재의 과거 성과를 조회합니다.\n조회 결과는 날짜, 광고주, 캠페인, 광고 그룹, 소재 번호 순으로 오름차순 정렬되어 제공됩니다.\n\n조회 기간은 최대 31일이며, 2년 전부터 전일 데이터까지 조회가 가능합니다.\n전일 데이터는 금일 02시부터 조회가 가능합니다.\n\n한 번에 최대 1000개 까지 조회가 가능하며, 이를 초과하는 개수가 존재하는 경우 페이징이 적용됩니다.\n\n응답의 next 필드 값을 다음 요청의 next 파라미터로 포함시키면 다음 페이지를 조회할 수 있으며, 해당 토큰은 10분간 유효합니다.\n",
+				"description": "특정 소재의 과거 성과를 조회합니다.\n",
 				"operationId": "creativePastPerformance",
 				"parameters": [
 					{
@@ -487,7 +497,7 @@
 					{
 						"name": "aggregationType",
 						"in": "path",
-						"description": "성과 제공 단위 ( 소재 : creatives )",
+						"description": "성과 집계 단위 ( 소재 : creatives )",
 						"required": true,
 						"schema": {
 							"type": "string",
@@ -562,7 +572,7 @@
 					"과거 성과 조회"
 				],
 				"summary": "캠페인 과거 성과 조회",
-				"description": "특정 캠페인의 과거 성과를 조회합니다.\n광고 그룹 또는 소재 단위로 집계할 수 있으며, 조회 결과는 날짜, 광고주, 캠페인, 광고 그룹, 소재 번호 순으로 오름차순 정렬되어 제공됩니다.\n\n조회 기간은 최대 31일이며, 2년 전부터 전일 데이터까지 조회가 가능합니다.\n전일 데이터는 금일 02시부터 조회가 가능합니다.\n\n한 번에 최대 1000개 까지 조회가 가능하며, 이를 초과하는 개수가 존재하는 경우 페이징이 적용됩니다.\n\n응답의 next 필드 값을 다음 요청의 next 파라미터로 포함시키면 다음 페이지를 조회할 수 있으며, 해당 토큰은 10분간 유효합니다.\n",
+				"description": "특정 캠페인의 과거 성과를 광고 그룹 / 소재 단위로 집계하여 조회합니다.\n",
 				"operationId": "campaignPastPerformance",
 				"parameters": [
 					{
@@ -600,7 +610,7 @@
 					{
 						"name": "aggregationType",
 						"in": "path",
-						"description": "성과 제공 단위 ( 광고 그룹 : adSets, 소재 : creatives )",
+						"description": "성과 집계 단위 ( 광고 그룹 : adSets, 소재 : creatives )",
 						"required": true,
 						"schema": {
 							"type": "string",
@@ -676,7 +686,7 @@
 					"과거 성과 조회"
 				],
 				"summary": "광고 그룹 과거 성과 조회",
-				"description": "특정 광고 그룹의 과거 성과를 조회합니다.\n조회 결과는 날짜, 광고주, 캠페인, 광고 그룹, 소재 번호 순으로 오름차순 정렬되어 제공됩니다.\n\n조회 기간은 최대 31일이며, 2년 전부터 전일 데이터까지 조회가 가능합니다.\n전일 데이터는 금일 02시부터 조회가 가능합니다.\n\n한 번에 최대 1000개 까지 조회가 가능하며, 이를 초과하는 개수가 존재하는 경우 페이징이 적용됩니다.\n\n응답의 next 필드 값을 다음 요청의 next 파라미터로 포함시키면 다음 페이지를 조회할 수 있으며, 해당 토큰은 10분간 유효합니다.\n",
+				"description": "특정 광고 그룹의 과거 성과를 소재 단위로 집계하여 조회합니다.\n",
 				"operationId": "adSetPastPerformance",
 				"parameters": [
 					{
@@ -714,7 +724,7 @@
 					{
 						"name": "aggregationType",
 						"in": "path",
-						"description": "성과 제공 단위 ( 소재 : creatives )",
+						"description": "성과 집계 단위 ( 소재 : creatives )",
 						"required": true,
 						"schema": {
 							"type": "string",
@@ -791,78 +801,96 @@
 				"properties": {
 					"campaignNo": {
 						"type": "integer",
+						"description": "캠페인 ID",
 						"format": "int64"
 					},
 					"adSetNo": {
 						"type": "integer",
+						"description": "광고 그룹 ID",
 						"format": "int64"
 					},
 					"creativeNo": {
 						"type": "integer",
+						"description": "소재 ID",
 						"format": "int64"
 					},
 					"targetDate": {
 						"type": "string",
+						"description": "성과 발생 일자",
 						"format": "date"
 					},
 					"impCount": {
 						"type": "integer",
+						"description": "노출 횟수",
 						"format": "int64"
 					},
 					"clickCount": {
 						"type": "integer",
+						"description": "클릭 횟수",
 						"format": "int64"
 					},
 					"vplayCount": {
 						"type": "integer",
+						"description": "비디오 재생 횟수",
 						"format": "int64"
 					},
 					"sales": {
 						"type": "number",
+						"description": "매출",
 						"format": "double"
 					},
 					"convCount": {
 						"type": "integer",
+						"description": "전환 횟수",
 						"format": "int64"
 					},
 					"convSales": {
 						"type": "number",
+						"description": "전환 매출",
 						"format": "double"
 					},
 					"updatedAt": {
 						"type": "string",
+						"description": "최종 업데이트 시각",
 						"format": "date-time"
 					}
-				}
+				},
+				"description": "조회 단위별로 집계된 성과"
 			},
 			"RealtimePerformanceResponse": {
 				"type": "object",
 				"properties": {
 					"rows": {
 						"type": "array",
+						"description": "성과 목록",
 						"items": {
 							"$ref": "#/components/schemas/AggregatedPerformance"
 						}
 					},
 					"until": {
 						"type": "integer",
+						"description": "성과 목록 중 마지막 업데이트 타임스탬프",
 						"format": "int64"
 					}
-				}
+				},
+				"description": "실시간 성과 조회 응답"
 			},
 			"PastPerformanceResponse": {
 				"type": "object",
 				"properties": {
 					"rows": {
 						"type": "array",
+						"description": "성과 목록",
 						"items": {
 							"$ref": "#/components/schemas/AggregatedPerformance"
 						}
 					},
 					"next": {
-						"type": "string"
+						"type": "string",
+						"description": "다음 페이지 조회를 위한 토큰"
 					}
-				}
+				},
+				"description": "과거 성과 조회 응답"
 			}
 		}
 	}

@@ -1,184 +1,326 @@
 {
-	"swagger": "2.0",
-	"info": {
-		"title": "계정 API"
-	},
-	"host": "openapi.naver.com",
-	"basePath": "/v1/ad-api",
-	"tags": [
-		{
-			"name": "광고 계정"
-		}
-	],
-	"paths": {
-		"/{version}/adAccounts": {
-			"get": {
-				"tags": [
-					"광고 계정"
-				],
-				"summary": "내 광고 계정 목록",
-				"operationId": "listUsingGET",
-				"produces": [
-					"*/*"
-				],
-				"parameters": [
-					{
-						"name": "page",
-						"in": "query",
-						"description": "페이지 번호 (기본값: 0)",
-						"required": false,
-						"type": "string"
-					},
-					{
-						"name": "size",
-						"in": "query",
-						"description": "페이지 크기 (기본값: 10, 최대: 100)",
-						"required": false,
-						"type": "string"
-					},
-					{
-						"name": "version",
-						"in": "path",
-						"description": "API 버전",
-						"required": false,
-						"type": "number",
-						"default": 1.0,
-						"format": "float"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"$ref": "#/definitions/Page«OpenAdAccount»"
-						}
-					}
-				}
-			}
-		}
-	},
-	"definitions": {
-		"OpenAdAccount": {
-			"type": "object",
-			"properties": {
-				"createdAt": {
-					"type": "string",
-					"format": "date-time"
-				},
-				"disabled": {
-					"type": "boolean"
-				},
-				"name": {
-					"type": "string"
-				},
-				"no": {
-					"type": "integer",
-					"format": "int64"
-				},
-				"role": {
-					"type": "string",
-					"enum": [
-						"MASTER",
-						"STANDARD",
-						"READ_ONLY",
-						"PERFORMANCE_MANAGEMENT"
-					]
-				},
-				"updatedAt": {
-					"type": "string",
-					"format": "date-time"
-				}
-			},
-			"title": "OpenAdAccount"
-		},
-		"Pageable": {
-			"type": "object",
-			"properties": {
-				"offset": {
-					"type": "integer",
-					"format": "int64"
-				},
-				"pageNumber": {
-					"type": "integer",
-					"format": "int32"
-				},
-				"pageSize": {
-					"type": "integer",
-					"format": "int32"
-				},
-				"paged": {
-					"type": "boolean"
-				},
-				"sort": {
-					"$ref": "#/definitions/Sort"
-				},
-				"unpaged": {
-					"type": "boolean"
-				}
-			},
-			"title": "Pageable"
-		},
-		"Page«OpenAdAccount»": {
-			"type": "object",
-			"properties": {
-				"content": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/OpenAdAccount"
-					}
-				},
-				"empty": {
-					"type": "boolean"
-				},
-				"first": {
-					"type": "boolean"
-				},
-				"last": {
-					"type": "boolean"
-				},
-				"number": {
-					"type": "integer",
-					"format": "int32"
-				},
-				"numberOfElements": {
-					"type": "integer",
-					"format": "int32"
-				},
-				"pageable": {
-					"$ref": "#/definitions/Pageable"
-				},
-				"size": {
-					"type": "integer",
-					"format": "int32"
-				},
-				"sort": {
-					"$ref": "#/definitions/Sort"
-				},
-				"totalElements": {
-					"type": "integer",
-					"format": "int64"
-				},
-				"totalPages": {
-					"type": "integer",
-					"format": "int32"
-				}
-			},
-			"title": "Page«OpenAdAccount»"
-		},
-		"Sort": {
-			"type": "object",
-			"properties": {
-				"empty": {
-					"type": "boolean"
-				},
-				"sorted": {
-					"type": "boolean"
-				},
-				"unsorted": {
-					"type": "boolean"
-				}
-			},
-			"title": "Sort"
-		}
-	}
+  "swagger": "2.0",
+  "info": {
+    "title": "계정 API"
+  },
+  "host": "openapi.naver.com",
+  "basePath": "/v1/ad-api",
+  "tags": [
+    {
+      "name": "광고 계정"
+    },
+    {
+      "name": "관리 계정"
+    }
+  ],
+  "paths": {
+    "/{version}/adAccounts": {
+      "get": {
+        "tags": [
+          "광고 계정"
+        ],
+        "summary": "내 광고 계정 목록",
+        "operationId": "listUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "페이지 번호 (기본값: 0)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "페이지 크기 (기본값: 10, 최대: 100)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "API 버전",
+            "required": true,
+            "type": "number",
+            "default": 1.0,
+            "format": "float"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Page«OpenAdAccount»"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/{version}/adAccounts/{adAccountNo}": {
+      "get": {
+        "tags": [
+          "광고 계정"
+        ],
+        "summary": "광고 계정 조회",
+        "operationId": "getUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "AccessManagerAccountNo",
+            "in": "header",
+            "description": "해당 광고 계정에 대한 접근 권한이 있는 관리 계정 ID",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "adAccountNo",
+            "in": "path",
+            "description": "adAccountNo",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "API 버전",
+            "required": true,
+            "type": "number",
+            "default": 1.0,
+            "format": "float"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OpenAdAccount"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "_comment": "#################### 광고/관리계정 구분선 ####################",
+    "/{version}/managerAccounts/{managerAccountNo}": {
+      "get": {
+        "tags": [
+          "관리 계정"
+        ],
+        "summary": "관리계정 조회",
+        "description": "응답 결과에는 관리 계정 정보와 하위의 모든 depth의 관리 계정/광고 계정NO 정보를 포함하고 있습니다.",
+        "operationId": "getUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "AccessManagerAccountNo",
+            "in": "header",
+            "description": "해당 관리 계정에 대한 접근 권한이 있는 관리 계정 ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "managerAccountNo",
+            "in": "path",
+            "description": "managerAccountNo",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "API 버전",
+            "required": true,
+            "type": "number",
+            "default": 1.0,
+            "format": "float"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OpenManagerAccount"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "OpenAdAccount": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "생성 일시"
+        },
+        "disabled": {
+          "type": "boolean",
+          "description": "비활성화 여부"
+        },
+        "name": {
+          "type": "string",
+          "description": "광고 계정 이름"
+        },
+        "no": {
+          "type": "integer",
+          "format": "int64",
+          "description": "광고 계정 ID"
+        },
+        "role": {
+          "type": "string",
+          "description": "권한 레벨 정보",
+          "enum": [
+            "MASTER",
+            "STANDARD",
+            "READ_ONLY",
+            "PERFORMANCE_MANAGEMENT"
+          ]
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "최종 수정 일시"
+        }
+      },
+      "title": "OpenAdAccount"
+    },
+    "OpenApiPageable": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32",
+          "description": "페이지 번호 (기본값: 0)"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "페이지 크기 (기본값: 10, 최대: 100)"
+        }
+      },
+      "title": "OpenApiPageable"
+    },
+    "Page«OpenAdAccount»": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OpenAdAccount"
+          }
+        },
+        "empty": {
+          "type": "boolean"
+        },
+        "first": {
+          "type": "boolean"
+        },
+        "last": {
+          "type": "boolean"
+        },
+        "number": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numberOfElements": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageable": {
+          "$ref": "#/definitions/OpenApiPageable"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sort": {
+          "$ref": "#/definitions/Sort"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Page«OpenAdAccount»"
+    },
+    "Sort": {
+      "type": "object",
+      "properties": {
+        "empty": {
+          "type": "boolean"
+        },
+        "sorted": {
+          "type": "boolean"
+        },
+        "unsorted": {
+          "type": "boolean"
+        }
+      },
+      "title": "Sort"
+    },
+    "_comment": "#################### 광고/관리계정 구분선 ####################",
+    "OpenManagerAccount": {
+      "type": "object",
+      "properties": {
+        "childAdAccountNos": {
+          "type": "array",
+          "description": "하위의 광고 계정 ID",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "childManagerAccounts": {
+          "type": "array",
+          "description": "하위의 관리 계정",
+          "items": {
+            "$ref": "#/definitions/OpenManagerAccount"
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "생성 일시"
+        },
+        "disabled": {
+          "type": "boolean",
+          "description": "비활성화 여부"
+        },
+        "name": {
+          "type": "string",
+          "description": "관리 계정 이름"
+        },
+        "no": {
+          "type": "integer",
+          "format": "int64",
+          "description": "관리 계정 ID"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "최종 수정 일시"
+        }
+      },
+      "title": "OpenManagerAccount"
+    }
+  }
 }
