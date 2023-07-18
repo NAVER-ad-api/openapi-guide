@@ -6,7 +6,7 @@
 	},
 	"servers": [
 		{
-			"url": "http://openapi.naver.com",
+			"url": "https://openapi.naver.com",
 		}
 	],
 	"tags": [

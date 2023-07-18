@@ -2841,6 +2841,9 @@ definitions:
       image:
         description: 대표 이미지
         $ref: '#/definitions/Image'
+      linkUrl:
+        type: string
+        description: 대표 URL
       name:
         type: string
         description: 소재 이름
