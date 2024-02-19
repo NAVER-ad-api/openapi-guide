@@ -203,7 +203,7 @@
         },
         "deprecated": false
       }
-    }    
+    }
   },
   "definitions": {
     "OpenAdAccount": {
@@ -369,44 +369,44 @@
       "title": "OpenManagerAccount"
     },
     "OpenMyManagerAccount": {
-        "type": "object",
-        "properties": {
-            "createdAt": {
-                "type": "string",
-                "format": "date-time",
-                "description": "생성 일시"
-            },
-            "disabled": {
-                "type": "boolean",
-                "description": "비활성화 여부"
-            },
-            "name": {
-                "type": "string",
-                "description": "관리 계정 이름"
-            },
-            "no": {
-                "type": "integer",
-                "format": "int64",
-                "description": "관리 계정 ID"
-            },
-            "role": {
-                "type": "string",
-                "description": "권한 레벨 정보",
-                "enum": [
-                    "MASTER",
-                    "STANDARD",
-                    "READ_ONLY",
-                    "PERFORMANCE_MANAGEMENT"
-                ]
-            },
-            "updatedAt": {
-                "type": "string",
-                "format": "date-time",
-                "description": "최종 수정 일시"
-            }
+      "type": "object",
+      "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "생성 일시"
+          },
+          "disabled": {
+            "type": "boolean",
+            "description": "비활성화 여부"
+          },
+          "name": {
+            "type": "string",
+            "description": "관리 계정 이름"
+          },
+          "no": {
+            "type": "integer",
+            "format": "int64",
+            "description": "관리 계정 ID"
+          },
+          "role": {
+              "type": "string",
+              "description": "권한 레벨 정보",
+              "enum": [
+                  "MASTER",
+                  "STANDARD",
+                  "READ_ONLY",
+                  "PERFORMANCE_MANAGEMENT"
+              ]
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "최종 수정 일시"
+          }
         },
         "title": "OpenMyManagerAccount"
-    },
+      },
     "Pageable": {
         "type": "object",
         "properties": {
@@ -435,51 +435,51 @@
         "title": "Pageable"
     },
     "Page«OpenMyManagerAccount»": {
-        "type": "object",
-        "properties": {
-            "content": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/definitions/OpenMyManagerAccount"
-                }
-            },
-            "empty": {
-                "type": "boolean"
-            },
-            "first": {
-                "type": "boolean"
-            },
-            "last": {
-                "type": "boolean"
-            },
-            "number": {
-                "type": "integer",
-                "format": "int32"
-            },
-            "numberOfElements": {
-                "type": "integer",
-                "format": "int32"
-            },
-            "pageable": {
-                "$ref": "#/definitions/OpenApiPageable"
-            },
-            "size": {
-                "type": "integer",
-                "format": "int32"
-            },
-            "sort": {
-                "$ref": "#/definitions/Sort"
-            },
-            "totalElements": {
-                "type": "integer",
-                "format": "int64"
-            },
-            "totalPages": {
-                "type": "integer",
-                "format": "int32"
-            }
-        },
-        "title": "Page«OpenMyManagerAccount»"
+      "type": "object",
+      "properties": {
+          "content": {
+              "type": "array",
+              "items": {
+                  "$ref": "#/definitions/OpenMyManagerAccount"
+              }
+          },
+          "empty": {
+              "type": "boolean"
+          },
+          "first": {
+              "type": "boolean"
+          },
+          "last": {
+              "type": "boolean"
+          },
+          "number": {
+              "type": "integer",
+              "format": "int32"
+          },
+          "numberOfElements": {
+              "type": "integer",
+              "format": "int32"
+          },
+          "pageable": {
+              "$ref": "#/definitions/OpenApiPageable"
+          },
+          "size": {
+              "type": "integer",
+              "format": "int32"
+          },
+          "sort": {
+              "$ref": "#/definitions/Sort"
+          },
+          "totalElements": {
+              "type": "integer",
+              "format": "int64"
+          },
+          "totalPages": {
+              "type": "integer",
+              "format": "int32"
+          }
+      },
+      "title": "Page«OpenMyManagerAccount»"
     }
   }
 }
