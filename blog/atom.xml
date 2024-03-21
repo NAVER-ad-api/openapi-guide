@@ -9,7 +9,7 @@
     <icon>https://naver-ad-api.github.io/openapi-guide/img/favicon.ico</icon>
     <entry>
         <title type="html"><![CDATA[환영합니다.]]></title>
-        <id>welcome</id>
+        <id>https://naver-ad-api.github.io/openapi-guide/blog/welcome</id>
         <link href="https://naver-ad-api.github.io/openapi-guide/blog/welcome"/>
         <updated>2023-02-03T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[환영합니다.]]></summary>

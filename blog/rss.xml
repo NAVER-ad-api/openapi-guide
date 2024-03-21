@@ -11,7 +11,7 @@
         <item>
             <title><![CDATA[환영합니다.]]></title>
             <link>https://naver-ad-api.github.io/openapi-guide/blog/welcome</link>
-            <guid>welcome</guid>
+            <guid>https://naver-ad-api.github.io/openapi-guide/blog/welcome</guid>
             <pubDate>Fri, 03 Feb 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[환영합니다.]]></description>
             <content:encoded><![CDATA[<p>환영합니다.</p><p>이 페이지를 통해 공지 사항을 전달할 예정입니다.</p><p><img loading="lazy" alt="Docusaurus Plushie" src="/openapi-guide/assets/images/docusaurus-plushie-banner-a60f7593abca1e3eef26a9afa244e4fb.jpeg" width="1500" height="500" class="img_ev3q"></p>]]></content:encoded>

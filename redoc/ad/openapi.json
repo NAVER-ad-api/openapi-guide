@@ -2976,6 +2976,15 @@
 							"example": 100000.0,
 							"description": "예산"
 						},
+						"conversionType": {
+							"type": "string",
+							"description": "Optimized conversion type\r\n- Available values: `INSTALL`"
+						},
+						"conversionUrlNo": {
+							"type": "integer",
+							"format": "int64",
+							"description": "Conversion tracking URL ID"
+						},
 						"name": {
 							"type": "string",
 							"description": "캠페인 이름",
@@ -3703,6 +3712,11 @@
 					"type": "number",
 					"example": 100000.0,
 					"description": "예산"
+				},
+				"conversionUrlNo": {
+					"type": "integer",
+					"format": "int64",
+					"description": "Conversion tracking URL ID"
 				},
 				"name": {
 					"type": "string",
