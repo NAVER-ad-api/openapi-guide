@@ -26,9 +26,19 @@
 					"실시간 성과 조회"
 				],
 				"summary": "광고 계정 실시간 성과 조회",
-				"description": "특정 광고 계정의 실시간 성과를 조회합니다.\n",
+				"description": "특정 광고 계정의 실시간 성과를 조회합니다.",
 				"operationId": "adAccountRealtimePerformance",
 				"parameters": [
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					},
 					{
 						"name": "version",
 						"in": "path",
@@ -53,10 +63,11 @@
 					{
 						"name": "targetDate",
 						"in": "query",
-						"description": "조회 대상 일자 ( 오늘 : today, 어제 : yesterday ), 주어지지 않으면 today",
+						"description": "조회 대상 일자 ( 오늘 : today, 어제 : yesterday )",
 						"required": false,
 						"schema": {
 							"type": "string",
+							"default": "today",
 							"enum": [
 								"today",
 								"yesterday"
@@ -75,9 +86,18 @@
 						"example": 1675907423
 					},
 					{
-						"name": "AccessManagerAccountNo",
-						"in": "header",
-						"description": "해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호"
+						"name": "timeUnit",
+						"in": "query",
+						"description": "조회 시간 단위 ( 일자별 : daily, 시간별 : hourly )",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"default": "daily",
+							"enum": [
+								"daily",
+								"hourly"
+							]
+						}
 					}
 				],
 				"responses": {
@@ -100,9 +120,30 @@
 					"실시간 성과 조회"
 				],
 				"summary": "소재 실시간 성과 조회",
-				"description": "특정 소재의 실시간 성과를 조회합니다.\n",
+				"description": "특정 소재의 실시간 성과를 조회합니다.",
 				"operationId": "creativeRealtimePerformance",
 				"parameters": [
+					{
+						"name": "creativeNo",
+						"in": "path",
+						"description": "소재 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"example": 5678
+					},
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					},
 					{
 						"name": "version",
 						"in": "path",
@@ -125,23 +166,13 @@
 						"example": 1234
 					},
 					{
-						"name": "creativeNo",
-						"in": "path",
-						"description": "소재 번호",
-						"required": true,
-						"schema": {
-							"type": "integer",
-							"format": "int64"
-						},
-						"example": 5678
-					},
-					{
 						"name": "targetDate",
 						"in": "query",
-						"description": "조회 대상 일자 ( 오늘 : today, 어제 : yesterday ), 주어지지 않으면 today",
+						"description": "조회 대상 일자 ( 오늘 : today, 어제 : yesterday )",
 						"required": false,
 						"schema": {
 							"type": "string",
+							"default": "today",
 							"enum": [
 								"today",
 								"yesterday"
@@ -160,9 +191,18 @@
 						"example": 1675907423
 					},
 					{
-						"name": "AccessManagerAccountNo",
-						"in": "header",
-						"description": "해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호"
+						"name": "timeUnit",
+						"in": "query",
+						"description": "조회 시간 단위 ( 일자별 : daily, 시간별 : hourly )",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"default": "daily",
+							"enum": [
+								"daily",
+								"hourly"
+							]
+						}
 					}
 				],
 				"responses": {
@@ -185,9 +225,30 @@
 					"실시간 성과 조회"
 				],
 				"summary": "캠페인 실시간 성과 조회",
-				"description": "특정 캠페인의 실시간 성과를 조회합니다.\n",
+				"description": "특정 캠페인의 실시간 성과를 조회합니다.",
 				"operationId": "campaignRealtimePerformance",
 				"parameters": [
+					{
+						"name": "campaignNo",
+						"in": "path",
+						"description": "캠페인 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"example": 5678
+					},
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					},
 					{
 						"name": "version",
 						"in": "path",
@@ -210,23 +271,13 @@
 						"example": 1234
 					},
 					{
-						"name": "campaignNo",
-						"in": "path",
-						"description": "캠페인 번호",
-						"required": true,
-						"schema": {
-							"type": "integer",
-							"format": "int64"
-						},
-						"example": 5678
-					},
-					{
 						"name": "targetDate",
 						"in": "query",
-						"description": "조회 대상 일자 ( 오늘 : today, 어제 : yesterday ), 주어지지 않으면 today",
+						"description": "조회 대상 일자 ( 오늘 : today, 어제 : yesterday )",
 						"required": false,
 						"schema": {
 							"type": "string",
+							"default": "today",
 							"enum": [
 								"today",
 								"yesterday"
@@ -245,9 +296,18 @@
 						"example": 1675907423
 					},
 					{
-						"name": "AccessManagerAccountNo",
-						"in": "header",
-						"description": "해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호"
+						"name": "timeUnit",
+						"in": "query",
+						"description": "조회 시간 단위 ( 일자별 : daily, 시간별 : hourly )",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"default": "daily",
+							"enum": [
+								"daily",
+								"hourly"
+							]
+						}
 					}
 				],
 				"responses": {
@@ -270,9 +330,30 @@
 					"실시간 성과 조회"
 				],
 				"summary": "광고 그룹 실시간 성과 조회",
-				"description": "특정 광고 그룹의 실시간 성과를 조회합니다.\n",
+				"description": "특정 광고 그룹의 실시간 성과를 조회합니다.",
 				"operationId": "adSetRealtimePerformance",
 				"parameters": [
+					{
+						"name": "adSetNo",
+						"in": "path",
+						"description": "광고 그룹 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"example": 5678
+					},
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					},
 					{
 						"name": "version",
 						"in": "path",
@@ -295,23 +376,13 @@
 						"example": 1234
 					},
 					{
-						"name": "adSetNo",
-						"in": "path",
-						"description": "광고 그룹 번호",
-						"required": true,
-						"schema": {
-							"type": "integer",
-							"format": "int64"
-						},
-						"example": 5678
-					},
-					{
 						"name": "targetDate",
 						"in": "query",
-						"description": "조회 대상 일자 ( 오늘 : today, 어제 : yesterday ), 주어지지 않으면 today",
+						"description": "조회 대상 일자 ( 오늘 : today, 어제 : yesterday )",
 						"required": false,
 						"schema": {
 							"type": "string",
+							"default": "today",
 							"enum": [
 								"today",
 								"yesterday"
@@ -330,9 +401,18 @@
 						"example": 1675907423
 					},
 					{
-						"name": "AccessManagerAccountNo",
-						"in": "header",
-						"description": "해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호"
+						"name": "timeUnit",
+						"in": "query",
+						"description": "조회 시간 단위 ( 일자별 : daily, 시간별 : hourly )",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"default": "daily",
+							"enum": [
+								"daily",
+								"hourly"
+							]
+						}
 					}
 				],
 				"responses": {
@@ -355,9 +435,33 @@
 					"과거 성과 조회"
 				],
 				"summary": "광고 계정 과거 성과 조회",
-				"description": "특정 광고 계정의 과거 성과를 캠페인 / 광고 그룹 / 소재 단위로 집계하여 조회합니다.\n",
+				"description": "특정 광고 계정의 과거 성과를 캠페인 / 광고 그룹 / 소재 단위로 집계하여 조회합니다.",
 				"operationId": "adAccountPastPerformance",
 				"parameters": [
+					{
+						"name": "aggregationType",
+						"in": "path",
+						"description": "성과 집계 단위 ( 캠페인 : campaigns, 광고 그룹 : adSets, 소재 : creatives )",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": [
+								"campaigns",
+								"adSets",
+								"creatives"
+							]
+						}
+					},
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					},
 					{
 						"name": "version",
 						"in": "path",
@@ -380,26 +484,13 @@
 						"example": 1234
 					},
 					{
-						"name": "aggregationType",
-						"in": "path",
-						"description": "성과 집계 단위 ( 캠페인 : campaigns, 광고 그룹 : adSets, 소재 : creatives )",
-						"required": true,
-						"schema": {
-							"type": "string",
-							"enum": [
-								"campaigns",
-								"adSets",
-								"creatives"
-							]
-						}
-					},
-					{
 						"name": "startDate",
 						"in": "query",
 						"description": "조회 시작일 (yyyy-MM-dd 형식)",
 						"required": true,
 						"schema": {
-							"type": "string"
+							"type": "string",
+							"format": "date"
 						},
 						"example": "2023-01-01"
 					},
@@ -409,7 +500,8 @@
 						"description": "조회 종료일 (yyyy-MM-dd 형식)",
 						"required": true,
 						"schema": {
-							"type": "string"
+							"type": "string",
+							"format": "date"
 						},
 						"example": "2023-01-30"
 					},
@@ -420,23 +512,32 @@
 						"required": false,
 						"schema": {
 							"type": "string"
-						}
+						},
+						"example": "zwMvjK6XRhyiJoFGZZkqhw:1707978058060"
 					},
 					{
 						"name": "limit",
 						"in": "query",
-						"description": "조회할 레코드 수, 주어지지 않으면 1000",
+						"description": "조회할 레코드 수",
 						"required": false,
 						"schema": {
-							"type": "integer",
-							"format": "int32"
-						},
-						"example": 1000
+							"type": "int",
+							"default": "1000"
+						}
 					},
 					{
-						"name": "AccessManagerAccountNo",
-						"in": "header",
-						"description": "해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호"
+						"name": "timeUnit",
+						"in": "query",
+						"description": "조회 시간 단위 ( 일자별 : daily, 시간별 : hourly )",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"default": "daily",
+							"enum": [
+								"daily",
+								"hourly"
+							]
+						}
 					}
 				],
 				"responses": {
@@ -459,30 +560,9 @@
 					"과거 성과 조회"
 				],
 				"summary": "소재 과거 성과 조회",
-				"description": "특정 소재의 과거 성과를 조회합니다.\n",
+				"description": "특정 소재의 과거 성과를 조회합니다.",
 				"operationId": "creativePastPerformance",
 				"parameters": [
-					{
-						"name": "version",
-						"in": "path",
-						"description": "API 버전",
-						"required": true,
-						"schema": {
-							"type": "float",
-							"default": "1.0"
-						}
-					},
-					{
-						"name": "adAccountNo",
-						"in": "path",
-						"description": "광고 계정 번호",
-						"required": true,
-						"schema": {
-							"type": "integer",
-							"format": "int64"
-						},
-						"example": 1234
-					},
 					{
 						"name": "creativeNo",
 						"in": "path",
@@ -507,22 +587,55 @@
 						}
 					},
 					{
-						"name": "startDate",
-						"in": "query",
-						"description": "조회 시작일 (yyyy-MM-dd 포맷)",
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호",
 						"required": true,
 						"schema": {
-							"type": "string"
+							"type": "integer",
+							"format": "int64"
+						}
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"schema": {
+							"type": "float",
+							"default": "1.0"
+						}
+					},
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "광고 계정 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"example": 1234
+					},
+					{
+						"name": "startDate",
+						"in": "query",
+						"description": "조회 시작일 (yyyy-MM-dd 형식)",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "date"
 						},
 						"example": "2023-01-01"
 					},
 					{
 						"name": "endDate",
 						"in": "query",
-						"description": "조회 종료일 (yyyy-MM-dd 포맷)",
+						"description": "조회 종료일 (yyyy-MM-dd 형식)",
 						"required": true,
 						"schema": {
-							"type": "string"
+							"type": "string",
+							"format": "date"
 						},
 						"example": "2023-01-30"
 					},
@@ -533,23 +646,32 @@
 						"required": false,
 						"schema": {
 							"type": "string"
-						}
+						},
+						"example": "zwMvjK6XRhyiJoFGZZkqhw:1707978058060"
 					},
 					{
 						"name": "limit",
 						"in": "query",
-						"description": "조회할 레코드 수, 주어지지 않으면 1000",
+						"description": "조회할 레코드 수",
 						"required": false,
 						"schema": {
-							"type": "integer",
-							"format": "int32"
-						},
-						"example": 1000
+							"type": "int",
+							"default": "1000"
+						}
 					},
 					{
-						"name": "AccessManagerAccountNo",
-						"in": "header",
-						"description": "해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호"
+						"name": "timeUnit",
+						"in": "query",
+						"description": "조회 시간 단위 ( 일자별 : daily, 시간별 : hourly )",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"default": "daily",
+							"enum": [
+								"daily",
+								"hourly"
+							]
+						}
 					}
 				],
 				"responses": {
@@ -572,30 +694,9 @@
 					"과거 성과 조회"
 				],
 				"summary": "캠페인 과거 성과 조회",
-				"description": "특정 캠페인의 과거 성과를 광고 그룹 / 소재 단위로 집계하여 조회합니다.\n",
+				"description": "특정 캠페인의 과거 성과를 광고 그룹 / 소재 단위로 집계하여 조회합니다.",
 				"operationId": "campaignPastPerformance",
 				"parameters": [
-					{
-						"name": "version",
-						"in": "path",
-						"description": "API 버전",
-						"required": true,
-						"schema": {
-							"type": "float",
-							"default": "1.0"
-						}
-					},
-					{
-						"name": "adAccountNo",
-						"in": "path",
-						"description": "광고 계정 번호",
-						"required": true,
-						"schema": {
-							"type": "integer",
-							"format": "int64"
-						},
-						"example": 1234
-					},
 					{
 						"name": "campaignNo",
 						"in": "path",
@@ -621,22 +722,55 @@
 						}
 					},
 					{
-						"name": "startDate",
-						"in": "query",
-						"description": "조회 시작일 (yyyy-MM-dd 포맷)",
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호",
 						"required": true,
 						"schema": {
-							"type": "string"
+							"type": "integer",
+							"format": "int64"
+						}
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"schema": {
+							"type": "float",
+							"default": "1.0"
+						}
+					},
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "광고 계정 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"example": 1234
+					},
+					{
+						"name": "startDate",
+						"in": "query",
+						"description": "조회 시작일 (yyyy-MM-dd 형식)",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "date"
 						},
 						"example": "2023-01-01"
 					},
 					{
 						"name": "endDate",
 						"in": "query",
-						"description": "조회 종료일 (yyyy-MM-dd 포맷)",
+						"description": "조회 종료일 (yyyy-MM-dd 형식)",
 						"required": true,
 						"schema": {
-							"type": "string"
+							"type": "string",
+							"format": "date"
 						},
 						"example": "2023-01-30"
 					},
@@ -647,23 +781,32 @@
 						"required": false,
 						"schema": {
 							"type": "string"
-						}
+						},
+						"example": "zwMvjK6XRhyiJoFGZZkqhw:1707978058060"
 					},
 					{
 						"name": "limit",
 						"in": "query",
-						"description": "조회할 레코드 수, 주어지지 않으면 1000",
+						"description": "조회할 레코드 수",
 						"required": false,
 						"schema": {
-							"type": "integer",
-							"format": "int32"
-						},
-						"example": 1000
+							"type": "int",
+							"default": "1000"
+						}
 					},
 					{
-						"name": "AccessManagerAccountNo",
-						"in": "header",
-						"description": "해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호"
+						"name": "timeUnit",
+						"in": "query",
+						"description": "조회 시간 단위 ( 일자별 : daily, 시간별 : hourly )",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"default": "daily",
+							"enum": [
+								"daily",
+								"hourly"
+							]
+						}
 					}
 				],
 				"responses": {
@@ -686,30 +829,9 @@
 					"과거 성과 조회"
 				],
 				"summary": "광고 그룹 과거 성과 조회",
-				"description": "특정 광고 그룹의 과거 성과를 소재 단위로 집계하여 조회합니다.\n",
+				"description": "특정 광고 그룹의 과거 성과를 소재 단위로 집계하여 조회합니다.",
 				"operationId": "adSetPastPerformance",
 				"parameters": [
-					{
-						"name": "version",
-						"in": "path",
-						"description": "API 버전",
-						"required": true,
-						"schema": {
-							"type": "float",
-							"default": "1.0"
-						}
-					},
-					{
-						"name": "adAccountNo",
-						"in": "path",
-						"description": "광고 계정 번호",
-						"required": true,
-						"schema": {
-							"type": "integer",
-							"format": "int64"
-						},
-						"example": 1234
-					},
 					{
 						"name": "adSetNo",
 						"in": "path",
@@ -734,22 +856,55 @@
 						}
 					},
 					{
-						"name": "startDate",
-						"in": "query",
-						"description": "조회 시작일 (yyyy-MM-dd 포맷)",
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호",
 						"required": true,
 						"schema": {
-							"type": "string"
+							"type": "integer",
+							"format": "int64"
+						}
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"schema": {
+							"type": "float",
+							"default": "1.0"
+						}
+					},
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "광고 계정 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"example": 1234
+					},
+					{
+						"name": "startDate",
+						"in": "query",
+						"description": "조회 시작일 (yyyy-MM-dd 형식)",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "date"
 						},
 						"example": "2023-01-01"
 					},
 					{
 						"name": "endDate",
 						"in": "query",
-						"description": "조회 종료일 (yyyy-MM-dd 포맷)",
+						"description": "조회 종료일 (yyyy-MM-dd 형식)",
 						"required": true,
 						"schema": {
-							"type": "string"
+							"type": "string",
+							"format": "date"
 						},
 						"example": "2023-01-30"
 					},
@@ -760,23 +915,32 @@
 						"required": false,
 						"schema": {
 							"type": "string"
-						}
+						},
+						"example": "zwMvjK6XRhyiJoFGZZkqhw:1707978058060"
 					},
 					{
 						"name": "limit",
 						"in": "query",
-						"description": "조회할 레코드 수, 주어지지 않으면 1000",
+						"description": "조회할 레코드 수",
 						"required": false,
 						"schema": {
-							"type": "integer",
-							"format": "int32"
-						},
-						"example": 1000
+							"type": "int",
+							"default": "1000"
+						}
 					},
 					{
-						"name": "AccessManagerAccountNo",
-						"in": "header",
-						"description": "해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호"
+						"name": "timeUnit",
+						"in": "query",
+						"description": "조회 시간 단위 ( 일자별 : daily, 시간별 : hourly )",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"default": "daily",
+							"enum": [
+								"daily",
+								"hourly"
+							]
+						}
 					}
 				],
 				"responses": {
@@ -818,6 +982,10 @@
 						"type": "string",
 						"description": "성과 발생 일자",
 						"format": "date"
+					},
+					"hour": {
+						"type": "string",
+						"description": "성과 발생 시간대; 일자별 조회인 경우에는 응답에 미포함"
 					},
 					"impCount": {
 						"type": "integer",
