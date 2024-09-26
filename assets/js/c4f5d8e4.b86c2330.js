@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkpa_openapi_docs=self.webpackChunkpa_openapi_docs||[]).push([[2634],{192:(e,n,s)=>{s.r(n),s.d(n,{default:()=>c});var t=s(4586),a=s(6540),o=s(6347);function c(){const{siteConfig:e}=(0,t.A)();return a.createElement(o.rd,{to:`${e.baseUrl}docs/intro`})}}}]);

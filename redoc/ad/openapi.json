@@ -1338,15 +1338,6 @@
 						"allowEmptyValue": false
 					},
 					{
-						"name": "campaignNo",
-						"in": "query",
-						"description": "캠페인 ID",
-						"required": false,
-						"type": "integer",
-						"format": "int64",
-						"allowEmptyValue": false
-					},
-					{
 						"name": "deleteOnly",
 						"in": "query",
 						"description": "삭제된 소재 조회 여부, 이 값이 true인 경우, 삭제된 소재만 조회합니다.",
@@ -3898,23 +3889,10 @@
 					"type": "boolean",
 					"description": "소재 활성화 여부"
 				},
-				"adSetName": {
-					"type": "string",
-					"description": "광고 그룹 이름"
-				},
 				"adSetNo": {
 					"type": "integer",
 					"format": "int64",
 					"description": "광고 그룹 ID"
-				},
-				"campaignName": {
-					"type": "string",
-					"description": "캠페인 이름"
-				},
-				"campaignNo": {
-					"type": "integer",
-					"format": "int64",
-					"description": "캠페인 ID"
 				},
 				"creativeType": {
 					"type": "string",
