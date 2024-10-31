@@ -2496,24 +2496,6 @@
 					"format": "int64",
 					"description": "브랜드 ID"
 				},
-				"categoryFirstId": {
-					"type": "integer",
-					"format": "int64",
-					"description": "대업종 ID"
-				},
-				"categoryFirstName": {
-					"type": "string",
-					"description": "대업종 이름"
-				},
-				"categorySecondId": {
-					"type": "integer",
-					"format": "int64",
-					"description": "세부업종 ID"
-				},
-				"categorySecondName": {
-					"type": "string",
-					"description": "세부업종 이름"
-				},
 				"explanation": {
 					"type": "string",
 					"description": "설명"
