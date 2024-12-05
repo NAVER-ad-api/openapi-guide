@@ -17,6 +17,14 @@
 		{
 			"name": "실시간 성과 조회",
 			"description": "특정 광고 계정 / 캠페인 / 광고 그룹 / 소재의 실시간 성과를 소재 단위로 조회합니다.\n\n오늘 또는 어제 데이터를 조회할 수 있으며, 성과는 업데이트 시점을 기준으로 오름차순 정렬되어 제공됩니다.\n\n응답의 until 필드 값을 다음 요청의 since 파라미터로 포함시키면 이전 요청 시점 이후에 업데이트된 소재만을 조회할 수 있습니다.\n\n실시간 성과는 조회 시점 이후라도 정합성 검증 및 보정 작업에 따라 변동이 발생할 수 있습니다.\n"
+		},
+		{
+			"name": "과거 전환 성과 조회",
+			"description": "특정 광고 계정 / 캠페인 / 광고 그룹 / 소재의 과거 전환 성과를 조회합니다.\n\n조회 단위보다 하위 요소로 집계한 결과가 제공되며,\n성과는 날짜, 광고주, 캠페인, 광고 그룹, 소재 번호 순으로 오름차순 정렬되어 제공됩니다.\n\n조회 기간은 최대 31일이며, 2년 전부터 전일 데이터까지 조회가 가능합니다.\n(전일 데이터는 금일 02시부터 조회가 가능합니다.)\n\n한 번에 최대 1000개 까지 조회가 가능하며, 이를 초과하는 개수가 존재하는 경우 페이징이 적용됩니다.\n응답의 next 필드 값을 다음 요청의 next 파라미터로 포함시키면 다음 페이지를 조회할 수 있으며, 해당 토큰은 10분간 유효합니다.\n\n전환 성과는 시간 단위 조회를 지원하지 않으며 일별 조회만 가능하며,\n응답의 convType, convPartner 필드에 대한 설명은 '시작하기 > 성과 관리 > 전환 성과 조회' 페이지를 참고해주세요.\n"
+		},
+		{
+			"name": "실시간 전환 성과 조회",
+			"description": "특정 광고 계정 / 캠페인 / 광고 그룹 / 소재의 실시간 전환 성과를 소재 단위로 조회합니다.\n\n오늘 또는 어제 데이터를 조회할 수 있으며, 성과는 업데이트 시점을 기준으로 오름차순 정렬되어 제공됩니다.\n\n응답의 until 필드 값을 다음 요청의 since 파라미터로 포함시키면 이전 요청 시점 이후에 업데이트된 소재만을 조회할 수 있습니다.\n\n실시간 성과는 조회 시점 이후라도 정합성 검증 및 보정 작업에 따라 변동이 발생할 수 있습니다.\n\n전환 성과는 시간 단위 조회를 지원하지 않으며 일별 조회만 가능하며,\n응답의 convType, convPartner 필드에 대한 설명은 '시작하기 > 성과 관리 > 전환 성과 조회' 페이지를 참고해주세요.\n"
 		}
 	],
 	"paths": {
@@ -956,6 +964,935 @@
 					}
 				}
 			}
+		},
+		"/v1/ad-api/{version}/adAccounts/{adAccountNo}/performance/conversion/realtime/creatives": {
+			"get": {
+				"tags": [
+					"실시간 전환 성과 조회"
+				],
+				"summary": "광고 계정 실시간 전환 성과 조회",
+				"description": "특정 광고 계정의 실시간 전환 성과를 조회합니다.",
+				"operationId": "adAccountRealtimePerformance_1",
+				"parameters": [
+					{
+						"name": "timeUnit",
+						"in": "query",
+						"description": "조회 시간 단위 ( 일자별 : daily )",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"default": "daily",
+							"enum": [
+								"daily"
+							]
+						}
+					},
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"schema": {
+							"type": "float",
+							"default": "1.0"
+						}
+					},
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "광고 계정 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"example": 1234
+					},
+					{
+						"name": "targetDate",
+						"in": "query",
+						"description": "조회 대상 일자 ( 오늘 : today, 어제 : yesterday )",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"default": "today",
+							"enum": [
+								"today",
+								"yesterday"
+							]
+						}
+					},
+					{
+						"name": "since",
+						"in": "query",
+						"description": "특정 시점 이후 성과가 업데이트된 소재만을 조회하기 위한 타임스탬프",
+						"required": false,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"example": 1675907423
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/RealtimeConvPerformanceResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/v1/ad-api/{version}/adAccounts/{adAccountNo}/performance/conversion/realtime/creatives/{creativeNo}/creatives": {
+			"get": {
+				"tags": [
+					"실시간 전환 성과 조회"
+				],
+				"summary": "소재 실시간 전환 성과 조회",
+				"description": "특정 소재의 실시간 전환 성과를 조회합니다.",
+				"operationId": "creativeRealtimePerformance_1",
+				"parameters": [
+					{
+						"name": "creativeNo",
+						"in": "path",
+						"description": "소재 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"example": 5678
+					},
+					{
+						"name": "timeUnit",
+						"in": "query",
+						"description": "조회 시간 단위 ( 일자별 : daily )",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"default": "daily",
+							"enum": [
+								"daily"
+							]
+						}
+					},
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"schema": {
+							"type": "float",
+							"default": "1.0"
+						}
+					},
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "광고 계정 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"example": 1234
+					},
+					{
+						"name": "targetDate",
+						"in": "query",
+						"description": "조회 대상 일자 ( 오늘 : today, 어제 : yesterday )",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"default": "today",
+							"enum": [
+								"today",
+								"yesterday"
+							]
+						}
+					},
+					{
+						"name": "since",
+						"in": "query",
+						"description": "특정 시점 이후 성과가 업데이트된 소재만을 조회하기 위한 타임스탬프",
+						"required": false,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"example": 1675907423
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/RealtimeConvPerformanceResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/v1/ad-api/{version}/adAccounts/{adAccountNo}/performance/conversion/realtime/campaigns/{campaignNo}/creatives": {
+			"get": {
+				"tags": [
+					"실시간 전환 성과 조회"
+				],
+				"summary": "캠페인 실시간 전환 성과 조회",
+				"description": "특정 캠페인의 실시간 전환 성과를 조회합니다.",
+				"operationId": "campaignRealtimePerformance_1",
+				"parameters": [
+					{
+						"name": "campaignNo",
+						"in": "path",
+						"description": "캠페인 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"example": 5678
+					},
+					{
+						"name": "timeUnit",
+						"in": "query",
+						"description": "조회 시간 단위 ( 일자별 : daily )",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"default": "daily",
+							"enum": [
+								"daily"
+							]
+						}
+					},
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"schema": {
+							"type": "float",
+							"default": "1.0"
+						}
+					},
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "광고 계정 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"example": 1234
+					},
+					{
+						"name": "targetDate",
+						"in": "query",
+						"description": "조회 대상 일자 ( 오늘 : today, 어제 : yesterday )",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"default": "today",
+							"enum": [
+								"today",
+								"yesterday"
+							]
+						}
+					},
+					{
+						"name": "since",
+						"in": "query",
+						"description": "특정 시점 이후 성과가 업데이트된 소재만을 조회하기 위한 타임스탬프",
+						"required": false,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"example": 1675907423
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/RealtimeConvPerformanceResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/v1/ad-api/{version}/adAccounts/{adAccountNo}/performance/conversion/realtime/adSets/{adSetNo}/creatives": {
+			"get": {
+				"tags": [
+					"실시간 전환 성과 조회"
+				],
+				"summary": "광고 그룹 실시간 전환 성과 조회",
+				"description": "특정 광고 그룹의 실시간 전환 성과를 조회합니다.",
+				"operationId": "adSetRealtimePerformance_1",
+				"parameters": [
+					{
+						"name": "adSetNo",
+						"in": "path",
+						"description": "광고 그룹 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"example": 5678
+					},
+					{
+						"name": "timeUnit",
+						"in": "query",
+						"description": "조회 시간 단위 ( 일자별 : daily )",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"default": "daily",
+							"enum": [
+								"daily"
+							]
+						}
+					},
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"schema": {
+							"type": "float",
+							"default": "1.0"
+						}
+					},
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "광고 계정 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"example": 1234
+					},
+					{
+						"name": "targetDate",
+						"in": "query",
+						"description": "조회 대상 일자 ( 오늘 : today, 어제 : yesterday )",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"default": "today",
+							"enum": [
+								"today",
+								"yesterday"
+							]
+						}
+					},
+					{
+						"name": "since",
+						"in": "query",
+						"description": "특정 시점 이후 성과가 업데이트된 소재만을 조회하기 위한 타임스탬프",
+						"required": false,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"example": 1675907423
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/RealtimeConvPerformanceResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/v1/ad-api/{version}/adAccounts/{adAccountNo}/performance/conversion/past/{aggregationType}": {
+			"get": {
+				"tags": [
+					"과거 전환 성과 조회"
+				],
+				"summary": "광고 계정 과거 전환 성과 조회",
+				"description": "특정 광고 계정의 과거 전환 성과를 캠페인 / 광고 그룹 / 소재 단위로 집계하여 조회합니다.",
+				"operationId": "adAccountPastConversionPerformance",
+				"parameters": [
+					{
+						"name": "aggregationType",
+						"in": "path",
+						"description": "성과 집계 단위 ( 캠페인 : campaigns, 광고 그룹 : adSets, 소재 : creatives )",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": [
+								"campaigns",
+								"adSets",
+								"creatives"
+							]
+						}
+					},
+					{
+						"name": "timeUnit",
+						"in": "query",
+						"description": "조회 시간 단위 ( 일자별 : daily )",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"default": "daily",
+							"enum": [
+								"daily"
+							]
+						}
+					},
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"schema": {
+							"type": "float",
+							"default": "1.0"
+						}
+					},
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "광고 계정 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"example": 1234
+					},
+					{
+						"name": "startDate",
+						"in": "query",
+						"description": "조회 시작일 (yyyy-MM-dd 형식)",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "date"
+						},
+						"example": "2023-01-01"
+					},
+					{
+						"name": "endDate",
+						"in": "query",
+						"description": "조회 종료일 (yyyy-MM-dd 형식)",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "date"
+						},
+						"example": "2023-01-30"
+					},
+					{
+						"name": "next",
+						"in": "query",
+						"description": "다음 페이지 조회를 위한 토큰",
+						"required": false,
+						"schema": {
+							"type": "string"
+						},
+						"example": "zwMvjK6XRhyiJoFGZZkqhw:1707978058060"
+					},
+					{
+						"name": "limit",
+						"in": "query",
+						"description": "조회할 레코드 수",
+						"required": false,
+						"schema": {
+							"type": "int",
+							"default": "1000"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PastConvPerformanceResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/v1/ad-api/{version}/adAccounts/{adAccountNo}/performance/conversion/past/creatives/{creativeNo}/{aggregationType}": {
+			"get": {
+				"tags": [
+					"과거 전환 성과 조회"
+				],
+				"summary": "소재 과거 전환 성과 조회",
+				"description": "특정 소재의 과거 전환 성과를 조회합니다.",
+				"operationId": "creativePastPerformance_1",
+				"parameters": [
+					{
+						"name": "creativeNo",
+						"in": "path",
+						"description": "소재 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"example": 5678
+					},
+					{
+						"name": "aggregationType",
+						"in": "path",
+						"description": "성과 집계 단위 ( 소재 : creatives )",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": [
+								"creatives"
+							]
+						}
+					},
+					{
+						"name": "timeUnit",
+						"in": "query",
+						"description": "조회 시간 단위 ( 일자별 : daily )",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"default": "daily",
+							"enum": [
+								"daily"
+							]
+						}
+					},
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"schema": {
+							"type": "float",
+							"default": "1.0"
+						}
+					},
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "광고 계정 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"example": 1234
+					},
+					{
+						"name": "startDate",
+						"in": "query",
+						"description": "조회 시작일 (yyyy-MM-dd 형식)",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "date"
+						},
+						"example": "2023-01-01"
+					},
+					{
+						"name": "endDate",
+						"in": "query",
+						"description": "조회 종료일 (yyyy-MM-dd 형식)",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "date"
+						},
+						"example": "2023-01-30"
+					},
+					{
+						"name": "next",
+						"in": "query",
+						"description": "다음 페이지 조회를 위한 토큰",
+						"required": false,
+						"schema": {
+							"type": "string"
+						},
+						"example": "zwMvjK6XRhyiJoFGZZkqhw:1707978058060"
+					},
+					{
+						"name": "limit",
+						"in": "query",
+						"description": "조회할 레코드 수",
+						"required": false,
+						"schema": {
+							"type": "int",
+							"default": "1000"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PastConvPerformanceResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/v1/ad-api/{version}/adAccounts/{adAccountNo}/performance/conversion/past/campaigns/{campaignNo}/{aggregationType}": {
+			"get": {
+				"tags": [
+					"과거 전환 성과 조회"
+				],
+				"summary": "캠페인 과거 전환 성과 조회",
+				"description": "특정 캠페인의 과거 전환 성과를 광고 그룹 / 소재 단위로 집계하여 조회합니다.",
+				"operationId": "campaignPastPerformance_1",
+				"parameters": [
+					{
+						"name": "campaignNo",
+						"in": "path",
+						"description": "캠페인 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"example": 5678
+					},
+					{
+						"name": "aggregationType",
+						"in": "path",
+						"description": "성과 집계 단위 ( 광고 그룹 : adSets, 소재 : creatives )",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": [
+								"adSets",
+								"creatives"
+							]
+						}
+					},
+					{
+						"name": "timeUnit",
+						"in": "query",
+						"description": "조회 시간 단위 ( 일자별 : daily )",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"default": "daily",
+							"enum": [
+								"daily"
+							]
+						}
+					},
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"schema": {
+							"type": "float",
+							"default": "1.0"
+						}
+					},
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "광고 계정 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"example": 1234
+					},
+					{
+						"name": "startDate",
+						"in": "query",
+						"description": "조회 시작일 (yyyy-MM-dd 형식)",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "date"
+						},
+						"example": "2023-01-01"
+					},
+					{
+						"name": "endDate",
+						"in": "query",
+						"description": "조회 종료일 (yyyy-MM-dd 형식)",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "date"
+						},
+						"example": "2023-01-30"
+					},
+					{
+						"name": "next",
+						"in": "query",
+						"description": "다음 페이지 조회를 위한 토큰",
+						"required": false,
+						"schema": {
+							"type": "string"
+						},
+						"example": "zwMvjK6XRhyiJoFGZZkqhw:1707978058060"
+					},
+					{
+						"name": "limit",
+						"in": "query",
+						"description": "조회할 레코드 수",
+						"required": false,
+						"schema": {
+							"type": "int",
+							"default": "1000"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PastConvPerformanceResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/v1/ad-api/{version}/adAccounts/{adAccountNo}/performance/conversion/past/adSets/{adSetNo}/{aggregationType}": {
+			"get": {
+				"tags": [
+					"과거 전환 성과 조회"
+				],
+				"summary": "광고 그룹 과거 전환 성과 조회",
+				"description": "특정 광고 그룹의 과거 전환 성과를 소재 단위로 집계하여 조회합니다.",
+				"operationId": "adSetPastPerformance_1",
+				"parameters": [
+					{
+						"name": "adSetNo",
+						"in": "path",
+						"description": "광고 그룹 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"example": 5678
+					},
+					{
+						"name": "aggregationType",
+						"in": "path",
+						"description": "성과 집계 단위 ( 소재 : creatives )",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": [
+								"creatives"
+							]
+						}
+					},
+					{
+						"name": "timeUnit",
+						"in": "query",
+						"description": "조회 시간 단위 ( 일자별 : daily )",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"default": "daily",
+							"enum": [
+								"daily"
+							]
+						}
+					},
+					{
+						"name": "AccessManagerAccountNo",
+						"in": "header",
+						"description": "해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "API 버전",
+						"required": true,
+						"schema": {
+							"type": "float",
+							"default": "1.0"
+						}
+					},
+					{
+						"name": "adAccountNo",
+						"in": "path",
+						"description": "광고 계정 번호",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"example": 1234
+					},
+					{
+						"name": "startDate",
+						"in": "query",
+						"description": "조회 시작일 (yyyy-MM-dd 형식)",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "date"
+						},
+						"example": "2023-01-01"
+					},
+					{
+						"name": "endDate",
+						"in": "query",
+						"description": "조회 종료일 (yyyy-MM-dd 형식)",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "date"
+						},
+						"example": "2023-01-30"
+					},
+					{
+						"name": "next",
+						"in": "query",
+						"description": "다음 페이지 조회를 위한 토큰",
+						"required": false,
+						"schema": {
+							"type": "string"
+						},
+						"example": "zwMvjK6XRhyiJoFGZZkqhw:1707978058060"
+					},
+					{
+						"name": "limit",
+						"in": "query",
+						"description": "조회할 레코드 수",
+						"required": false,
+						"schema": {
+							"type": "int",
+							"default": "1000"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PastConvPerformanceResponse"
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	},
 	"components": {
@@ -987,6 +1924,21 @@
 						"type": "string",
 						"description": "성과 발생 시간대; 일자별 조회인 경우에는 응답에 미포함"
 					},
+					"convCount": {
+						"type": "integer",
+						"description": "전환 횟수",
+						"format": "int64"
+					},
+					"convSales": {
+						"type": "number",
+						"description": "전환 매출",
+						"format": "double"
+					},
+					"updatedAt": {
+						"type": "string",
+						"description": "최종 업데이트 시각",
+						"format": "date-time"
+					},
 					"impCount": {
 						"type": "integer",
 						"description": "노출 횟수",
@@ -1006,21 +1958,6 @@
 						"type": "number",
 						"description": "매출",
 						"format": "double"
-					},
-					"convCount": {
-						"type": "integer",
-						"description": "전환 횟수",
-						"format": "int64"
-					},
-					"convSales": {
-						"type": "number",
-						"description": "전환 매출",
-						"format": "double"
-					},
-					"updatedAt": {
-						"type": "string",
-						"description": "최종 업데이트 시각",
-						"format": "date-time"
 					}
 				},
 				"description": "조회 단위별로 집계된 성과"
@@ -1059,6 +1996,94 @@
 					}
 				},
 				"description": "과거 성과 조회 응답"
+			},
+			"ConvPerformance": {
+				"type": "object",
+				"properties": {
+					"campaignNo": {
+						"type": "integer",
+						"description": "캠페인 ID",
+						"format": "int64"
+					},
+					"adSetNo": {
+						"type": "integer",
+						"description": "광고 그룹 ID",
+						"format": "int64"
+					},
+					"creativeNo": {
+						"type": "integer",
+						"description": "소재 ID",
+						"format": "int64"
+					},
+					"targetDate": {
+						"type": "string",
+						"description": "성과 발생 일자",
+						"format": "date"
+					},
+					"hour": {
+						"type": "string",
+						"description": "성과 발생 시간대; 일자별 조회인 경우에는 응답에 미포함"
+					},
+					"convCount": {
+						"type": "integer",
+						"description": "전환 횟수",
+						"format": "int64"
+					},
+					"convSales": {
+						"type": "number",
+						"description": "전환 매출",
+						"format": "double"
+					},
+					"updatedAt": {
+						"type": "string",
+						"description": "최종 업데이트 시각",
+						"format": "date-time"
+					},
+					"convPartner": {
+						"type": "string",
+						"description": "전환 연동 파트너"
+					},
+					"convType": {
+						"type": "string",
+						"description": "전환 유형"
+					}
+				},
+				"description": "조회 단위별로 집계된 전환 성과"
+			},
+			"RealtimeConvPerformanceResponse": {
+				"type": "object",
+				"properties": {
+					"rows": {
+						"type": "array",
+						"description": "전환 성과 목록",
+						"items": {
+							"$ref": "#/components/schemas/ConvPerformance"
+						}
+					},
+					"until": {
+						"type": "integer",
+						"description": "성과 목록 중 마지막 업데이트 타임스탬프",
+						"format": "int64"
+					}
+				},
+				"description": "실시간 전환 성과 조회 응답"
+			},
+			"PastConvPerformanceResponse": {
+				"type": "object",
+				"properties": {
+					"rows": {
+						"type": "array",
+						"description": "전환 성과 목록",
+						"items": {
+							"$ref": "#/components/schemas/ConvPerformance"
+						}
+					},
+					"next": {
+						"type": "string",
+						"description": "다음 페이지 조회를 위한 토큰"
+					}
+				},
+				"description": "과거 전환 성과 조회 응답"
 			}
 		}
 	}
