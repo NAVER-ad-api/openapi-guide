@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkpa_openapi_docs=self.webpackChunkpa_openapi_docs||[]).push([[7614],{4013:e=>{e.exports=JSON.parse('[{"label":"patch","permalink":"/openapi-guide/blog/tags/patch","count":1},{"label":"hello","permalink":"/openapi-guide/blog/tags/hello","count":1}]')}}]);
