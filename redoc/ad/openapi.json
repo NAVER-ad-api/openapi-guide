@@ -3677,7 +3677,7 @@
             },
             "conversionType": {
               "type": "string",
-              "description": "최적화 전환 유형\r\n- 사용 가능한 값: `PURCHASE`,`CART`"
+              "description": "최적화 전환 유형\r\n- 사용 가능한 값: `null`,`PURCHASE`,`CART`"
             },
             "conversionUrlNo": {
               "type": "integer",
@@ -4085,7 +4085,7 @@
             },
             "conversionType": {
               "type": "string",
-              "description": "Optimized conversion type\r\n- Available values: `INSTALL`"
+              "description": "최적화 전환 유형\r\n- 사용 가능한 값: `null`,`INSTALL`,`PURCHASE`,`CART`"
             },
             "conversionUrlNo": {
               "type": "integer",
@@ -5146,7 +5146,7 @@
         },
         "conversionType": {
           "type": "string",
-          "description": "최적화 전환 유형\r\n- 사용 가능한 값: `PURCHASE`,`CART`,`INSTALL`",
+          "description": "최적화 전환 유형\r\n- 사용 가능한 값: `null`,`PURCHASE`,`CART`,`INSTALL`",
           "enum": [
             "PURCHASE",
             "MEMBERSHIP",
@@ -5910,7 +5910,7 @@
             },
             "conversionType": {
               "type": "string",
-              "description": "최적화 전환 유형\r\n- 사용 가능한 값: `PURCHASE`,`CART`"
+              "description": "최적화 전환 유형\r\n- 사용 가능한 값: `null`,`PURCHASE`,`CART`"
             },
             "conversionUrlNo": {
               "type": "integer",
