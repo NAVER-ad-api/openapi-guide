@@ -2,11 +2,21 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://naver-ad-api.github.io/openapi-guide/blog</id>
     <title>네이버 성과형 디스플레이 광고 API (Beta) Blog</title>
-    <updated>2025-03-14T00:00:00.000Z</updated>
+    <updated>2025-04-24T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://naver-ad-api.github.io/openapi-guide/blog"/>
     <subtitle>네이버 성과형 디스플레이 광고 API (Beta) Blog</subtitle>
     <icon>https://naver-ad-api.github.io/openapi-guide/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[2025년 4월 플랫폼 변경 사항 안내 (4월 24일 업데이트)]]></title>
+        <id>2025-04-24-update</id>
+        <link href="https://naver-ad-api.github.io/openapi-guide/blog/2025-04-24-update"/>
+        <updated>2025-04-24T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[안녕하세요. 네이버 성과형 디스플레이 광고 오픈 API 운영자입니다.]]></summary>
+        <content type="html"><![CDATA[<p>안녕하세요. 네이버 성과형 디스플레이 광고 오픈 API 운영자입니다.</p><p>2025년 4월 네이버 성과형 디스플레이 광고 플랫폼 변경 사항 안내드립니다.
+자세한 사항은 아래 내용을 참고하시기 바랍니다.​</p><p><strong>■ 변경 사항</strong></p><p>[1]<!-- --> 성과 조회 응답 내 'convPartner' 값 제거​</p><p><strong>■ 상세 변경 내용</strong></p><p>[1]<!-- --> 성과 조회 응답 내 'convPartner' 값 제거</p><p>과거 전환 성과 조회 및 실시간 전환 성과 조회 응답 내 항목으로 제공되었으나, 상황상 명확한 구분이 어려워 해당 값의 제공을 종료하게 된 점 안내드립니다.</p><p><strong>적용 일자</strong></p><p>2025년 4월 24일 목요일</p><p><strong>변경 사항</strong></p><ul><li>과거 전환 성과 응답 결과 내 'convPartner' 항목 삭제</li><li>실시간 전환 성과 응답 결과 내 'convPartner' 항목 삭제</li></ul><p>기타 궁금하신 사항은 네이버 성과형 디스플레이 광고 API 문의를 이용해 주시기 바랍니다.</p><p>감사합니다.</p>]]></content>
+        <category label="patch" term="patch"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[2025년 3월 플랫폼 변경 사항 안내 (3월 14일 업데이트)]]></title>
         <id>2025-03-14-update</id>
