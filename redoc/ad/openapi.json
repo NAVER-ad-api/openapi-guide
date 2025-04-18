@@ -1497,7 +1497,7 @@
         "tags": [
           "캠페인"
         ],
-        "summary": "캠페인 예산 다중 변경(deprecated)",
+        "summary": "캠페인 예산 다중 변경",
         "operationId": "editBudgetUsingPOST",
         "consumes": [
           "application/json"
@@ -1563,7 +1563,7 @@
             }
           }
         },
-        "deprecated": true
+        "deprecated": false
       }
     },
     "/{version}/adAccounts/{adAccountNo}/campaigns/editSpendLimit": {
