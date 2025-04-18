@@ -1075,7 +1075,7 @@ paths:
     post:
       tags:
         - 캠페인
-      summary: 캠페인 예산 다중 변경
+      summary: 캠페인 예산 다중 변경(deprecated)
       operationId: editBudgetUsingPOST
       consumes:
         - application/json
@@ -1124,7 +1124,7 @@ paths:
           description: OK
           schema:
             type: boolean
-      deprecated: false
+      deprecated: true
   /{version}/adAccounts/{adAccountNo}/campaigns/editSpendLimit:
     post:
       tags:
