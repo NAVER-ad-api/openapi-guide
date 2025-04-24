@@ -61,8 +61,7 @@ tags:
 
       전환 성과는 시간 단위 조회를 지원하지 않으며 일별 조회만 가능하며,
 
-      응답의 convType, convPartner 필드에 대한 설명은 '시작하기 > 성과 관리 > 전환 성과 조회' 페이지를
-      참고해주세요.
+      응답의 convType 필드에 대한 설명은 '시작하기 > 성과 관리 > 전환 성과 조회' 페이지를 참고해주세요.
   - name: 실시간 전환 성과 조회
     description: >
       특정 광고 계정 / 캠페인 / 광고 그룹 / 소재의 실시간 전환 성과를 소재 단위로 조회합니다.
@@ -80,8 +79,7 @@ tags:
 
       전환 성과는 시간 단위 조회를 지원하지 않으며 일별 조회만 가능하며,
 
-      응답의 convType, convPartner 필드에 대한 설명은 '시작하기 > 성과 관리 > 전환 성과 조회' 페이지를
-      참고해주세요.
+      응답의 convType 필드에 대한 설명은 '시작하기 > 성과 관리 > 전환 성과 조회' 페이지를 참고해주세요.
 paths:
   /v1/ad-api/{version}/adAccounts/{adAccountNo}/performance/realtime/creatives:
     get:
@@ -1489,9 +1487,6 @@ components:
           type: string
           description: 최종 업데이트 시각
           format: date-time
-        convPartner:
-          type: string
-          description: 전환 연동 파트너
         convType:
           type: string
           description: 전환 유형
