@@ -231,10 +231,9 @@
           "type": "string",
           "description": "권한 레벨 정보",
           "enum": [
+            "OWNER",
             "MASTER",
-            "STANDARD",
-            "READ_ONLY",
-            "PERFORMANCE_MANAGEMENT"
+            "READ_ONLY"
           ]
         },
         "updatedAt": {
@@ -393,10 +392,9 @@
               "type": "string",
               "description": "권한 레벨 정보",
               "enum": [
+                  "OWNER",
                   "MASTER",
-                  "STANDARD",
-                  "READ_ONLY",
-                  "PERFORMANCE_MANAGEMENT"
+                  "READ_ONLY"
               ]
           },
           "updatedAt": {

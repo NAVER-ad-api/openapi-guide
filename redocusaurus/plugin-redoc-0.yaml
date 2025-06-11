@@ -163,10 +163,9 @@ definitions:
         type: string
         description: 권한 레벨 정보
         enum:
+          - OWNER
           - MASTER
-          - STANDARD
           - READ_ONLY
-          - PERFORMANCE_MANAGEMENT
       updatedAt:
         type: string
         format: date-time
@@ -282,10 +281,9 @@ definitions:
         type: string
         description: 권한 레벨 정보
         enum:
+          - OWNER
           - MASTER
-          - STANDARD
           - READ_ONLY
-          - PERFORMANCE_MANAGEMENT
       updatedAt:
         type: string
         format: date-time
