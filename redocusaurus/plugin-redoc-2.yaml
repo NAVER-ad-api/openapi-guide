@@ -92,7 +92,7 @@ paths:
         - name: AccessManagerAccountNo
           in: header
           description: 해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호
-          required: true
+          required: false
           schema:
             type: integer
             format: int64
@@ -165,7 +165,7 @@ paths:
         - name: AccessManagerAccountNo
           in: header
           description: 해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호
-          required: true
+          required: false
           schema:
             type: integer
             format: int64
@@ -238,7 +238,7 @@ paths:
         - name: AccessManagerAccountNo
           in: header
           description: 해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호
-          required: true
+          required: false
           schema:
             type: integer
             format: int64
@@ -311,7 +311,7 @@ paths:
         - name: AccessManagerAccountNo
           in: header
           description: 해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호
-          required: true
+          required: false
           schema:
             type: integer
             format: int64
@@ -386,7 +386,7 @@ paths:
         - name: AccessManagerAccountNo
           in: header
           description: 해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호
-          required: true
+          required: false
           schema:
             type: integer
             format: int64
@@ -479,7 +479,7 @@ paths:
         - name: AccessManagerAccountNo
           in: header
           description: 해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호
-          required: true
+          required: false
           schema:
             type: integer
             format: int64
@@ -573,7 +573,7 @@ paths:
         - name: AccessManagerAccountNo
           in: header
           description: 해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호
-          required: true
+          required: false
           schema:
             type: integer
             format: int64
@@ -666,7 +666,7 @@ paths:
         - name: AccessManagerAccountNo
           in: header
           description: 해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호
-          required: true
+          required: false
           schema:
             type: integer
             format: int64
@@ -752,7 +752,7 @@ paths:
         - name: AccessManagerAccountNo
           in: header
           description: 해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호
-          required: true
+          required: false
           schema:
             type: integer
             format: int64
@@ -824,7 +824,7 @@ paths:
         - name: AccessManagerAccountNo
           in: header
           description: 해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호
-          required: true
+          required: false
           schema:
             type: integer
             format: int64
@@ -896,7 +896,7 @@ paths:
         - name: AccessManagerAccountNo
           in: header
           description: 해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호
-          required: true
+          required: false
           schema:
             type: integer
             format: int64
@@ -968,7 +968,7 @@ paths:
         - name: AccessManagerAccountNo
           in: header
           description: 해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호
-          required: true
+          required: false
           schema:
             type: integer
             format: int64
@@ -1042,7 +1042,7 @@ paths:
         - name: AccessManagerAccountNo
           in: header
           description: 해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호
-          required: true
+          required: false
           schema:
             type: integer
             format: int64
@@ -1134,7 +1134,7 @@ paths:
         - name: AccessManagerAccountNo
           in: header
           description: 해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호
-          required: true
+          required: false
           schema:
             type: integer
             format: int64
@@ -1227,7 +1227,7 @@ paths:
         - name: AccessManagerAccountNo
           in: header
           description: 해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호
-          required: true
+          required: false
           schema:
             type: integer
             format: int64
@@ -1319,7 +1319,7 @@ paths:
         - name: AccessManagerAccountNo
           in: header
           description: 해당 광고 계정의 성과에 대한 접근 권한이 있는 관리 계정 번호
-          required: true
+          required: false
           schema:
             type: integer
             format: int64
