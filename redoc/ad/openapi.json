@@ -7886,56 +7886,26 @@
           "type": "string",
           "format": "date-time"
         },
-        "deleted": {
-          "type": "boolean"
-        },
-        "inspectionStatus": {
-          "type": "string",
-          "enum": [
-            "PENDING",
-            "APPROVED",
-            "REJECTED"
-          ]
-        },
-        "localUpdatedAt": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "mallId": {
+        "failMessage": {
           "type": "string"
-        },
-        "managerId": {
-          "type": "string"
-        },
-        "managerName": {
-          "type": "string"
-        },
-        "mobileApp": {
-          "type": "boolean"
         },
         "no": {
           "type": "integer",
           "format": "int64"
         },
-        "storePlatform": {
+        "sizeGroupNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "status": {
           "type": "string",
           "enum": [
-            "ANDROID",
-            "IOS"
+            "READY",
+            "ONGOING",
+            "COMPLETED",
+            "FAILED",
+            "NOT_AVAILABLE"
           ]
-        },
-        "updatedAt": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "updaterId": {
-          "type": "string"
-        },
-        "url": {
-          "type": "string"
-        },
-        "zoneId": {
-          "$ref": "#/definitions/ZoneId"
         }
       },
       "title": "UploadVideo"

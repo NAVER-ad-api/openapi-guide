@@ -5738,42 +5738,22 @@ definitions:
       createdAt:
         type: string
         format: date-time
-      deleted:
-        type: boolean
-      inspectionStatus:
+      failMessage:
         type: string
-        enum:
-          - PENDING
-          - APPROVED
-          - REJECTED
-      localUpdatedAt:
-        type: string
-        format: date-time
-      mallId:
-        type: string
-      managerId:
-        type: string
-      managerName:
-        type: string
-      mobileApp:
-        type: boolean
       'no':
         type: integer
         format: int64
-      storePlatform:
+      sizeGroupNo:
+        type: integer
+        format: int32
+      status:
         type: string
         enum:
-          - ANDROID
-          - IOS
-      updatedAt:
-        type: string
-        format: date-time
-      updaterId:
-        type: string
-      url:
-        type: string
-      zoneId:
-        $ref: '#/definitions/ZoneId'
+          - READY
+          - ONGOING
+          - COMPLETED
+          - FAILED
+          - NOT_AVAILABLE
     title: UploadVideo
   WATCH_VIDEO:
     title: WATCH_VIDEO
