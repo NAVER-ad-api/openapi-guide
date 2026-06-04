@@ -1606,7 +1606,7 @@ paths:
           schema:
             $ref: '#/definitions/ErrorResult'
       deprecated: false
-  /api/open/{version}/adAccounts/{adAccountNo}/creatives/NATIVE_VIDEO:
+  /{version}/adAccounts/{adAccountNo}/creatives/NATIVE_VIDEO:
     post:
       tags:
         - 광고 소재
